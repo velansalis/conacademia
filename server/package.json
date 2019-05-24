@@ -1,0 +1,17 @@
+{
+    "name": "data.nmamit.in",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "velansalis",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^8.0.0",
+        "express": "^4.17.0",
+        "mongoose": "^5.5.11",
+        "morgan": "^1.9.1"
+    }
+}

@@ -1,11 +1,11 @@
-const user = require("../controllers/user");
+const users = require("../controllers/users");
 
 const router = require("express").Router();
 
-router.get("/api/user/:id", user.getUser);
-router.post("/api/user", user.addUser);
-router.delete("/api/user", user.deleteUser);
-router.patch("/api/user", user.updateUser);
+router.get("/api/user/:username", users.getUser);
+router.post("/api/user", users.addUser);
+router.delete("/api/user", users.deleteUser);
+router.patch("/api/user", users.updateUser);
 
 router.get("*", (req, res, next) => {
 	let message = "Route not configured";

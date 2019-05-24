@@ -9,6 +9,7 @@
     "author": "velansalis",
     "license": "ISC",
     "dependencies": {
+        "body-parser": "^1.19.0",
         "dotenv": "^8.0.0",
         "express": "^4.17.0",
         "mongoose": "^5.5.11",

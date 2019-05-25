@@ -1,20 +1,24 @@
 {
-    "name": "data.nmamit.in",
-    "version": "1.0.0",
-    "description": "",
-    "main": "server.js",
-    "scripts": {
-        "start": "node server.js"
-    },
-    "author": "velansalis",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "dotenv": "^8.0.0",
-        "koa": "^2.7.0",
-        "koa-body": "^4.1.0",
-        "koa-router": "^7.4.0",
-        "mongoose": "^5.5.11",
-        "morgan": "^1.9.1"
-    }
+	"name": "data.nmamit.in",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"test": "jest --detectOpenHandles --forceExit"
+	},
+	"author": "velansalis",
+	"license": "ISC",
+	"dependencies": {
+		"koa": "^2.7.0",
+		"koa-body": "^4.1.0",
+		"koa-router": "^7.4.0",
+		"mongoose": "^5.5.11"
+	},
+	"devDependencies": {
+		"dotenv": "^8.0.0",
+		"jest": "^24.8.0",
+		"mocha": "^6.1.4",
+		"supertest": "^4.0.2"
+	}
 }

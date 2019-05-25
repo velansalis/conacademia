@@ -4,7 +4,7 @@ const koaBody = require("koa-body");
 const app = new koa();
 
 require("dotenv").config();
-require("./dbconnect").call();
+require("./mongo-connect").call();
 
 const router = require("./routes/routes");
 

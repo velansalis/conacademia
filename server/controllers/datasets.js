@@ -1,12 +1,12 @@
-const User = require("../models/index").user;
+const Dataset = require("../models/index").dataset;
 
 module.exports = {
 	// GET
-	getUsers: async (context, next) => {
+	getDatasets: async (context, next) => {
 		try {
-			let response = await User.find().exec();
+			let response = await Dataset.find().exec();
 			context.body = {
-				message: "Users Found",
+				message: "Datasets Found",
 				count: response.length,
 				data: response
 			};
@@ -19,13 +19,13 @@ module.exports = {
 		}
 	},
 	// GET specific
-	getUser: async (context, next) => {
+	getDataset: async (context, next) => {
 		try {
-			let response = await User.find({
-				username: context.params.username
+			let response = await Dataset.find({
+				username: context.params.id
 			}).exec();
 			context.body = {
-				message: "Users Found",
+				message: "Dataset Found",
 				count: response.length,
 				data: response
 			};
@@ -38,18 +38,13 @@ module.exports = {
 		}
 	},
 	// POST
-	addUser: async (context, next) => {
+	addDataset: async (context, next) => {
 		try {
-			let response = await new User({
-				username: context.request.body.username,
-				password: context.request.body.password,
-				fname: context.request.body.fname,
-				lname: context.request.body.lname,
-				dob: new Date(context.request.body.dob),
-				designation: context.request.body.designation
+			let response = await new Dataset({
+				title: context.request.body.title
 			}).save();
 			context.body = {
-				message: "User Added",
+				message: "Dataset Added",
 				data: response
 			};
 		} catch (err) {
@@ -60,13 +55,13 @@ module.exports = {
 		}
 	},
 	// DELETE
-	deleteUser: async (context, next) => {
+	deleteDataset: async (context, next) => {
 		try {
-			let response = await User.deleteOne({
-				username: context.params.username
+			let response = await Dataset.deleteOne({
+				id: context.params.id
 			}).exec();
 			context.body = {
-				message: "User Deleted",
+				message: "Dataset Deleted",
 				data: response
 			};
 		} catch (err) {
@@ -78,14 +73,14 @@ module.exports = {
 		}
 	},
 	// PATCH
-	updateUser: async (context, next) => {
+	updateDataset: async (context, next) => {
 		try {
-			let response = await User.findOneAndUpdate(
+			let response = await Dataset.findOneAndUpdate(
 				context.request.body.query,
 				context.request.body.value
 			).exec();
 			context.body = {
-				message: "User Updated",
+				message: "Dataset Updated",
 				data: response
 			};
 		} catch (err) {

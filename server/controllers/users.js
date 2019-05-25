@@ -81,7 +81,7 @@ module.exports = {
 	updateUser: async (context, next) => {
 		try {
 			let response = await User.findOneAndUpdate(
-				context.request.body.query,
+				context.params.username,
 				context.request.body.value
 			).exec();
 			context.body = {

@@ -58,7 +58,7 @@ module.exports = {
 	deleteDataset: async (context, next) => {
 		try {
 			let response = await Dataset.deleteOne({
-				id: context.params.id
+				_id: context.params.id
 			}).exec();
 			context.body = {
 				message: "Dataset Deleted",
@@ -76,8 +76,8 @@ module.exports = {
 	updateDataset: async (context, next) => {
 		try {
 			let response = await Dataset.findOneAndUpdate(
-				context.request.body.query,
-				context.request.body.value
+				context.params.id,
+				context.request.body.query
 			).exec();
 			context.body = {
 				message: "Dataset Updated",

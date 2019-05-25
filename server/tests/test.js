@@ -12,12 +12,19 @@ beforeAll(async done => {
 	});
 });
 
-describe("Users", () => {
-	test("should return all the registered users.", async () => {
-		const response = await request(app).get("/api/user");
+describe("Students", () => {
+	test("Should Return all the registered Students", async () => {
+		const response = await request(app).get("/api/student");
 		expect(response).toBeDefined();
 		expect(response.status).toEqual(200);
 		expect(response.type).toEqual("application/json");
+		expect(response.body).toMatchObject({
+			data: [
+				{
+					username: expect.anything()
+				}
+			]
+		});
 	});
 });
 

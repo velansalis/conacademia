@@ -2,7 +2,7 @@ const router = require("koa-router")();
 
 const students = require("../controllers/student");
 const faculty = require("../controllers/faculty");
-const dataset = require("../controllers/datasets");
+const dataset = require("../controllers/dataset");
 
 // Routes for Student
 router.get("/api/student/", students.getStudents);

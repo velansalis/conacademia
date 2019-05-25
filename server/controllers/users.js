@@ -73,10 +73,21 @@ module.exports = {
 			};
 		}
 	},
-	updateUser: (context, next) => {
-		let message = "User Deleted";
-		res.json({
-			message
-		});
+	updateUser: async (context, next) => {
+		try {
+			let response = await User.findOneAndUpdate(
+				context.request.body.query,
+				context.request.body.value
+			).exec();
+			context.body = {
+				message: "User Updated",
+				data: response
+			};
+		} catch (err) {
+			context.body = {
+				message: "There was an error",
+				error: err
+			};
+		}
 	}
 };

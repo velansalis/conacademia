@@ -17,9 +17,9 @@ const UserSchema = new Schema({
 	college: { type: String },
 	department: { type: String },
 	usn: { type: Number },
-	datasets_published: [{ type: Schema.Types.ObjectId, ref: "Datasets" }],
-	datasets_saved: [{ type: Schema.Types.ObjectId, ref: "Datasets" }],
-	datasets_downloaded: [{ type: Schema.Types.ObjectId, ref: "Datasets" }]
+	datasets_published: [{ type: Schema.Types.ObjectId, ref: "Dataset" }],
+	datasets_saved: [{ type: Schema.Types.ObjectId, ref: "Dataset" }],
+	datasets_downloaded: [{ type: Schema.Types.ObjectId, ref: "Dataset" }]
 });
 
 module.exports = mongoose.model("User", UserSchema);

@@ -1,40 +1,79 @@
 const User = require("../models/index").user;
 
 module.exports = {
-	getUser: (req, res, next) => {
-		let username = req.params.username;
-		let message = `There you go. ${username}`;
-		res.json({
-			message: message
-		});
+	getUsers: async (context, next) => {
+		try {
+			let response = await User.find().exec();
+			context.body = {
+				message: "Users Found",
+				count: response.length,
+				data: response
+			};
+		} catch (err) {
+			context.body = {
+				message: "There was an error",
+				error: err,
+				data: response
+			};
+		}
 	},
-	addUser: (req, res, next) => {
-		console.log(req.body);
-		User.create(
-			{
-				username: req.body.username,
-				password: req.body.password,
-				fname: req.body.fname,
-				lname: req.body.lname,
-				dob: new Date(req.body.dob),
-				designation: req.body.designation
-			},
-			(err, res) => {
-				// console.log(err);
-			}
-		);
-		res.json({
-			message: "Created",
-			body: req.body
-		});
+	getUser: async (context, next) => {
+		try {
+			let response = await User.find({
+				username: context.params.username
+			}).exec();
+			context.body = {
+				message: "Users Found",
+				count: response.length,
+				data: response
+			};
+		} catch (err) {
+			context.body = {
+				message: "There was an error",
+				error: err,
+				data: response
+			};
+		}
 	},
-	deleteUser: (req, res, next) => {
-		let message = "User Deleted";
-		res.json({
-			message
-		});
+	addUser: async (context, next) => {
+		try {
+			let response = await new User({
+				username: context.request.body.username,
+				password: context.request.body.password,
+				fname: context.request.body.fname,
+				lname: context.request.body.lname,
+				dob: new Date(context.request.body.dob),
+				designation: context.request.body.designation
+			}).save();
+			context.body = {
+				message: "User Added",
+				data: response
+			};
+		} catch (err) {
+			context.body = {
+				message: "There was an error",
+				error: err
+			};
+		}
 	},
-	updateUser: (req, res, next) => {
+	deleteUser: async (context, next) => {
+		try {
+			let response = await User.deleteOne({
+				username: context.params.username
+			}).exec();
+			context.body = {
+				message: "User Deleted",
+				data: response
+			};
+		} catch (err) {
+			context.body = {
+				message: "There was an error",
+				error: err,
+				data: response
+			};
+		}
+	},
+	updateUser: (context, next) => {
 		let message = "User Deleted";
 		res.json({
 			message

@@ -1,14 +1,25 @@
 const mongoose = require("mongoose");
 
-module.exports = function(req, res, next) {
-  mongoose
-    .connect(process.env.MONGO_URL, { useNewUrlParser: true })
-    .then(res => {
-      console.log(
-        `Database Successfully Connected - [${process.env.MONGO_URL}]`
-      );
-    })
-    .catch(err => {
-      console.log("There was an error connecting database.");
-    });
+// Switching off deprecation warnings
+const options = {
+	useNewUrlParser: true,
+	useFindAndModify: false,
+	useCreateIndex: true
 };
+
+const dbconnect = function() {
+	mongoose
+		.connect(process.env.MONGO_URL, options)
+		.then(res => {
+			console.log(
+				`[MONGODB] database Successfully Connected - url : [${
+					process.env.MONGO_URL
+				}]`
+			);
+		})
+		.catch(err => {
+			console.log("There was an error connecting database.");
+		});
+};
+
+module.exports = dbconnect;

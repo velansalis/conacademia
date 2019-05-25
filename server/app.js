@@ -1,44 +1,16 @@
-// Packages
-const express = require("express");
-const morgan = require("morgan");
+const koa = require("koa");
 const mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-const app = express();
+const koaBody = require("koa-body");
+const app = new koa();
 
-app.use((req, res, next) => {
-	console.log(req);
-	next();
-});
-
-// Importing Environment Variables
 require("dotenv").config();
+require("./dbconnect").call();
 
-// Imports
-const routes = require("./routes/routes");
+const router = require("./routes/routes");
 
-// Middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-mongoose
-	.connect(process.env.MONGO_URL, {
-		useNewUrlParser: true,
-		useFindAndModify: false,
-		useCreateIndex: true
-	})
-	.then(res => {
-		console.log(
-			`[DATABASE] Mongodb Successfully Connected - [${
-				process.env.MONGO_URL
-			}]`
-		);
-	})
-	.catch(err => {
-		console.log("[DATABASE] There was an error connecting database.");
-	});
+app.use(koaBody());
 
-app.use(morgan("tiny"));
-
-// Redirecting Requests
-app.use("/", routes);
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 module.exports = app;

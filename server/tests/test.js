@@ -2,7 +2,7 @@ const request = require("supertest");
 require("dotenv").config();
 
 let app = require("../app");
-let db = require("../connect.db");
+let db = require("../mongo-connect");
 
 beforeAll(async done => {
 	db = await db.call();

@@ -1,5 +1,5 @@
 {
-	"name": "data.nmamit.in",
+	"name": "datasets",
 	"version": "1.0.0",
 	"description": "",
 	"main": "server.js",
@@ -9,7 +9,12 @@
 	},
 	"author": "velansalis",
 	"license": "ISC",
+	"jest": {
+		"testEnvironment": "node",
+		"verbose": true
+	},
 	"dependencies": {
+		"chalk": "^2.4.2",
 		"koa": "^2.7.0",
 		"koa-body": "^4.1.0",
 		"koa-router": "^7.4.0",
@@ -18,7 +23,6 @@
 	"devDependencies": {
 		"dotenv": "^8.0.0",
 		"jest": "^24.8.0",
-		"mocha": "^6.1.4",
 		"supertest": "^4.0.2"
 	}
 }

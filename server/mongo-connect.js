@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const chalk = require("chalk");
 
 const options = {
 	useNewUrlParser: true,
@@ -12,10 +13,22 @@ const dbconnect = async () => {
 			process.env.MONGO_URL,
 			options
 		);
-		console.log("Connected");
+		console.log(
+			chalk.green.bold("[Database] "),
+			"MongoDB Connected at",
+			chalk.underline(
+				"http://" +
+					mongoose.connection.host +
+					":" +
+					mongoose.connection.port +
+					"/" +
+					mongoose.connection.name +
+					"\n"
+			)
+		);
 		return connection;
 	} catch (err) {
-		console.log("There was an error connecting database.");
+		console.log(chalk.red.bold("[Error] "), err);
 		return err;
 	}
 };

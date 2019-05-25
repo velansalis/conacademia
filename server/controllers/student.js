@@ -1,12 +1,12 @@
-const User = require("../models/index").user;
+const Student = require("../models/index").student;
 
 module.exports = {
 	// GET
-	getUsers: async (context, next) => {
+	getStudents: async (context, next) => {
 		try {
-			let response = await User.find().exec();
+			let response = await Student.find().exec();
 			context.body = {
-				message: "Users Found",
+				message: "Students Found",
 				count: response.length,
 				data: response
 			};
@@ -19,9 +19,9 @@ module.exports = {
 		}
 	},
 	// GET specific
-	getUser: async (context, next) => {
+	getStudent: async (context, next) => {
 		try {
-			let response = await User.find({
+			let response = await Student.find({
 				username: context.params.username
 			}).exec();
 			context.body = {
@@ -38,18 +38,17 @@ module.exports = {
 		}
 	},
 	// POST
-	addUser: async (context, next) => {
+	addStudent: async (context, next) => {
 		try {
-			let response = await new User({
+			let response = await new Student({
 				username: context.request.body.username,
 				password: context.request.body.password,
 				fname: context.request.body.fname,
 				lname: context.request.body.lname,
-				dob: new Date(context.request.body.dob),
-				designation: context.request.body.designation
+				dob: new Date(context.request.body.dob)
 			}).save();
 			context.body = {
-				message: "User Added",
+				message: "Student Added",
 				data: response
 			};
 		} catch (err) {
@@ -60,13 +59,13 @@ module.exports = {
 		}
 	},
 	// DELETE
-	deleteUser: async (context, next) => {
+	deleteStudent: async (context, next) => {
 		try {
-			let response = await User.deleteOne({
+			let response = await Student.deleteOne({
 				username: context.params.username
 			}).exec();
 			context.body = {
-				message: "User Deleted",
+				message: "Student Deleted",
 				data: response
 			};
 		} catch (err) {
@@ -78,14 +77,14 @@ module.exports = {
 		}
 	},
 	// PATCH
-	updateUser: async (context, next) => {
+	updateStudent: async (context, next) => {
 		try {
-			let response = await User.findOneAndUpdate(
+			let response = await Student.findOneAndUpdate(
 				context.params.username,
-				context.request.body.value
+				context.request.body.query
 			).exec();
 			context.body = {
-				message: "User Updated",
+				message: "Student Updated",
 				data: response
 			};
 		} catch (err) {

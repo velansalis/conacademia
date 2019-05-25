@@ -1,4 +1,5 @@
 module.exports = {
-	user: require("./users"),
+	student: require("./student"),
+	faculty: require("./faculty"),
 	dataset: require("./datasets")
 };

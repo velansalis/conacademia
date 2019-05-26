@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const StudentSchema = new Schema({
 	_id: {
 		type: mongoose.Schema.Types.ObjectId,
-		index: true,
 		required: true,
 		auto: true
 	},

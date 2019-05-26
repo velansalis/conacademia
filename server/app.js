@@ -8,7 +8,7 @@ require("dotenv").config();
 require("./mongo-connect").call();
 
 app.use(require("./middlewares/logger").logger);
-app.use(koaBody());
+app.use(koaBody({ multipart: true }));
 
 app.use(router.routes());
 app.use(router.allowedMethods());

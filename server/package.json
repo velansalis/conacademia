@@ -18,7 +18,8 @@
 		"koa": "^2.7.0",
 		"koa-body": "^4.1.0",
 		"koa-router": "^7.4.0",
-		"mongoose": "^5.5.11"
+		"mongoose": "^5.5.11",
+		"promisepipe": "^3.0.0"
 	},
 	"devDependencies": {
 		"dotenv": "^8.0.0",

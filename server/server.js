@@ -10,7 +10,7 @@ app.on("error", err => {
 });
 
 server.createServer(app.callback()).listen(process.env.PORT, () => {
-	console.clear();
+	// console.clear();
 	console.log(
 		chalk.blue.bold("[App Name] "),
 		require("./package.json").name,

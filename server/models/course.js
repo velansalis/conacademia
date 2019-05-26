@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 const CourseSchema = new Schema({
 	_id: {
 		type: mongoose.Schema.Types.ObjectId,
-		index: true,
 		required: true,
-		auto: true
+		auto: true,
+		index: true
 	},
 	uploaded_faculty: { type: mongoose.Schema.Types.ObjectId, ref: "Faculty" },
 	course_id: { type: String, unique: true },

@@ -2,7 +2,7 @@ const router = require("koa-router")();
 
 const students = require("../controllers/student");
 const faculty = require("../controllers/faculty");
-const dataset = require("../controllers/dataset");
+const course = require("../controllers/course");
 
 // Routes for Student
 router.get("/api/student/", students.getStudents);
@@ -19,11 +19,11 @@ router.delete("/api/faculty/:username", faculty.deleteFaculty);
 router.patch("/api/faculty/:username", faculty.updateFaculty);
 
 // Routes for Datasets
-router.get("/api/dataset/", dataset.getDatasets);
-router.get("/api/dataset/:id", dataset.getDataset);
-router.post("/api/dataset", dataset.addDataset);
-router.delete("/api/dataset/:id", dataset.deleteDataset);
-router.patch("/api/dataset/:id", dataset.updateDataset);
+router.get("/api/course/", course.getCourses);
+router.get("/api/course/:id", course.getCourse);
+router.post("/api/course", course.addCourse);
+router.delete("/api/course/:id", course.deleteCourse);
+router.patch("/api/course/:id", course.updateCourse);
 
 // Any other Route
 router.get("*", (context, next) => {

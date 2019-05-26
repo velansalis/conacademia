@@ -1,12 +1,12 @@
-const Dataset = require("../models/index").dataset;
+const Course = require("../models/index").course;
 
 module.exports = {
 	// GET
-	getDatasets: async (context, next) => {
+	getCourses: async (context, next) => {
 		try {
-			let response = await Dataset.find().exec();
+			let response = await Course.find().exec();
 			context.body = {
-				message: "Datasets Found",
+				message: "Courses Found",
 				count: response.length,
 				data: response
 			};
@@ -19,13 +19,13 @@ module.exports = {
 		}
 	},
 	// GET specific
-	getDataset: async (context, next) => {
+	getCourse: async (context, next) => {
 		try {
-			let response = await Dataset.find({
+			let response = await Course.find({
 				username: context.params.id
 			}).exec();
 			context.body = {
-				message: "Dataset Found",
+				message: "Course Found",
 				count: response.length,
 				data: response
 			};
@@ -38,13 +38,13 @@ module.exports = {
 		}
 	},
 	// POST
-	addDataset: async (context, next) => {
+	addCourse: async (context, next) => {
 		try {
-			let response = await new Dataset({
+			let response = await new Course({
 				title: context.request.body.title
 			}).save();
 			context.body = {
-				message: "Dataset Added",
+				message: "Course Added",
 				data: response
 			};
 		} catch (err) {
@@ -55,13 +55,13 @@ module.exports = {
 		}
 	},
 	// DELETE
-	deleteDataset: async (context, next) => {
+	deleteCourse: async (context, next) => {
 		try {
-			let response = await Dataset.deleteOne({
+			let response = await Course.deleteOne({
 				_id: context.params.id
 			}).exec();
 			context.body = {
-				message: "Dataset Deleted",
+				message: "Course Deleted",
 				data: response
 			};
 		} catch (err) {
@@ -73,14 +73,14 @@ module.exports = {
 		}
 	},
 	// PATCH
-	updateDataset: async (context, next) => {
+	updateCourse: async (context, next) => {
 		try {
-			let response = await Dataset.findOneAndUpdate(
+			let response = await Course.findOneAndUpdate(
 				context.params.id,
 				context.request.body.query
 			).exec();
 			context.body = {
-				message: "Dataset Updated",
+				message: "Course Updated",
 				data: response
 			};
 		} catch (err) {

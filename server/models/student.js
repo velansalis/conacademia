@@ -3,8 +3,10 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
 	_id: {
-		type: Schema.Types.ObjectId,
-		default: new mongoose.Types.ObjectId()
+		type: mongoose.Schema.Types.ObjectId,
+		index: true,
+		required: true,
+		auto: true
 	},
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
@@ -14,11 +16,7 @@ const StudentSchema = new Schema({
 	age: { type: Number },
 	doj: { type: Date },
 	college: { type: String },
-	department: { type: String },
-	usn: { type: Number },
-	datasets_published: [{ type: Schema.Types.ObjectId, ref: "Dataset" }],
-	datasets_saved: [{ type: Schema.Types.ObjectId, ref: "Dataset" }],
-	datasets_downloaded: [{ type: Schema.Types.ObjectId, ref: "Dataset" }]
+	department: { type: String }
 });
 
 module.exports = mongoose.model("Student", StudentSchema);

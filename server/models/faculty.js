@@ -3,8 +3,10 @@ const Schema = mongoose.Schema;
 
 const FacultySchema = new Schema({
 	_id: {
-		type: Schema.Types.ObjectId,
-		default: new mongoose.Types.ObjectId()
+		type: mongoose.Schema.Types.ObjectId,
+		index: true,
+		required: true,
+		auto: true
 	},
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
@@ -15,9 +17,7 @@ const FacultySchema = new Schema({
 	doj: { type: Date },
 	college: { type: String },
 	department: { type: String },
-	datasets_published: [{ type: Schema.Types.ObjectId, ref: "Dataset" }],
-	datasets_saved: [{ type: Schema.Types.ObjectId, ref: "Dataset" }],
-	datasets_downloaded: [{ type: Schema.Types.ObjectId, ref: "Dataset" }]
+	courses: [{ type: Schema.Types.ObjectId, ref: "Course" }]
 });
 
 module.exports = mongoose.model("Faculty", FacultySchema);

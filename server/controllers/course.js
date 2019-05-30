@@ -49,7 +49,7 @@ const getCourses = async (context, next) => {
 const getCourse = async (context, next) => {
 	try {
 		let response = await Course.find({
-			_id: context.params.id
+			course_id: context.params.course_id
 		}).exec();
 		context.body = {
 			message: "Course Found",
@@ -107,39 +107,13 @@ const updateCourse = async (context, next) => {
 			Object.assign(updateQuery, {
 				xlfile_name: savefile
 			});
-		} else if (context.request.body.query.details) {
-			let detailsObject = JSON.parse(
-				JSON.stringify(context.request.body.query.details)
-			);
-			delete context.request.body.query.details;
-			let _detailsObject = context.request.body.query;
-			let value = await Course.findOne({
-				_id: context.params.id
-			}).exec();
-			value = value.details.filter(
-				record => record.usn == detailsObject.usn
-			);
-			if (value.length != 0) {
-				console.log("Inside");
-				response = await Course.update(
-					{ _id: context.params.id },
-					Object.assign(_detailsObject, { details: detailsObject })
-				).exec();
-			} else {
-				response = await Course.update(
-					{ _id: context.params.id },
-					Object.assign(_detailsObject, {
-						$push: { details: detailsObject }
-					})
-				).exec();
-			}
-		} else {
-			Object.assign(updateQuery, context.request.body.query);
-			response = await Course.findOneAndUpdate(
-				context.params.id,
-				updateQuery
-			).exec();
 		}
+		delete context.request.body.query.details;
+		Object.assign(updateQuery, context.request.body.query);
+		response = await Course.findOneAndUpdate(
+			context.params.course_id,
+			updateQuery
+		).exec();
 		context.body = {
 			message: "Course Updated",
 			data: response
@@ -155,11 +129,11 @@ const updateCourse = async (context, next) => {
 const deleteCourse = async (context, next) => {
 	try {
 		let response = await Course.find({
-			_id: context.params.id
+			course_id: context.params.course_id
 		}).exec();
 		let file = response[0].xlfile_name;
 		response = await Course.deleteOne({
-			_id: context.params.id
+			course_id: context.params.course_id
 		}).exec();
 		fs.unlinkSync(path.join("uploads", file));
 		context.body = {
@@ -175,10 +149,60 @@ const deleteCourse = async (context, next) => {
 	}
 };
 
+const getDetail = async (context, next) => {
+	try {
+		let response = await Course.findOne({
+			course_id: context.params.course_id
+		})
+			.lean()
+			.exec();
+		response = response.details.filter(records => {
+			return records.usn == context.params.usn;
+		});
+		context.response.status = 200;
+		context.body = {
+			err: false,
+			statusCode: 200,
+			count: response.length,
+			data: response
+		};
+	} catch (err) {
+		context.response.status = 500;
+		context.body = {
+			error: true,
+			statusCode: 500,
+			errorMessage: err.toString(),
+			data: []
+		};
+	}
+};
+
+const addDetail = async (context, next) => {
+	context.body = {
+		message: "Add detail"
+	};
+};
+
+const updateDetail = async (context, next) => {
+	context.body = {
+		message: "update detail"
+	};
+};
+
+const deleteDetail = async (context, next) => {
+	context.body = {
+		message: "Delete detail"
+	};
+};
+
 module.exports = {
 	getCourses: getCourses,
 	getCourse: getCourse,
 	addCourse: addCourse,
 	deleteCourse: deleteCourse,
-	updateCourse: updateCourse
+	updateCourse: updateCourse,
+	getDetail: getDetail,
+	addDetail: addDetail,
+	updateDetail: updateDetail,
+	deleteDetail: deleteDetail
 };

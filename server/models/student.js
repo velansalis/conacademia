@@ -11,6 +11,7 @@ const StudentSchema = new Schema({
 	password: { type: String, required: true },
 	fname: { type: String, required: true },
 	lname: { type: String, required: true },
+	usn: { type: String },
 	dob: { type: Date, required: true },
 	age: { type: Number },
 	doj: { type: Date },

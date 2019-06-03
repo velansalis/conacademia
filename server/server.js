@@ -31,10 +31,6 @@ const app = require("./app");
 	}
 })();
 
-app.on("error", err => {
-	console.error("server error", err);
-});
-
 process.on("SIGINT", async () => {
 	console.log("\n");
 	console.log(

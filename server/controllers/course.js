@@ -48,7 +48,6 @@ const getCourses = async (context, next) => {
 };
 
 const getCourse = async (context, next) => {
-	console.log(context.params.course_id.toLowerCase());
 	try {
 		let response = await Course.findOne({
 			course_id: context.params.course_id
@@ -117,7 +116,6 @@ const updateCourse = async (context, next) => {
 			Object.assign(updateQuery, {
 				xlfile_name: savefile
 			});
-			console.log(updateQuery);
 		}
 		response = await Course.findOneAndUpdate(
 			context.params.course_id,
@@ -143,7 +141,6 @@ const deleteCourse = async (context, next) => {
 		})
 			.lean()
 			.exec();
-		console.log(response);
 		if (response[0] && response[0].xlfile_name) {
 			let file = response[0].xlfile_name;
 			fs.unlinkSync(path.join("uploads", file));

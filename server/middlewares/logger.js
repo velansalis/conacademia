@@ -5,7 +5,7 @@ const logger = async (context, next) => {
 	await next();
 	const ms = Date.now() - start;
 	console.log(
-		chalk.bgGreen.bold("  " + context.method + "  "),
+		chalk.green.bold(context.method),
 		chalk.underline(context.request.href),
 		chalk.bold(ms),
 		"ms"

@@ -33,12 +33,4 @@ router.post(domain + "/courses/:course_id", course.addDetail);
 router.delete(domain + "/courses/:course_id/:usn", course.deleteDetail);
 router.put(domain + "/courses/:course_id/:usn", course.updateDetail);
 
-// Any other Route
-router.get("*", (context, next) => {
-	context.body = {
-		statuscode: 404,
-		message: "route is invalid"
-	};
-});
-
 module.exports = router;

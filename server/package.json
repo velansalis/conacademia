@@ -5,7 +5,9 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
-		"test": "jest --detectOpenHandles --watchAll"
+		"start:dev": "nodemon",
+		"test": "jest --detectOpenHandles",
+		"test:watch": "jest --detectOpenHandles --watchAll"
 	},
 	"author": "@velansalis",
 	"license": "ISC",
@@ -14,9 +16,11 @@
 		"verbose": true
 	},
 	"dependencies": {
+		"bcrypt": "^3.0.6",
 		"chalk": "^2.4.2",
 		"koa": "^2.7.0",
 		"koa-body": "^4.1.0",
+		"koa-logger": "^3.2.0",
 		"koa-router": "^7.4.0",
 		"mongoose": "^5.5.11",
 		"promisepipe": "^3.0.0"

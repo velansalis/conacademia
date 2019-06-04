@@ -4,11 +4,10 @@ const http = require("http");
 const request = require("supertest");
 const fs = require("fs");
 const path = require("path");
-
-let server = null;
-const app = require("../app");
-
 require("dotenv").config();
+
+const app = require("../app");
+let server = null;
 
 beforeAll(async done => {
 	try {
@@ -44,103 +43,127 @@ afterAll(async done => {
 	done();
 });
 
-describe("Courses", () => {
-	test("Returning all courses", async () => {
-		let response = await request(server).get("/api/v1/courses/");
-		expect(response).toBeDefined();
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual("application/json");
-		expect(response.body.data).toEqual(
-			expect.arrayContaining([]) ||
-				expect.arrayContaining([expect.objectContaining({})])
-		);
-	});
-
-	test("Add a new course", async () => {
-		let data = {
+const course = {
+	getCourses: {
+		route: "/api/v1/courses",
+		resolver: async () => {
+			let response = await request(server).get(course.getCourses.route);
+			console.log("GET :", response.body);
+			expect(response.status).toEqual(200);
+			expect(response.body.data).toBeDefined();
+			expect(response.type).toEqual("application/json");
+			expect(response.body.data).toEqual(
+				expect.arrayContaining([]) ||
+					expect.arrayContaining([
+						expect.objectContaining({
+							_id: expect.anything(),
+							course_id: expect.anything(),
+							course_title: expect.anything(),
+							credits: expect.anything(),
+							semester: expect.anything()
+						})
+					])
+			);
+		}
+	},
+	addCourse: {
+		route: "/api/v1/courses",
+		data: {
 			course_id: "17MCA201",
 			course_title: "Python Programming",
 			credits: 4,
 			year: 2018,
 			semester: 4
-		};
-		let response = null;
-		response = await request(server)
-			.post("/api/v1/courses")
-			.send(data);
-		expect(response).toBeDefined();
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual("application/json");
-		expect(response.body.data).toEqual(
-			expect.arrayContaining([]) ||
-				expect.arrayContaining([
-					expect.objectContaining({
-						_id: expect.anything(),
-						course_id: expect.anything(),
-						course_title: expect.anything()
-					})
-				])
-		);
-		response = await request(server).get("/api/v1/courses/17mca201");
-		expect(response).toBeDefined();
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual("application/json");
-		expect(response.body.data).toEqual(
-			expect.arrayContaining([]) ||
-				expect.arrayContaining([
-					expect.objectContaining({
-						course_id: data.course_id,
-						course_title: data.course_title,
-						credits: data.credits,
-						semester: data.semester,
-						year: data.year
-					})
-				])
-		);
-	});
-
-	test("Edit registered course", async () => {
-		let reponse = null;
-		let filePath = "/home/velansalis/Documents/MCA 4 SEM C-LAB.xls";
-		let file = fs.readFileSync(filePath);
-
-		let query = {
-			query: {
-				file: file,
-				course_title: "Python",
-				details: {
-					usn: "4nm18mca97"
-				}
+		},
+		resolver: async () => {
+			let response = await request(server)
+				.post(course.addCourse.route)
+				.send(course.addCourse.data);
+			expect(response.status).toEqual(200);
+			expect(response.body.data).toBeDefined();
+			expect(response.type).toEqual("application/json");
+			expect(response.body.data).toEqual(
+				expect.arrayContaining([]) ||
+					expect.arrayContaining([
+						expect.objectContaining({
+							_id: expect.anything(),
+							course_id: expect.anything(),
+							course_title: expect.anything(),
+							credits: expect.anything(),
+							semester: expect.anything()
+						})
+					])
+			);
+		}
+	},
+	getCourse: {
+		route: "/api/v1/courses/17mca201",
+		expectData: {
+			course_id: "17MCA201",
+			course_title: "Python Programming",
+			credits: 4,
+			year: 2018,
+			semester: 4
+		},
+		resolver: async () => {
+			let response = await request(server).get(
+				`/api/v1/courses/${course.getCourse.expectData.course_id}`
+			);
+			expect(response.status).toEqual(200);
+			expect(response.body.data).toBeDefined();
+			expect(response.type).toEqual("application/json");
+			expect(response.body.data).toEqual(
+				expect.arrayContaining(
+					[] ||
+						expect.arrayContaining([
+							expect.objectContaining({
+								_id: expect.anything(),
+								course_id:
+									course.getCourse.expectData.course_id,
+								course_title:
+									course.getCourse.expectData.course_title,
+								credits: course.getCourse.expectData.credits,
+								semester: course.getCourse.expectData.semester,
+								year: course.getCourse.expectData.year
+							})
+						])
+				)
+			);
+		}
+	},
+	updateCourse: {
+		route: "/api/v1/courses/17mca201",
+		data: {
+			file: (() => {
+				return fs.readFileSync(
+					"/home/velansalis/Documents/MCA 4 SEM C-LAB.xls"
+				);
+			})(),
+			course_title: "Python",
+			details: {
+				usn: "4nm18mca97"
 			}
-		};
+		},
+		expectData: {},
+		resolver: async () => {
+			let response = await request(server)
+				.patch("/api/v1/courses/17mca201")
+				.send(course.updateCourse.data);
+			console.log(response.body);
+			expect(response.status).toEqual(200);
+			expect(response.body.data).toBeDefined();
+			expect(response.type).toEqual("application/json");
+			expect(response.body.data).toEqual(expect.arrayContaining([]));
+		}
+	}
+};
 
-		response = await request(server)
-			.patch("/api/v1/courses/17mca201")
-			.send(query);
-		expect(response).toBeDefined();
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual("application/json");
-		expect(response.body.data).toEqual(expect.arrayContaining([]));
-		response = await request(server).get("/api/v1/courses/17mca201");
-		expect(response).toBeDefined();
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual("application/json");
-		expect(response.body.data).toEqual(
-			expect.arrayContaining([]) ||
-				expect.arrayContaining([
-					expect.objectContaining({
-						xlfile1_name: expect.toBe(String),
-						course_title: query.query.course_title
-					})
-				])
-		);
-	});
-
-	test("Delete single registered course", async () => {
-		let response = await request(server).delete("/api/v1/courses/17mca201");
-		expect(response).toBeDefined();
-		expect(response.status).toEqual(200);
-		expect(response.type).toEqual("application/json");
-		expect(response.body.data.deletedCount).toEqual(1);
-	});
+describe("Courses", () => {
+	test(`GET : ${course.getCourses.route}`, course.getCourses.resolver);
+	test(`POST : ${course.addCourse.route}`, course.addCourse.resolver);
+	test(`GET : ${course.getCourse.route}`, course.getCourse.resolver);
+	test(`GET : ${course.getCourses.route}`, course.getCourses.resolver);
+	test(`PATCH : ${course.updateCourse.route}`, course.updateCourse.resolver);
+	test(`GET : ${course.getCourses.route}`, course.getCourses.resolver);
+	test(`GET : ${course.getCourses.route}`, course.getCourses.resolver);
 });

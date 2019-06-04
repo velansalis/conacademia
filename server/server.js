@@ -15,7 +15,7 @@ const app = require("./app");
 				useCreateIndex: true
 			}
 		);
-		server.createServer(app).listen(process.env.PORT, () => {
+		server.createServer(app.callback()).listen(process.env.PORT, () => {
 			console.table({
 				database: "Mongodb : 27017",
 				server: `NodeJS : ${process.env.PORT}`,

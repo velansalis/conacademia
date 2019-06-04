@@ -9,39 +9,41 @@ const uploadFile = async context => {
 	try {
 		const uploadfile = context.request.files.file;
 		const savefile = Date.now().toString() + uploadfile.name;
-
 		let readStream = fs.createReadStream(uploadfile.path);
 		let writeStream = fs.createWriteStream(path.join("uploads", savefile));
 		await promisePipe(
 			readStream.on("error", () => {
-				throw new Error("Read Error");
+				throw new Error({
+					errors: "File Read Error"
+				});
 			}),
 			writeStream.on("error", () => {
-				throw new Error("Write Error");
+				throw new Error({
+					errors: "Write Error"
+				});
 			})
 		);
 		return savefile;
 	} catch (err) {
+		context.response.status = 500;
 		throw new Error({
-			name: "UploadError",
-			message: "There was an error uploading the file",
-			error: err
+			errors: err.toString()
 		});
 	}
 };
 
 const getCourses = async (context, next) => {
 	try {
-		let response = await Course.find().exec();
+		let response = await Course.find()
+			.lean()
+			.exec();
 		context.body = {
-			message: "Courses Found",
-			count: response.length,
 			data: response
 		};
 	} catch (err) {
+		context.response.status = 500;
 		context.body = {
-			message: "There was an error",
-			error: err,
+			errors: err,
 			data: response
 		};
 	}
@@ -49,17 +51,19 @@ const getCourses = async (context, next) => {
 
 const getCourse = async (context, next) => {
 	try {
+		let course_id = context.params.course_id.toLowerCase();
 		let response = await Course.findOne({
-			course_id: context.params.course_id
-		}).exec();
+			course_id: course_id
+		})
+			.lean()
+			.exec();
 		context.body = {
-			message: "Course Found",
 			data: response
 		};
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
-			error: err
+			errors: err,
+			data: response
 		};
 	}
 };
@@ -83,19 +87,17 @@ const addCourse = async (context, next) => {
 		}
 		let response = await new Course(saveObject).save();
 		context.body = {
-			message: "Course Added",
 			data: response
 		};
 	} catch (err) {
-		console.log(err);
 		if (err.name == "MongoError") {
 			fs.unlink(path.join("uploads", savefile), () => {
 				console.log(`Removed ${savefile}`);
 			});
 		}
 		context.body = {
-			message: "There was an error",
-			error: err
+			errors: err,
+			data: response
 		};
 	}
 };
@@ -105,11 +107,11 @@ const updateCourse = async (context, next) => {
 	let response = null;
 	let savefile = null;
 	try {
-		if (context.request.body.query != undefined) {
-			if (context.request.body.query.details) {
-				delete context.request.body.query.details;
+		if (Object.keys(context.request.body).length == 0) {
+			if (context.request.body.details) {
+				delete context.request.body.details;
 			}
-			Object.assign(updateQuery, context.request.body.query);
+			Object.assign(updateQuery, context.request.body);
 		}
 		if (context.request.files != undefined) {
 			savefile = await uploadFile(context);
@@ -122,14 +124,13 @@ const updateCourse = async (context, next) => {
 			updateQuery
 		).exec();
 		context.body = {
-			message: "Course Updated",
 			data: response
 		};
 	} catch (err) {
 		console.log(err);
 		context.body = {
-			error: true,
-			message: err
+			errors: err.toString(),
+			data: response
 		};
 	}
 };

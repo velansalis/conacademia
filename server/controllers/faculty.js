@@ -1,18 +1,16 @@
+const bcrypt = require("bcrypt");
+
 const Faculty = require("../models/index").faculty;
 
 const getFaculties = async (context, next) => {
 	try {
 		let response = await Faculty.find().exec();
 		context.body = {
-			message: "Faculty Found",
-			count: response.length,
 			data: response
 		};
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
-			error: err,
-			data: response
+			errors: err
 		};
 	}
 };
@@ -23,36 +21,32 @@ const getFaculty = async (context, next) => {
 			username: context.params.username
 		}).exec();
 		context.body = {
-			message: "Users Found",
-			count: response.length,
-			data: response
+			data: response._doc
 		};
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
-			error: err,
-			data: response
+			errors: err
 		};
 	}
 };
 
 const addFaculty = async (context, next) => {
 	try {
-		let response = await new Faculty({
-			username: context.request.body.username,
-			password: context.request.body.password,
-			fname: context.request.body.fname,
-			lname: context.request.body.lname,
-			dob: new Date(context.request.body.dob)
+		const body = context.request.body;
+		const hashedPassword = await bcrypt.hash(body.password, 12);
+		const response = await new Faculty({
+			username: body.username,
+			password: hashedPassword,
+			fname: body.fname,
+			lname: body.lname,
+			dob: new Date(body.dob)
 		}).save();
 		context.body = {
-			message: "Faculty Added",
 			data: response
 		};
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
-			error: err
+			errors: err.toString()
 		};
 	}
 };
@@ -63,14 +57,11 @@ const deleteFaculty = async (context, next) => {
 			username: context.params.username
 		}).exec();
 		context.body = {
-			message: "Faculty Deleted",
 			data: response
 		};
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
-			error: err,
-			data: response
+			errors: err
 		};
 	}
 };
@@ -79,16 +70,14 @@ const updateFaculty = async (context, next) => {
 	try {
 		let response = await Faculty.findOneAndUpdate(
 			context.params.username,
-			context.request.body.query
+			context.request.body
 		).exec();
 		context.body = {
-			message: "Faculty Updated",
 			data: response
 		};
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
-			error: err
+			errors: err
 		};
 	}
 };

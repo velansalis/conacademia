@@ -10,14 +10,11 @@ app.use(koaLogger());
 
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.use((context, next) => {
-	context.response.status = 404;
-	const error = new Error("Route not allowed");
-	next(error);
-});
-app.use((error, context, next) => {
+
+app.on("error", (err, context) => {
 	context.body = {
-		error: error
+		errors: err,
+		data: []
 	};
 });
 

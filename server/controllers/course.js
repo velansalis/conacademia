@@ -25,10 +25,8 @@ const uploadFile = async context => {
 		);
 		return savefile;
 	} catch (err) {
-		context.response.status = 500;
-		throw new Error({
-			errors: err.toString()
-		});
+		context.status = err.status || 500;
+		context.app.emit("error", err.toString(), context);
 	}
 };
 
@@ -41,11 +39,8 @@ const getCourses = async (context, next) => {
 			data: response
 		};
 	} catch (err) {
-		context.response.status = 500;
-		context.body = {
-			errors: err,
-			data: response
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err.toString(), context);
 	}
 };
 
@@ -61,44 +56,28 @@ const getCourse = async (context, next) => {
 			data: response
 		};
 	} catch (err) {
-		context.body = {
-			errors: err,
-			data: response
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err.toString(), context);
 	}
 };
 
 const addCourse = async (context, next) => {
 	let saveObject = new Object();
 	try {
-		if (context.request.files != undefined) {
-			let savefile = await uploadFile(context);
-			Object.assign(saveObject, {
-				xlfile_name: savefile
-			});
-		} else {
-			Object.assign(saveObject, {
-				course_id: context.request.body.course_id,
-				course_title: context.request.body.course_title,
-				credits: context.request.body.credits,
-				year: context.request.body.year,
-				semester: context.request.body.semester
-			});
-		}
+		Object.assign(saveObject, {
+			course_id: context.request.body.course_id,
+			course_title: context.request.body.course_title,
+			credits: context.request.body.credits,
+			year: context.request.body.year,
+			semester: context.request.body.semester
+		});
 		let response = await new Course(saveObject).save();
 		context.body = {
 			data: response
 		};
 	} catch (err) {
-		if (err.name == "MongoError") {
-			fs.unlink(path.join("uploads", savefile), () => {
-				console.log(`Removed ${savefile}`);
-			});
-		}
-		context.body = {
-			errors: err,
-			data: response
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
@@ -107,7 +86,7 @@ const updateCourse = async (context, next) => {
 	let response = null;
 	let savefile = null;
 	try {
-		if (Object.keys(context.request.body).length == 0) {
+		if (Object.keys(context.request.body).length != 0) {
 			if (context.request.body.details) {
 				delete context.request.body.details;
 			}
@@ -120,18 +99,15 @@ const updateCourse = async (context, next) => {
 			});
 		}
 		response = await Course.findOneAndUpdate(
-			context.params.course_id,
+			context.params.course_id.toLowerCase(),
 			updateQuery
 		).exec();
 		context.body = {
 			data: response
 		};
 	} catch (err) {
-		console.log(err);
-		context.body = {
-			errors: err.toString(),
-			data: response
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
@@ -142,7 +118,7 @@ const deleteCourse = async (context, next) => {
 		})
 			.lean()
 			.exec();
-		if (response[0] && response[0].xlfile_name) {
+		if (response && response[0] && response[0].xlfile_name) {
 			let file = response[0].xlfile_name;
 			fs.unlinkSync(path.join("uploads", file));
 		}
@@ -150,15 +126,11 @@ const deleteCourse = async (context, next) => {
 			course_id: context.params.course_id
 		}).exec();
 		context.body = {
-			message: "Course Deleted",
 			data: response
 		};
 	} catch (err) {
-		console.log(err);
-		context.body = {
-			message: "There was an error",
-			error: err
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
@@ -172,82 +144,56 @@ const getDetail = async (context, next) => {
 		response = response.details.filter(records => {
 			return records.usn == context.params.usn;
 		});
-		context.response.status = 200;
 		context.body = {
-			err: false,
-			statusCode: 200,
-			count: response.length,
 			data: response
 		};
 	} catch (err) {
-		context.response.status = 500;
-		context.body = {
-			error: true,
-			statusCode: 500,
-			errorMessage: err.toString(),
-			data: []
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
 const addDetail = async (context, next) => {
 	try {
-		let updateQuery = context.request.body.query;
-		let response = await Course.updateOne(
+		let updateQuery = context.request.body;
+		let response = await Course.findOneAndUpdate(
 			{
-				course_id: context.params.course_id,
-				"details.usn": { $ne: updateQuery.usn }
+				course_id: context.params.course_id.toLowerCase(),
+				"marks.usn": { $ne: updateQuery.usn }
 			},
-			{ $push: { details: updateQuery } }
+			{ $push: { marks: updateQuery } }
 		).exec();
 		context.body = {
-			err: false,
-			title: "Success",
-			statusCode: 200,
-			count: response.length,
 			data: response
 		};
 	} catch (err) {
-		context.body = {
-			error: true,
-			title: "ServerError",
-			statusCode: 500,
-			message: err.toString()
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
 const updateDetail = async (context, next) => {
-	let requestQuery = context.request.body.query;
 	try {
-		let updateQuery = context.request.body.query;
-		let response = await Course.updateOne(
+		let updateQuery = context.request.body;
+		let response = await Course.findOneAndUpdate(
 			{
 				course_id: context.params.course_id
 			},
-			{ $pull: { details: { usn: updateQuery.usn } } }
+			{ $pull: { "marks.usn": context.params.usn } }
 		).exec();
-		response = await Course.updateOne(
+		response = await Course.findOneAndUpdate(
 			{
 				course_id: context.params.course_id,
-				"details.usn": { $ne: updateQuery.usn }
+				"marks.usn": { $ne: context.params.usn }
 			},
-			{ $push: { details: updateQuery } }
+			{ $push: { marks: updateQuery } }
 		).exec();
 		context.body = {
-			err: false,
-			title: "Success",
-			statusCode: 200,
-			count: response.length,
 			data: response
 		};
 	} catch (err) {
-		context.body = {
-			error: true,
-			title: "ServerError",
-			statusCode: 500,
-			message: err.toString()
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
@@ -257,23 +203,15 @@ const deleteDetail = async (context, next) => {
 			{
 				course_id: context.params.course_id
 			},
-			{ $pull: { details: { usn: context.params.usn } } }
+			{ $pull: { marks: { usn: context.params.usn } } }
 		).exec();
 
 		context.body = {
-			err: false,
-			title: "Success",
-			statusCode: 200,
-			count: response.length,
 			data: response
 		};
 	} catch (err) {
-		context.body = {
-			error: true,
-			title: "ServerError",
-			statusCode: 500,
-			message: err.toString()
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 

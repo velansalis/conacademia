@@ -1,6 +1,45 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const Marks = new Schema({
+	usn: {
+		type: String,
+		unique: true,
+		required: true,
+		lowercase: true,
+		ref: "Student"
+	},
+	attendance: {
+		type: Number,
+		default: 0
+	},
+	task: [
+		{
+			type: Number,
+			min: [0, "Task marks can't be less than 0"],
+			default: 0
+		}
+	],
+	mse1: {
+		type: Number,
+		min: [0, "MSE marks can't be less than 0"],
+		default: 0
+	},
+	mse2: {
+		type: Number,
+		min: [0, "MSE marks can't be less than 0"],
+		default: 0
+	},
+	total: {
+		type: Number,
+		default: 0
+	},
+	remarks: {
+		type: String,
+		default: null
+	}
+});
+
 const CourseSchema = new Schema({
 	_id: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -39,48 +78,8 @@ const CourseSchema = new Schema({
 	faculty_incharge: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Faculty"
-		// required: true
 	},
-	details: [
-		{
-			usn: {
-				type: String,
-				unique: true,
-				required: true,
-				lowercase: true,
-				ref: "Student"
-			},
-			attendance: {
-				type: Number
-			},
-			task: [
-				{ type: Number, min: [0, "Task marks can't be less than 0"] }
-			],
-			mse1: {
-				type: Number,
-				min: [0, "MSE marks can't be less than 0"],
-				default: 0
-			},
-			mse2: {
-				type: Number,
-				min: [0, "MSE marks can't be less than 0"],
-				default: 0
-			},
-			total: {
-				type: Number,
-				set: () => {
-					return this.details.total;
-				},
-				default: () => {
-					return this.details.mse1 + this.details.mse2;
-				}
-			},
-			remarks: {
-				type: String,
-				default: null
-			}
-		}
-	]
+	marks: [Marks]
 });
 
 module.exports = mongoose.model("Course", CourseSchema);

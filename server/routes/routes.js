@@ -1,17 +1,23 @@
 const router = require("koa-router")();
 
-const students = require("../controllers/student");
+const {
+	getStudent,
+	getStudents,
+	addStudent,
+	deleteStudent,
+	updateStudent
+} = require("../controllers/student");
 const faculty = require("../controllers/faculty");
 const course = require("../controllers/course");
 
 const domain = "/api/v1";
 
 // Routes for Student
-router.get(domain + "/students/", students.getStudents);
-router.get(domain + "/students/:username", students.getStudent);
-router.post(domain + "/students", students.addStudent);
-router.delete(domain + "/students/:username", students.deleteStudent);
-router.patch(domain + "/students/:username", students.updateStudent);
+router.get(domain + "/students/", getStudents);
+router.get(domain + "/students/:username", getStudent);
+router.post(domain + "/students", addStudent);
+router.delete(domain + "/students/:username", deleteStudent);
+router.patch(domain + "/students/:username", updateStudent);
 
 // Routes for Faculty
 router.get(domain + "/faculty/", faculty.getFaculties);

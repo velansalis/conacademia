@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 const getStudents = async (context, next) => {
 	try {
-		console.log(context.requested);
 		let response = await Student.find().exec();
 		response.map(object => {
 			return (object.password = null);
@@ -34,14 +33,7 @@ const getStudent = async (context, next) => {
 
 const addStudent = async (context, next) => {
 	try {
-		let {
-			username,
-			password,
-			fname,
-			lname,
-			dob,
-			usn
-		} = context.request.body;
+		let { username, password, fname, lname, dob, usn } = context.request.body;
 
 		let hash = await bcrypt.hash(password, 12);
 
@@ -83,10 +75,7 @@ const deleteStudent = async (context, next) => {
 
 const updateStudent = async (context, next) => {
 	try {
-		let response = await Student.updateObe(
-			context.params.username,
-			context.request.body.query
-		).exec();
+		let response = await Student.updateObe(context.params.username, context.request.body.query).exec();
 		context.status = 200;
 		context.app.emit("response", response, context);
 	} catch (err) {

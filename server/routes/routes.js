@@ -1,20 +1,8 @@
 const router = require("koa-router")();
 
-const {
-	getStudent,
-	getStudents,
-	addStudent,
-	deleteStudent,
-	updateStudent
-} = require("../controllers/student");
+const { getStudent, getStudents, addStudent, deleteStudent, updateStudent } = require("../controllers/student");
 
-const {
-	getFaculties,
-	getFaculty,
-	addFaculty,
-	updateFaculty,
-	deleteFaculty
-} = require("../controllers/faculty");
+const { getFaculties, getFaculty, addFaculty, updateFaculty, deleteFaculty } = require("../controllers/faculty");
 
 const {
 	getCourse,
@@ -28,7 +16,8 @@ const {
 	deleteDetail
 } = require("../controllers/course");
 
-const { getKey, verifyKey } = require("../controllers/jwt.auth");
+const { getKey, verifyKey } = require("../controllers/auth/jwt.auth");
+const { verifyStudent, verifyFaculty } = require("../controllers/auth/auth");
 
 const domain = "/api/v1";
 
@@ -36,31 +25,31 @@ const domain = "/api/v1";
 router.post(`${domain}/auth/key`, getKey);
 
 // Routes for Student
-router.get(`${domain}/students/`, verifyKey, getStudents);
-router.get(`${domain}/students/:username`, verifyKey, getStudent);
-router.post(`${domain}/students`, verifyKey, addStudent);
-router.delete(`${domain}/students/:username`, verifyKey, deleteStudent);
-router.patch(`${domain}/students/:username`, verifyKey, updateStudent);
+router.get(`${domain}/students/`, verifyKey, verifyStudent, getStudents);
+router.get(`${domain}/students/:username`, verifyKey, verifyStudent, getStudent);
+router.post(`${domain}/students`, verifyKey, verifyStudent, addStudent);
+router.delete(`${domain}/students/:username`, verifyKey, verifyStudent, deleteStudent);
+router.patch(`${domain}/students/:username`, verifyKey, verifyStudent, updateStudent);
 
 // Routes for Faculty
-router.get(`${domain}/faculty/`, verifyKey, getFaculties);
-router.get(`${domain}/faculty/:username`, verifyKey, getFaculty);
-router.post(`${domain}/faculty`, verifyKey, addFaculty);
-router.delete(`${domain}/faculty/:username`, verifyKey, deleteFaculty);
-router.patch(`${domain}/faculty/:username`, verifyKey, updateFaculty);
+router.get(`${domain}/faculty/`, verifyKey, verifyFaculty, getFaculties);
+router.get(`${domain}/faculty/:username`, verifyKey, verifyFaculty, getFaculty);
+router.post(`${domain}/faculty`, verifyKey, verifyFaculty, addFaculty);
+router.delete(`${domain}/faculty/:username`, verifyKey, verifyFaculty, deleteFaculty);
+router.patch(`${domain}/faculty/:username`, verifyKey, verifyFaculty, updateFaculty);
 
 // Routes for Courses
-router.get(`${domain}/courses/`, verifyKey, getCourses);
-router.get(`${domain}/courses/:course_id`, verifyKey, getCourse);
-router.post(`${domain}/courses`, verifyKey, addCourse);
-router.delete(`${domain}/courses/:course_id`, verifyKey, deleteCourse);
-router.patch(`${domain}/courses/:course_id`, verifyKey, updateCourse);
+router.get(`${domain}/courses/`, verifyKey, verifyFaculty, getCourses);
+router.get(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, getCourse);
+router.post(`${domain}/courses`, verifyKey, verifyFaculty, addCourse);
+router.delete(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, deleteCourse);
+router.patch(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, updateCourse);
 
 // Route for Details of Courses
-router.get(`${domain}/courses/:course_id/:usn`, verifyKey, getDetail);
-router.post(`${domain}/courses/:course_id`, verifyKey, addDetail);
-router.delete(`${domain}/courses/:course_id/:usn`, verifyKey, deleteDetail);
-router.put(`${domain}/courses/:course_id/:usn`, verifyKey, updateDetail);
+router.get(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, getDetail);
+router.post(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, addDetail);
+router.delete(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, deleteDetail);
+router.put(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, updateDetail);
 
 // Catch all other routes
 router.all("*", (context, next) => {

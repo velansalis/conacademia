@@ -5,23 +5,18 @@ require("dotenv").config();
 
 const generateToken = data => {
 	return new Promise((resolve, reject) => {
-		jwt.sign(
-			data,
-			process.env.PRIVATE_KEY,
-			{ expiresIn: 60 * 60 },
-			(err, token) => {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(token);
-				}
+		jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: 60 * 60 }, (err, token) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(token);
 			}
-		);
+		});
 	});
 };
 
 const getKey = async (context, next) => {
-	const { Student, Faculty } = require("../models/index");
+	const { Student, Faculty } = require("../../models/index");
 	const { username, password } = context.request.body;
 
 	try {
@@ -73,12 +68,17 @@ const getKey = async (context, next) => {
 };
 
 const verifyKey = async (context, next) => {
-	let { authorization } = context.request.headers;
-	let token = authorization.split(" ")[1];
 	try {
-		var decoded = jwt.verify(token, process.env.PRIVATE_KEY);
-		context.jwtDecoded = decoded;
-		return next();
+		let { authorization } = context.request.headers;
+		if (authorization) {
+			let token = authorization.split(" ")[1];
+			var decoded = jwt.verify(token, process.env.PRIVATE_KEY);
+			context.decoded = decoded;
+			return next();
+		} else {
+			context.status = 500;
+			context.app.emit("error", { message: "Authorization token missing" }, context);
+		}
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);

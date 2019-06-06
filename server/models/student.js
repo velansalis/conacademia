@@ -16,7 +16,13 @@ const StudentSchema = new Schema({
 	age: { type: Number },
 	doj: { type: Date },
 	college: { type: String },
-	department: { type: String }
+	department: { type: String },
+	activities: [
+		{
+			method: { type: String },
+			url: { type: String }
+		}
+	]
 });
 
 module.exports = mongoose.model("Student", StudentSchema);

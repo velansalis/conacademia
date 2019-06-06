@@ -53,7 +53,7 @@ const getCourse = async (context, next) => {
 			.lean()
 			.exec();
 		context.body = {
-			data: response
+			data: response == null ? [] : response
 		};
 	} catch (err) {
 		context.status = err.status || 500;
@@ -87,8 +87,8 @@ const updateCourse = async (context, next) => {
 	let savefile = null;
 	try {
 		if (Object.keys(context.request.body).length != 0) {
-			if (context.request.body.details) {
-				delete context.request.body.details;
+			if (context.request.body.marks) {
+				delete context.request.body.marks;
 			}
 			Object.assign(updateQuery, context.request.body);
 		}
@@ -98,8 +98,8 @@ const updateCourse = async (context, next) => {
 				xlfile_name: savefile
 			});
 		}
-		response = await Course.findOneAndUpdate(
-			context.params.course_id.toLowerCase(),
+		response = await Course.updateOne(
+			{ course_id: context.params.course_id.toLowerCase() },
 			updateQuery
 		).exec();
 		context.body = {
@@ -141,9 +141,13 @@ const getDetail = async (context, next) => {
 		})
 			.lean()
 			.exec();
-		response = response.details.filter(records => {
-			return records.usn == context.params.usn;
-		});
+		if (!response) {
+			response = [];
+		} else {
+			response = response.details.filter(records => {
+				return records.usn == context.params.usn;
+			});
+		}
 		context.body = {
 			data: response
 		};
@@ -156,7 +160,7 @@ const getDetail = async (context, next) => {
 const addDetail = async (context, next) => {
 	try {
 		let updateQuery = context.request.body;
-		let response = await Course.findOneAndUpdate(
+		let response = await Course.updateOne(
 			{
 				course_id: context.params.course_id.toLowerCase(),
 				"marks.usn": { $ne: updateQuery.usn }
@@ -175,19 +179,20 @@ const addDetail = async (context, next) => {
 const updateDetail = async (context, next) => {
 	try {
 		let updateQuery = context.request.body;
-		let response = await Course.findOneAndUpdate(
-			{
-				course_id: context.params.course_id
-			},
-			{ $pull: { "marks.usn": context.params.usn } }
-		).exec();
-		response = await Course.findOneAndUpdate(
-			{
-				course_id: context.params.course_id,
-				"marks.usn": { $ne: context.params.usn }
-			},
-			{ $push: { marks: updateQuery } }
-		).exec();
+		let response = await Course.findOne({
+			course_id: context.params.course_id,
+			"marks.usn": { $ne: context.params.usn }
+		})
+			.lean()
+			.exec();
+		console.log(response.marks);
+		// response = await Course.findOneAndUpdate(
+		// 	{
+		// 		course_id: context.params.course_id,
+		// 		"marks.usn": { $ne: context.params.usn }
+		// 	},
+		// 	{ $push: { marks: updateQuery } }
+		// ).exec();
 		context.body = {
 			data: response
 		};

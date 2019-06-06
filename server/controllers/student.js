@@ -1,19 +1,18 @@
-const Student = require("../models/index").student;
+const { Student } = require("../models/index");
+const bcrypt = require("bcrypt");
 
 const getStudents = async (context, next) => {
 	try {
+		console.log(context.requested);
 		let response = await Student.find().exec();
-		context.body = {
-			message: "Students Found",
-			count: response.length,
-			data: response
-		};
+		response.map(object => {
+			return (object.password = null);
+		});
+		context.status = 200;
+		context.app.emit("response", response, context);
 	} catch (err) {
-		context.body = {
-			message: "There was an error",
-			error: err,
-			data: response
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
@@ -22,38 +21,48 @@ const getStudent = async (context, next) => {
 		let response = await Student.find({
 			username: context.params.username
 		}).exec();
-		context.body = {
-			message: "Users Found",
-			count: response.length,
-			data: response
-		};
+		response.map(object => {
+			return (object.password = null);
+		});
+		context.status = 200;
+		context.app.emit("response", response, context);
 	} catch (err) {
-		context.body = {
-			message: "There was an error",
-			error: err,
-			data: response
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
 const addStudent = async (context, next) => {
 	try {
+		let {
+			username,
+			password,
+			fname,
+			lname,
+			dob,
+			usn
+		} = context.request.body;
+
+		let hash = await bcrypt.hash(password, 12);
+
 		let response = await new Student({
-			username: context.request.body.username,
-			password: context.request.body.password,
-			fname: context.request.body.fname,
-			lname: context.request.body.lname,
-			dob: new Date(context.request.body.dob)
+			username: username,
+			password: hash,
+			fname: fname,
+			lname: lname,
+			dob: new Date(dob).toDateString(),
+			usn: usn
 		}).save();
-		context.body = {
-			message: "Student Added",
-			data: response
-		};
+
+		[response].map(object => {
+			return (object.password = null);
+		});
+
+		context.status = 200;
+		context.app.emit("response", response, context);
 	} catch (err) {
-		context.body = {
-			message: "There was an error",
-			error: err
-		};
+		context.status = err.status || 500;
+		context.app.emit("error", err, context);
 	}
 };
 
@@ -62,29 +71,24 @@ const deleteStudent = async (context, next) => {
 		let response = await Student.deleteOne({
 			username: context.params.username
 		}).exec();
-		context.body = {
-			message: "Student Deleted",
-			data: response
-		};
+		context.status = 200;
+		context.app.emit("response", response, context);
 	} catch (err) {
 		context.body = {
-			message: "There was an error",
 			error: err,
-			data: response
+			data: []
 		};
 	}
 };
 
 const updateStudent = async (context, next) => {
 	try {
-		let response = await Student.findOneAndUpdate(
+		let response = await Student.updateObe(
 			context.params.username,
 			context.request.body.query
 		).exec();
-		context.body = {
-			message: "Student Updated",
-			data: response
-		};
+		context.status = 200;
+		context.app.emit("response", response, context);
 	} catch (err) {
 		context.body = {
 			message: "There was an error",

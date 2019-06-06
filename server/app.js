@@ -11,10 +11,21 @@ app.use(koaLogger());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+app.on("response", (data, context) => {
+	context.body = {
+		data: data,
+		method: context.method,
+		url: context.href
+	};
+});
+
 app.on("error", (err, context) => {
+	console.log(err);
 	context.body = {
 		errors: err,
-		data: []
+		data: [],
+		url: context.href,
+		method: context.method
 	};
 });
 

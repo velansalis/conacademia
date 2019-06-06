@@ -1,45 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Marks = new Schema({
-	usn: {
-		type: String,
-		unique: true,
-		required: true,
-		lowercase: true,
-		ref: "Student"
-	},
-	attendance: {
-		type: Number,
-		default: 0
-	},
-	task: [
-		{
-			type: Number,
-			min: [0, "Task marks can't be less than 0"],
-			default: 0
-		}
-	],
-	mse1: {
-		type: Number,
-		min: [0, "MSE marks can't be less than 0"],
-		default: 0
-	},
-	mse2: {
-		type: Number,
-		min: [0, "MSE marks can't be less than 0"],
-		default: 0
-	},
-	total: {
-		type: Number,
-		default: 0
-	},
-	remarks: {
-		type: String,
-		default: null
-	}
-});
-
 const CourseSchema = new Schema({
 	_id: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -64,7 +25,6 @@ const CourseSchema = new Schema({
 	},
 	year: {
 		type: Number,
-		default: new Date().getFullYear(),
 		required: true
 	},
 	semester: {
@@ -72,14 +32,45 @@ const CourseSchema = new Schema({
 		required: true
 	},
 	xlfile_name: {
-		type: String,
-		default: null
+		type: String
 	},
 	faculty_incharge: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Faculty"
 	},
-	marks: [Marks]
+	marks: [
+		{
+			usn: {
+				type: String,
+				required: true,
+				lowercase: true,
+				ref: "Student"
+			},
+			attendance: {
+				type: Number
+			},
+			task: [
+				{
+					type: Number,
+					min: [0, "Task marks can't be less than 0"]
+				}
+			],
+			mse1: {
+				type: Number,
+				min: [0, "MSE marks can't be less than 0"]
+			},
+			mse2: {
+				type: Number,
+				min: [0, "MSE marks can't be less than 0"]
+			},
+			total: {
+				type: Number
+			},
+			remarks: {
+				type: String
+			}
+		}
+	]
 });
 
 module.exports = mongoose.model("Course", CourseSchema);

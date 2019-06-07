@@ -20,9 +20,11 @@ const StudentSchema = new Schema({
 	activities: [
 		{
 			method: { type: String },
-			url: { type: String }
+			url: { type: String },
+			timestamp: { type: Date }
 		}
-	]
+	],
+	created_by: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Student", StudentSchema);

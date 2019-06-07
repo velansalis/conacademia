@@ -20,7 +20,7 @@ app.on("response", (data, context) => {
 });
 
 app.on("error", (err, context) => {
-	console.log(err.message);
+	console.log(err);
 	context.body = {
 		errors: err,
 		data: [],

@@ -16,7 +16,8 @@ const FacultySchema = new Schema({
 	doj: { type: Date },
 	college: { type: String },
 	department: { type: String },
-	courses: [{ type: Schema.Types.ObjectId, ref: "Course" }]
+	courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+	created_by: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Faculty", FacultySchema);

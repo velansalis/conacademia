@@ -3,9 +3,11 @@ const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 
+const { Student, Faculty } = require("../../models/index");
+
 const generateToken = data => {
 	return new Promise((resolve, reject) => {
-		jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: 60 * 60 }, (err, token) => {
+		jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: 60 * 60 * 24 }, (err, token) => {
 			if (err) {
 				reject(err);
 			} else {
@@ -15,56 +17,111 @@ const generateToken = data => {
 	});
 };
 
-const getKey = async (context, next) => {
-	const { Student, Faculty } = require("../../models/index");
+const loginStudent = async context => {
 	const { username, password } = context.request.body;
-
-	try {
-		let hashedPassword = null,
-			data = null;
-		const student = await Student.findOne({
-			username: username
-		})
-			.lean()
-			.exec();
-		const faculty = await Faculty.findOne({
-			username: username
-		})
-			.lean()
-			.exec();
-
-		// Set Student or Faculty
-		if (student) {
-			data = {
-				_id: student._id,
-				username: student.username,
-				designation: "student"
-			};
-			hashedPassword = student.password;
-		} else if (faculty) {
-			data = {
-				_id: faculty._id,
-				username: faculty.username,
-				designation: "faculty"
-			};
-			hashedPassword = faculty.password;
-		} else {
-			throw new Error("Invalid Credentials");
-		}
-
-		// Compare hashed password
-		let response = await bcrypt.compare(password, hashedPassword);
+	const student = await Student.findOne({
+		username: username
+	})
+		.lean()
+		.exec();
+	if (student) {
+		data = {
+			_id: student._id,
+			username: student.username,
+			role: "student"
+		};
+		let response = await bcrypt.compare(password, student.password);
 		if (response) {
 			let token = await generateToken(data);
-			context.status = 200;
-			context.app.emit("response", { AccessToken: token }, context);
+			return token;
 		} else {
-			throw new Error("Invalid Credentials");
+			context.status = err.status || 500;
+			context.app.emit("error", "Invalid Credentials", context);
 		}
-	} catch (err) {
+	} else {
 		context.status = err.status || 500;
 		context.app.emit("error", "Invalid Credentials", context);
 	}
+};
+
+const loginFaculty = async context => {
+	const { username, password } = context.request.body;
+	const faculty = await Faculty.findOne({
+		username: username
+	})
+		.lean()
+		.exec();
+	if (faculty) {
+		data = {
+			_id: faculty._id,
+			username: faculty.username,
+			role: "faculty"
+		};
+		let response = await bcrypt.compare(password, faculty.password);
+		if (response) {
+			let token = await generateToken(data);
+			return token;
+		} else {
+			context.status = err.status || 500;
+			context.app.emit("error", "Invalid Credentials", context);
+		}
+	} else {
+		context.status = err.status || 500;
+		context.app.emit("error", "Invalid Credentials", context);
+	}
+};
+
+const createStudent = async context => {
+	try {
+		let { username, password, fname, lname, dob, usn } = context.request.body;
+
+		let hash = await bcrypt.hash(password, 12);
+
+		let response = await new Student({
+			username: username,
+			password: hash,
+			fname: fname,
+			lname: lname,
+			dob: new Date(dob).toDateString(),
+			usn: usn,
+			created_by: username
+		}).save();
+
+		let data = {
+			_id: response._id,
+			username: response.username,
+			role: "student"
+		};
+		let token = await generateToken(data);
+		return token;
+	} catch (err) {
+		return err;
+	}
+};
+
+const createFaculty = context => {};
+
+const getKey = async (context, next) => {
+	let { designation, username } = context.request.body;
+	let token = null;
+	if (designation == "student") {
+		if (Object.keys(context.request.body).length <= 3) {
+			token = await loginStudent(context);
+		} else {
+			token = await createStudent(context);
+		}
+	} else if (designation == "faculty") {
+		if (Object.keys(context.request.body).length <= 3) {
+			token = await loginFaculty(context);
+		} else {
+			token = await createFaculty(context);
+		}
+	} else {
+		context.status = err.status || 500;
+		context.app.emit("error", "Invalid designation field", context);
+	}
+	context.status = 200;
+	context.app.emit("response", { AccessToken: token, designation: designation, username: username }, context);
 };
 
 const verifyKey = async (context, next) => {

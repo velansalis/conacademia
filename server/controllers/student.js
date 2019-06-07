@@ -33,7 +33,7 @@ const getStudent = async (context, next) => {
 
 const addStudent = async (context, next) => {
 	try {
-		let { username, password, fname, lname, dob, usn } = context.request.body;
+		let { username, password, fname, lname, dob, usn, created_by } = context.request.body;
 
 		let hash = await bcrypt.hash(password, 12);
 
@@ -43,7 +43,8 @@ const addStudent = async (context, next) => {
 			fname: fname,
 			lname: lname,
 			dob: new Date(dob).toDateString(),
-			usn: usn
+			usn: usn,
+			created_by: created_by
 		}).save();
 
 		[response].map(object => {

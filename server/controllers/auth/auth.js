@@ -25,15 +25,12 @@ const isCreatedBy = async (_username, username) => {
 			.exec();
 		console.log(response);
 		if (response.created_by == username) {
-			console.log("Access : ok");
 			return true;
 		} else {
-			console.log("Access : not ok");
 			return false;
 		}
 	} catch (err) {
-		console.log(err);
-		return false;
+		return err;
 	}
 };
 
@@ -50,9 +47,6 @@ const fetchCredentials = context => {
 	return { username, _username };
 };
 
-// username - from jwt
-// _username - from params or body
-
 const verifyStudent = async (context, next) => {
 	try {
 		let { username, _username } = fetchCredentials(context);
@@ -65,17 +59,18 @@ const verifyStudent = async (context, next) => {
 			console.log("POST", context.request.body);
 			addActivity("student", username, context);
 			return next();
-		} else if (method == "DELETE" && isCreatedBy(_username, username)) {
+		} else if (method == "DELETE" && (await isCreatedBy(_username, username))) {
+			console.log("touched");
 			addActivity("student", username, context);
 			return next();
-		} else if (method == "PATCH" && isCreatedBy(_username, username)) {
+		} else if (method == "PATCH" && (await isCreatedBy(_username, username))) {
 			addActivity("student", username, context);
 			return next();
-		} else if (method == "PUT" && isCreatedBy(_username, username)) {
+		} else if (method == "PUT" && (await isCreatedBy(_username, username))) {
 			addActivity("student", username, context);
 			return next();
 		} else {
-			context.status = 500;
+			context.status = 401;
 			context.app.emit("error", "Unauthorized method", context);
 		}
 	} catch (err) {

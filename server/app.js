@@ -11,17 +11,6 @@ app.use(koaLogger());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-function prettifyErrors(err) {
-	let prettyError = new Array();
-	let { name, message } = err;
-	let errObj = {
-		name,
-		message
-	};
-	prettyError.push(errObj);
-	return prettyError;
-}
-
 app.on("response", (data, context) => {
 	context.body = {
 		data: data,
@@ -31,7 +20,15 @@ app.on("response", (data, context) => {
 });
 
 app.on("error", (err, context) => {
-	let prettyError = prettifyErrors(err);
+	console.log(err);
+	let prettyError = new Array();
+	let { name, message } = err;
+	let errObj = {
+		name,
+		message
+	};
+	prettyError.push(errObj);
+
 	context.body = {
 		errors: prettyError,
 		data: [],

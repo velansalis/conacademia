@@ -40,8 +40,9 @@ router.put(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, update
 
 // Catch all other routes
 router.all("*", (context, next) => {
-	const err = new Error("Invalid route");
-	context.app.emit("error", err.message, context);
+	const err = new Error("Unauthorized route");
+	err.name = "Unauthorized";
+	context.app.emit("error", err, context);
 });
 
 module.exports = router;

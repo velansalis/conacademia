@@ -16,7 +16,6 @@ const isCreatedBy = async (_username, username) => {
 		let response = await Student.findOne({ username: _username })
 			.lean()
 			.exec();
-		console.log(response);
 		if (response.created_by == username) {
 			return true;
 		} else {
@@ -36,7 +35,6 @@ const fetchCredentials = context => {
 			return context.request.body.username;
 		}
 	})();
-	console.log({ jwt_username, param_username });
 	return { jwt_username, param_username };
 };
 

@@ -33,8 +33,10 @@ const loginOrCreate = context => {
 						designation: user.designation
 					});
 				} else {
-					context.status = err.status || 500;
-					context.app.emit("error", "Invalid Credentials", context);
+					context.status = 500;
+					let err = new Error(`Invalid Credentials : Wrong Password`);
+					err.name = "Unauthorized";
+					throw err;
 				}
 			} else {
 				let { username, password, fname, lname, designation, dob, usn } = context.request.body;

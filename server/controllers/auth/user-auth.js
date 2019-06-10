@@ -47,20 +47,38 @@ const verifyUser = async (context, next) => {
 		switch (context.method) {
 			case "GET":
 				return next();
-			case "POST":
-				throw new Error("Unauthorized method");
 			case "PUT":
 				if (await isCreatedBy(param_username, jwt_username)) return next();
-				else throw new Error("Unauthorized method");
+				else {
+					let err = new Error(`Unauthorized method ${context.method} for ${jwt_username}`);
+					err.name = "Unauthorized";
+					throw err;
+				}
 			case "PATCH":
 				if (await isCreatedBy(param_username, jwt_username)) return next();
-				else throw new Error("Unauthorized method");
+				else {
+					let err = new Error(`Unauthorized method ${context.method} for ${jwt_username}`);
+					err.name = "Unauthorized";
+					throw err;
+				}
 			case "DELETE":
 				if (await isCreatedBy(param_username, jwt_username)) return next();
-				else throw new Error("Unauthorized method");
+				else {
+					let err = new Error(`Unauthorized method ${context.method} for ${jwt_username}`);
+					err.name = "Unauthorized";
+					throw err;
+				}
+			case "POST":
+				let err = new Error(`Unauthorized method ${context.method} for ${jwt_username}`);
+				err.name = "Unauthorized";
+				throw err;
 			default:
 				context.status = 401;
-				context.app.emit("error", "Unauthorized method", context);
+				context.app.emit(
+					"error",
+					new Error(`Unauthorized method ${context.method} for ${jwt_username}`),
+					context
+				);
 		}
 	} catch (err) {
 		context.status = err.status || 500;

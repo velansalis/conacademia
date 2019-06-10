@@ -1,42 +1,27 @@
 const router = require("koa-router")();
 
-const { getStudent, getStudents, addStudent, deleteStudent, updateStudent } = require("../controllers/student");
+const { getUser, getUsers, addUser, deleteUser, updateUser } = require("../controllers/user");
+const { getCourse, getCourses, getDetail, addCourse, updateCourse } = require("../controllers/course");
+const { addDetail, updateDetail, deleteCourse, deleteDetail } = require("../controllers/course");
 
-const { getFaculties, getFaculty, addFaculty, updateFaculty, deleteFaculty } = require("../controllers/faculty");
-
-const {
-	getCourse,
-	getCourses,
-	getDetail,
-	addCourse,
-	addDetail,
-	updateCourse,
-	updateDetail,
-	deleteCourse,
-	deleteDetail
-} = require("../controllers/course");
-
-const { getKey, verifyKey } = require("../controllers/auth/jwt.auth");
-const { verifyStudent, verifyFaculty } = require("../controllers/auth/auth");
+const { getKey, verifyKey } = require("../controllers/auth/key-auth");
+const { verifyUser } = require("../controllers/auth/user-auth");
 
 const domain = "/api/v1";
 
 // Route for getting the key
 router.post(`${domain}/auth/key`, getKey);
 
-// Routes for Student
-router.get(`${domain}/students/`, verifyKey, verifyStudent, getStudents);
-router.get(`${domain}/students/:username`, verifyKey, verifyStudent, getStudent);
-router.post(`${domain}/students`, verifyKey, verifyStudent, addStudent);
-router.delete(`${domain}/students/:username`, verifyKey, verifyStudent, deleteStudent);
-router.patch(`${domain}/students/:username`, verifyKey, verifyStudent, updateStudent);
+// Routes for User
+router.get(`${domain}/users/`, verifyKey, verifyUser, getUsers);
+router.get(`${domain}/users/:username`, verifyKey, verifyUser, getUser);
+router.post(`${domain}/users`, verifyKey, verifyUser, addUser);
+router.delete(`${domain}/users/:username`, verifyKey, verifyUser, deleteUser);
+router.patch(`${domain}/users/:username`, verifyKey, verifyUser, updateUser);
 
-// Routes for Faculty
-router.get(`${domain}/faculty/`, verifyKey, verifyFaculty, getFaculties);
-router.get(`${domain}/faculty/:username`, verifyKey, verifyFaculty, getFaculty);
-router.post(`${domain}/faculty`, verifyKey, verifyFaculty, addFaculty);
-router.delete(`${domain}/faculty/:username`, verifyKey, verifyFaculty, deleteFaculty);
-router.patch(`${domain}/faculty/:username`, verifyKey, verifyFaculty, updateFaculty);
+/*
+
+YET TO BE IMPLEMENTED
 
 // Routes for Courses
 router.get(`${domain}/courses/`, verifyKey, verifyFaculty, getCourses);
@@ -50,6 +35,8 @@ router.get(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, getDet
 router.post(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, addDetail);
 router.delete(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, deleteDetail);
 router.put(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, updateDetail);
+
+*/
 
 // Catch all other routes
 router.all("*", (context, next) => {

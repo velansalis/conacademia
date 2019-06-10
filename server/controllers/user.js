@@ -1,9 +1,9 @@
-const { Student } = require("../models/index");
+const { User } = require("../models/index");
 const bcrypt = require("bcrypt");
 
-const getStudents = async (context, next) => {
+const getUsers = async (context, next) => {
 	try {
-		let response = await Student.find().exec();
+		let response = await User.find().exec();
 		response.map(object => {
 			return (object.password = null);
 		});
@@ -15,9 +15,9 @@ const getStudents = async (context, next) => {
 	}
 };
 
-const getStudent = async (context, next) => {
+const getUser = async (context, next) => {
 	try {
-		let response = await Student.find({
+		let response = await User.find({
 			username: context.params.username
 		}).exec();
 		response.map(object => {
@@ -31,26 +31,23 @@ const getStudent = async (context, next) => {
 	}
 };
 
-const addStudent = async (context, next) => {
+const addUser = async (context, next) => {
 	try {
-		let { username, password, fname, lname, dob, usn, created_by } = context.request.body;
-
+		let { username, password, fname, lname, dob, usn } = context.request.body;
 		let hash = await bcrypt.hash(password, 12);
-
-		let response = await new Student({
+		if (!usn && designation.toLowercase() == "student") throw new Error();
+		let response = await new User({
 			username: username,
 			password: hash,
 			fname: fname,
 			lname: lname,
 			dob: new Date(dob).toDateString(),
 			usn: usn,
-			created_by: created_by
+			created_by: username
 		}).save();
-
 		[response].map(object => {
 			return (object.password = null);
 		});
-
 		context.status = 200;
 		context.app.emit("response", response, context);
 	} catch (err) {
@@ -59,9 +56,9 @@ const addStudent = async (context, next) => {
 	}
 };
 
-const deleteStudent = async (context, next) => {
+const deleteUser = async (context, next) => {
 	try {
-		let response = await Student.deleteOne({
+		let response = await User.deleteOne({
 			username: context.params.username
 		}).exec();
 		context.status = 200;
@@ -74,9 +71,9 @@ const deleteStudent = async (context, next) => {
 	}
 };
 
-const updateStudent = async (context, next) => {
+const updateUser = async (context, next) => {
 	try {
-		let response = await Student.updateObe(context.params.username, context.request.body.query).exec();
+		let response = await User.updateObe(context.params.username, context.request.body.query).exec();
 		context.status = 200;
 		context.app.emit("response", response, context);
 	} catch (err) {
@@ -88,9 +85,9 @@ const updateStudent = async (context, next) => {
 };
 
 module.exports = {
-	getStudents: getStudents,
-	getStudent: getStudent,
-	addStudent: addStudent,
-	deleteStudent: deleteStudent,
-	updateStudent: updateStudent
+	getUsers,
+	getUser,
+	addUser,
+	updateUser,
+	deleteUser
 };

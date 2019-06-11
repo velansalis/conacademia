@@ -16,7 +16,7 @@ const isCreatedBy = async (_username, username) => {
 		let response = await Student.findOne({ username: _username })
 			.lean()
 			.exec();
-		if (response.created_by == username) {
+		if (response.owner == username) {
 			return true;
 		} else {
 			return false;

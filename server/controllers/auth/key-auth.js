@@ -47,8 +47,9 @@ const loginOrCreate = context => {
 					lname: lname,
 					designation: designation,
 					dob: new Date(dob).toDateString(),
+					age: parseInt((new Date().getTime() - new Date(dob)) / (1000 * 60 * 60 * 24 * 365)),
 					usn: usn,
-					created_by: username
+					owner: username
 				}).save();
 				resolve({
 					_id: user._id,

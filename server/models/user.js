@@ -3,24 +3,27 @@ const Schema = mongoose.Schema;
 
 const nameValidator = {
 	validator: value => {
-		return /^[A-Za-z]+$/.test(value);
+		if (value) return /^[A-Za-z_0-9]+$/.test(value);
+		else value;
 	},
 	message: "Name can contain only letters."
 };
 
 const usernameValidator = {
 	validator: value => {
-		return /^[A-Za-z_0-9]+$/.test(value);
+		if (value) return /^[A-Za-z_0-9]+$/.test(value);
+		else value;
 	},
 	message: "Username can contain only letters and underscore '_'."
 };
 
 const titlecase = value => {
-	return value
-		.trim()
-		.split(" ")
-		.map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
-		.join(" ");
+	if (value)
+		return value
+			.trim()
+			.split(" ")
+			.map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
+			.join(" ");
 };
 
 const UserSchema = new Schema({
@@ -62,7 +65,7 @@ const UserSchema = new Schema({
 			timestamp: { type: Date }
 		}
 	],
-	created_by: { type: String }
+	owner: { type: String }
 });
 
 module.exports = mongoose.model("User", UserSchema);

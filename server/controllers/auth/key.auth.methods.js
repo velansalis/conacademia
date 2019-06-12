@@ -1,9 +1,22 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+require("dotenv").config();
+
 const { User } = require("../../models/index");
 
-require("dotenv").config();
+const addActivity = async (username, context) => {
+	let activity = {
+		activities: {
+			method: context.method,
+			url: context.href,
+			timestamp: new Date().toDateString()
+		}
+	};
+	await User.updateOne({ username: username }, { $push: activity })
+		.lean()
+		.exec();
+};
 
 const generateToken = data => {
 	let tokenExpiry = 60 * 60 * 24;
@@ -14,7 +27,6 @@ const generateToken = data => {
 			} else {
 				resolve(token);
 			}
-			60 * 60 * 2460 * 60 * 24;
 		});
 	});
 };
@@ -41,6 +53,7 @@ const loginOrCreate = context => {
 				}
 			} else {
 				let { username, password, fname, lname, designation, dob, usn } = context.request.body;
+				console.log(username, password, fname, lname, designation, dob, usn);
 				let hash = await bcrypt.hash(password, 12);
 				let user = await new User({
 					username: username,
@@ -65,53 +78,8 @@ const loginOrCreate = context => {
 	});
 };
 
-const getKey = async context => {
-	try {
-		let tokenData = await loginOrCreate(context);
-		let token = await generateToken(tokenData);
-
-		let data = {
-			AccessToken: token,
-			designation: tokenData.designation,
-			username: tokenData.username
-		};
-
-		context.status = 201;
-		context.app.emit("response", data, context);
-	} catch (err) {
-		context.status = err.status || 500;
-		context.app.emit("error", err, context);
-	}
-};
-
-const verifyKey = async (context, next) => {
-	try {
-		let { authorization } = context.request.headers;
-		if (authorization) {
-			let token = authorization.split(" ")[1];
-			var decoded = jwt.verify(token, process.env.PRIVATE_KEY);
-			context.decoded = decoded;
-
-			let user = await User.findOne({ username: context.decoded.username })
-				.lean()
-				.exec();
-			if (user) return next();
-			else {
-				let err = new Error("Invalid access token");
-				err.name = "AccessTokenError";
-				throw err;
-			}
-		} else {
-			context.status = 500;
-			context.app.emit("error", { message: "Missing access token" }, context);
-		}
-	} catch (err) {
-		context.status = err.status || 500;
-		context.app.emit("error", err, context);
-	}
-};
-
 module.exports = {
-	getKey,
-	verifyKey
+	addActivity,
+	generateToken,
+	loginOrCreate
 };

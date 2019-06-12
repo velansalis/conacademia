@@ -1,44 +1,38 @@
 const router = require("koa-router")();
 
+const { getKey, authKey } = require("../controllers/auth/key.auth");
+const { filterUser } = require("../controllers/auth/user.auth");
+
 const { getUser, getUsers, addUser, deleteUser, updateUser } = require("../controllers/user");
-const { getCourse, getCourses, getDetail, addCourse, updateCourse } = require("../controllers/course");
-const { addDetail, updateDetail, deleteCourse, deleteDetail } = require("../controllers/course");
+const { getCourse, getCourses, addCourse, deleteCourse, updateCourse } = require("../controllers/course");
+const { getDetail, addDetail, updateDetail, deleteDetail } = require("../controllers/course");
 
-const { getKey, verifyKey } = require("../controllers/auth/key-auth");
-const { verifyUser } = require("../controllers/auth/user-auth");
+router.post(`/api/v1/auth/login`, getKey);
 
-const domain = "/api/v1";
+router.get(`/api/v1/users/`, authKey, filterUser, getUsers);
+router.get(`/api/v1/users/:username`, authKey, filterUser, getUser);
+router.post(`/api/v1/users`, authKey, filterUser, addUser);
+router.delete(`/api/v1/users/:username`, authKey, filterUser, deleteUser);
+router.patch(`/api/v1/users/:username`, authKey, filterUser, updateUser);
 
-// Route for getting the key
-router.post(`${domain}/auth/key`, getKey);
-
-// Routes for User
-router.get(`${domain}/users/`, verifyKey, verifyUser, getUsers);
-router.get(`${domain}/users/:username`, verifyKey, verifyUser, getUser);
-router.post(`${domain}/users`, verifyKey, verifyUser, addUser);
-router.delete(`${domain}/users/:username`, verifyKey, verifyUser, deleteUser);
-router.patch(`${domain}/users/:username`, verifyKey, verifyUser, updateUser);
-
-// Routes for Courses
-router.get(`${domain}/courses/`, verifyKey, verifyFaculty, getCourses);
-router.get(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, getCourse);
-router.post(`${domain}/courses`, verifyKey, verifyFaculty, addCourse);
-router.delete(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, deleteCourse);
-router.patch(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, updateCourse);
+router.get(`/api/v1/courses/`, authKey, filterUser, getCourses);
+router.get(`/api/v1/courses/:course_id`, authKey, filterUser, getCourse);
+router.post(`/api/v1/courses`, authKey, filterUser, addCourse);
+router.delete(`/api/v1/courses/:course_id`, authKey, filterUser, deleteCourse);
+router.patch(`/api/v1/courses/:course_id`, authKey, filterUser, updateCourse);
 
 /*
 
 // YET TO BE IMPLEMENTED
 
 // Route for Details of Courses
-router.get(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, getDetail);
-router.post(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, addDetail);
-router.delete(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, deleteDetail);
-router.put(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, updateDetail);
+router.get(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, getDetail);
+router.post(`/api/v1/courses/:course_id`, authKey, verifyFaculty, addDetail);
+router.delete(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, deleteDetail);
+router.put(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, updateDetail);
 
 */
 
-// Catch all other routes
 router.all("*", (context, next) => {
 	const err = new Error("Unauthorized route");
 	err.name = "Unauthorized";

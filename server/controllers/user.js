@@ -6,10 +6,14 @@ const getUsers = async (context, next) => {
 		const { limit, offset, order } = context.request.query;
 		const avoidQuery = { password: 0, activities: 0, __v: 0, owner: 0 };
 
+		const sortQuery = { fname: order == "dsc" ? 0 : 1 };
+		const skipQuery = offset == undefined ? 0 : parseInt(offset);
+		const limitQuery = limit == undefined ? 10 : parseInt(limit);
+
 		let response = await User.find({}, avoidQuery)
-			.sort({ fname: order == "dsc" ? 0 : 1 })
-			.skip(offset == undefined ? 0 : parseInt(offset))
-			.limit(limit == undefined ? 10 : parseInt(limit))
+			.sort(sortQuery)
+			.skip(skipQuery)
+			.limit(limitQuery)
 			.exec();
 
 		context.status = 200;
@@ -64,12 +68,18 @@ const addUser = async (context, next) => {
 
 const deleteUser = async (context, next) => {
 	try {
-		let response = await User.deleteOne({
-			username: context.params.username
-		}).exec();
+		let options = {};
+		let deleteQuery = { username: context.params.username };
+		let deleted = await User.findOneAndRemove(deleteQuery, options)
+			.lean()
+			.exec();
+
+		let { _id, password, activities, ...response } = deleted;
+
 		context.status = 200;
 		context.app.emit("response", response, context);
 	} catch (err) {
+		console.log(err);
 		context.body = {
 			error: err,
 			data: []

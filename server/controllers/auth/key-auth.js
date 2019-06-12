@@ -6,13 +6,15 @@ const { User } = require("../../models/index");
 require("dotenv").config();
 
 const generateToken = data => {
+	let tokenExpiry = 60 * 60 * 24;
 	return new Promise((resolve, reject) => {
-		jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: 60 * 60 * 24 }, (err, token) => {
+		jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: tokenExpiry }, (err, token) => {
 			if (err) {
 				reject(err);
 			} else {
 				resolve(token);
 			}
+			60 * 60 * 2460 * 60 * 24;
 		});
 	});
 };
@@ -67,12 +69,15 @@ const getKey = async context => {
 	try {
 		let tokenData = await loginOrCreate(context);
 		let token = await generateToken(tokenData);
-		context.status = 200;
-		context.app.emit(
-			"response",
-			{ AccessToken: token, designation: tokenData.designation, username: tokenData.username },
-			context
-		);
+
+		let data = {
+			AccessToken: token,
+			designation: tokenData.designation,
+			username: tokenData.username
+		};
+
+		context.status = 201;
+		context.app.emit("response", data, context);
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
@@ -86,10 +91,19 @@ const verifyKey = async (context, next) => {
 			let token = authorization.split(" ")[1];
 			var decoded = jwt.verify(token, process.env.PRIVATE_KEY);
 			context.decoded = decoded;
-			return next();
+
+			let user = await User.findOne({ username: context.decoded.username })
+				.lean()
+				.exec();
+			if (user) return next();
+			else {
+				let err = new Error("Invalid access token");
+				err.name = "AccessTokenError";
+				throw err;
+			}
 		} else {
 			context.status = 500;
-			context.app.emit("error", { message: "Authorization token missing" }, context);
+			context.app.emit("error", { message: "Missing access token" }, context);
 		}
 	} catch (err) {
 		context.status = err.status || 500;

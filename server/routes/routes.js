@@ -19,16 +19,16 @@ router.post(`${domain}/users`, verifyKey, verifyUser, addUser);
 router.delete(`${domain}/users/:username`, verifyKey, verifyUser, deleteUser);
 router.patch(`${domain}/users/:username`, verifyKey, verifyUser, updateUser);
 
-/*
-
-YET TO BE IMPLEMENTED
-
 // Routes for Courses
 router.get(`${domain}/courses/`, verifyKey, verifyFaculty, getCourses);
 router.get(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, getCourse);
 router.post(`${domain}/courses`, verifyKey, verifyFaculty, addCourse);
 router.delete(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, deleteCourse);
 router.patch(`${domain}/courses/:course_id`, verifyKey, verifyFaculty, updateCourse);
+
+/*
+
+// YET TO BE IMPLEMENTED
 
 // Route for Details of Courses
 router.get(`${domain}/courses/:course_id/:usn`, verifyKey, verifyFaculty, getDetail);

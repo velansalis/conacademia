@@ -71,7 +71,7 @@ const CourseSchema = new Schema({
 			}
 		}
 	],
-	created_by: { type: String, required: true }
+	owner: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Course", CourseSchema);

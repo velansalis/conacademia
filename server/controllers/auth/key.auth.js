@@ -1,10 +1,12 @@
 const jwt = require("jsonwebtoken");
+const { User } = require("../../models/index");
 
 require("dotenv").config();
 
 const { loginOrCreate, generateToken, addActivity } = require("./key.auth.methods");
 
 const getKey = async context => {
+	console.log(context);
 	try {
 		console.log(context);
 		let tokenData = await loginOrCreate(context);
@@ -30,13 +32,13 @@ const authKey = async (context, next) => {
 		if (authorization) {
 			let token = authorization.split(" ")[1];
 			var decoded = jwt.verify(token, process.env.PRIVATE_KEY);
-			let user = await User.findOne({ username: context.decoded.username })
+			let user = await User.findOne({ username: decoded.username })
 				.lean()
 				.exec();
 
 			if (user && decoded) {
 				context.decoded = decoded;
-				await addActivity(decoded.username);
+				await addActivity(decoded.username, context);
 				return next();
 			} else {
 				let err = new Error("Invalid access token");

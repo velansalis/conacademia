@@ -67,23 +67,26 @@ const addUser = async (context, next) => {
 };
 
 const deleteUser = async (context, next) => {
+	let deleted;
 	try {
 		let options = {};
 		let deleteQuery = { username: context.params.username };
-		let deleted = await User.findOneAndRemove(deleteQuery, options)
+		deleted = await User.findOneAndRemove(deleteQuery, options)
 			.lean()
 			.exec();
-
-		let { _id, password, activities, ...response } = deleted;
-
-		context.status = 200;
-		context.app.emit("response", response, context);
 	} catch (err) {
-		console.log(err);
-		context.body = {
-			error: err,
-			data: []
-		};
+		context.status = 500;
+		context.app.emit("error", err, context);
+	} finally {
+		if (deleted) {
+			let { _id, password, activities, ...response } = deleted;
+			context.status = 200;
+			context.app.emit("response", response, context);
+		} else {
+			let response = `No user named ${context.params.username} to be deleted`;
+			context.status = 200;
+			context.app.emit("response", response, context);
+		}
 	}
 };
 

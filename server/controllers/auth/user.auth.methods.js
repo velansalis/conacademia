@@ -1,15 +1,17 @@
 const { User, Course } = require("../../models/index");
 
-const isOwnedBy = async username => {
-	try {
-		let paramValue = (() => {
-			if (context.params) {
-				return param.username || param.course_id;
-			} else {
-				return body.username || body.course_id;
-			}
-		})();
+const getParamValue = context => {
+	if (context.params) {
+		return context.params.username || context.params.course_id;
+	} else {
+		return body.username || body.course_id;
+	}
+};
 
+const isOwnedBy = async (username, context) => {
+	try {
+		console.log(context.params);
+		let paramValue = getParamValue(context);
 		let user = await User.findOne({ username: paramValue })
 			.lean()
 			.exec();
@@ -18,11 +20,11 @@ const isOwnedBy = async username => {
 			.lean()
 			.exec();
 
-		console.log(paramValue, user, course);
+		console.log("isownedby", paramValue, user, course);
 
-		if (user.owner && user.owner == username) {
+		if (user && user.owner == username) {
 			return true;
-		} else if (course.owner && course.owner == username) {
+		} else if (course && course.owner == username) {
 			return true;
 		} else {
 			return false;
@@ -32,4 +34,6 @@ const isOwnedBy = async username => {
 	}
 };
 
-module.exports = isOwnedBy;
+module.exports = {
+	isOwnedBy
+};

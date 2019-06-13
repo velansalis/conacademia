@@ -20,7 +20,6 @@ app.on("response", (data, context) => {
 });
 
 app.on("error", (err, context) => {
-	console.log(err);
 	let prettyError = new Array();
 	let { name, message } = err;
 	let errObj = {

@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const marksObject = {
 	usn: { type: String, required: true, lowercase: true, ref: "Student" },
-	attendance: { type: Number },
+	attendance: { type: Number, min: 0 },
 	task: [{ type: Number, min: [0, "Task marks can't be less than 0"] }],
 	mse1: { type: Number, min: [0, "MSE marks can't be less than 0"] },
 	mse2: { type: Number, min: [0, "MSE marks can't be less than 0"] },
-	total: { type: Number },
+	total: { type: Number, min: 0 },
 	remarks: { type: String }
 };
 

@@ -23,19 +23,12 @@ router.post(`/api/v1/courses`, authKey, filterFaculty, addCourse);
 router.delete(`/api/v1/courses/:course_id`, authKey, filterFaculty, deleteCourse);
 router.patch(`/api/v1/courses/:course_id`, authKey, filterFaculty, updateCourse);
 
-router.get("/api/v1/uploads/:filename", authKey, filterUser, getUploads);
-
-/*
-
-// YET TO BE IMPLEMENTED
-
-// Route for Details of Courses
-router.get(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, getDetail);
-router.post(`/api/v1/courses/:course_id`, authKey, verifyFaculty, addDetail);
+router.get(`/api/v1/courses/:course_id/:usn`, authKey, filterFaculty, getDetail);
+router.post(`/api/v1/courses/:course_id`, authKey, filterFaculty, addDetail);
 router.delete(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, deleteDetail);
 router.put(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, updateDetail);
 
-*/
+router.get("/api/v1/uploads/:filename", authKey, filterUser, getUploads);
 
 router.all("*", (context, next) => {
 	const err = new Error("Unauthorized route");

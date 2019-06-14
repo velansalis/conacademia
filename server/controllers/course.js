@@ -1,6 +1,5 @@
-const { Course } = require("../models/index");
-
 const { upload, removeUploads } = require("./utils/file-util");
+const { Course } = require("../models/index");
 
 const getCourses = async (context, next) => {
 	let response = null;
@@ -29,10 +28,11 @@ const getCourse = async (context, next) => {
 	let response = null;
 	const { populate } = context.request.query;
 	const course_id = context.params.course_id.toLowerCase();
+	const findQuery = { course_id: course_id };
 	const populateQuery = populate == "true" ? "faculty_incharge" : "";
 	const populateFields = ["fname", "lname", "username", "designation", "dob", "age"];
 	try {
-		response = await Course.findOne({ course_id: course_id })
+		response = await Course.findOne(findQuery)
 			.populate(populateQuery, populateFields)
 			.lean()
 			.exec();
@@ -104,29 +104,21 @@ const deleteCourse = async (context, next) => {
 	}
 };
 
+// PENDING : Fetching only usn from one query
 const getDetail = async (context, next) => {
+	let response = null;
+	let { course_id, usn } = context.params;
+	let findQuery = { course_id: course_id, "marks.usn": usn };
 	try {
-		let response = await Course.findOne(
-			{
-				course_id: context.params.course_id
-			},
-			["marks"]
-		)
+		response = await Course.findOne(findQuery)
 			.lean()
 			.exec();
-		if (!response) {
-			response = [];
-		} else {
-			response = response.details.filter(records => {
-				return records.usn == context.params.usn;
-			});
-		}
-		context.body = {
-			data: response
-		};
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
@@ -194,13 +186,13 @@ const deleteDetail = async (context, next) => {
 };
 
 module.exports = {
-	getCourses: getCourses,
-	getCourse: getCourse,
-	addCourse: addCourse,
-	deleteCourse: deleteCourse,
-	updateCourse: updateCourse,
-	getDetail: getDetail,
-	addDetail: addDetail,
-	updateDetail: updateDetail,
-	deleteDetail: deleteDetail
+	getCourses,
+	getCourse,
+	addCourse,
+	deleteCourse,
+	updateCourse,
+	getDetail,
+	addDetail,
+	updateDetail,
+	deleteDetail
 };

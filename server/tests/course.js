@@ -1,6 +1,4 @@
 const request = require("supertest");
-const fs = require("fs");
-const path = require("path");
 
 const course = {
 	getCourses: {
@@ -11,8 +9,7 @@ const course = {
 			expect(response.body.data).toBeDefined();
 			expect(response.type).toEqual("application/json");
 			expect(response.body.data).toEqual(
-				expect.arrayContaining([]) ||
-					expect.arrayContaining([expect.objectContaining({})])
+				expect.arrayContaining([]) || expect.arrayContaining([expect.objectContaining({})])
 			);
 		}
 	},
@@ -56,9 +53,7 @@ const course = {
 			semester: 4
 		},
 		resolver: async () => {
-			let response = await request(server).get(
-				`/api/v1/courses/${course.getCourse.expectData.course_id}`
-			);
+			let response = await request(server).get(`/api/v1/courses/${course.getCourse.expectData.course_id}`);
 			expect(response.status).toEqual(200);
 			expect(response.body.data).toBeDefined();
 			expect(response.type).toEqual("application/json");
@@ -68,10 +63,8 @@ const course = {
 						expect.arrayContaining([
 							expect.objectContaining({
 								_id: expect.anything(),
-								course_id:
-									course.getCourse.expectData.course_id,
-								course_title:
-									course.getCourse.expectData.course_title,
+								course_id: course.getCourse.expectData.course_id,
+								course_title: course.getCourse.expectData.course_title,
 								credits: course.getCourse.expectData.credits,
 								semester: course.getCourse.expectData.semester,
 								year: course.getCourse.expectData.year

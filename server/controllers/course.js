@@ -1,144 +1,117 @@
-const fs = require("fs");
-const path = require("path");
-const promisePipe = require("promisepipe");
+const { Course } = require("../models/index");
 
-const Course = require("../models/index").course;
-const Faculty = require("../models/index").faculty;
-
-const uploadFile = async context => {
-	try {
-		const uploadfile = context.request.files.file;
-		const savefile = Date.now().toString() + uploadfile.name;
-		let readStream = fs.createReadStream(uploadfile.path);
-		let writeStream = fs.createWriteStream(path.join("uploads", savefile));
-		await promisePipe(
-			readStream.on("error", () => {
-				throw new Error({
-					errors: "File Read Error"
-				});
-			}),
-			writeStream.on("error", () => {
-				throw new Error({
-					errors: "Write Error"
-				});
-			})
-		);
-		return savefile;
-	} catch (err) {
-		context.status = err.status || 500;
-		context.app.emit("error", err.toString(), context);
-	}
-};
+const { upload, removeUploads } = require("./utils/file-util");
 
 const getCourses = async (context, next) => {
+	let response = null;
+	const { limit, offset, order } = context.request.query;
+	const avoidQuery = { _id: 0, marks: 0, __v: 0, owner: 0 };
+	const sortQuery = { course_title: order == "dsc" ? 0 : 1 };
+	const skipQuery = offset == undefined ? 0 : parseInt(offset);
+	const limitQuery = limit == undefined ? 5 : parseInt(limit);
 	try {
-		let response = await Course.find()
+		response = await Course.find({}, avoidQuery)
+			.sort(sortQuery)
+			.skip(skipQuery)
+			.limit(limitQuery)
 			.lean()
 			.exec();
-		context.body = {
-			data: response
-		};
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err.toString(), context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
 const getCourse = async (context, next) => {
+	let response = null;
+	const { populate } = context.request.query;
+	const course_id = context.params.course_id.toLowerCase();
+	const populateQuery = populate == "true" ? "faculty_incharge" : "";
+	const populateFields = ["fname", "lname", "username", "designation", "dob", "age"];
 	try {
-		let course_id = context.params.course_id.toLowerCase();
-		let response = await Course.findOne({
-			course_id: course_id
-		})
+		response = await Course.findOne({ course_id: course_id })
+			.populate(populateQuery, populateFields)
 			.lean()
 			.exec();
-		context.body = {
-			data: response == null ? [] : response
-		};
 	} catch (err) {
 		context.status = err.status || 500;
-		context.app.emit("error", err.toString(), context);
+		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
 const addCourse = async (context, next) => {
-	let saveObject = new Object();
+	let body = context.request.body;
+	let response = null;
+	let saveQuery = {
+		course_id: body.course_id,
+		course_title: body.course_title,
+		credits: body.credits,
+		year: body.year,
+		semester: body.semester,
+		faculty_incharge: context.decoded._id,
+		owner: context.decoded.username
+	};
 	try {
-		Object.assign(saveObject, {
-			course_id: context.request.body.course_id,
-			course_title: context.request.body.course_title,
-			credits: context.request.body.credits,
-			year: context.request.body.year,
-			semester: context.request.body.semester
-		});
-		let response = await new Course(saveObject).save();
-		context.body = {
-			data: response
-		};
+		response = await Course.create(saveQuery);
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
 const updateCourse = async (context, next) => {
-	let updateQuery = new Object();
 	let response = null;
-	let savefile = null;
+	let { marks, marksheet, ...updateQuery } = context.request.body;
+	let findQuery = { course_id: context.params.course_id.toLowerCase() };
+	let options = { fields: { __v: 0, owner: 0 }, new: true };
+	let file = context.request.files.marksheet;
 	try {
-		if (Object.keys(context.request.body).length != 0) {
-			if (context.request.body.marks) {
-				delete context.request.body.marks;
-			}
-			Object.assign(updateQuery, context.request.body);
+		if (file) {
+			let marksheet = await upload(file);
+			updateQuery["marksheet"] = marksheet;
 		}
-		if (context.request.files != undefined) {
-			savefile = await uploadFile(context);
-			Object.assign(updateQuery, {
-				xlfile_name: savefile
-			});
-		}
-		response = await Course.updateOne(
-			{ course_id: context.params.course_id.toLowerCase() },
-			updateQuery
-		).exec();
-		context.body = {
-			data: response
-		};
+		response = await Course.findOneAndUpdate(findQuery, updateQuery, options).exec();
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
 const deleteCourse = async (context, next) => {
+	let deleteQuery = { course_id: context.params.course_id };
+	let response = null;
 	try {
-		let response = await Course.findOne({
-			course_id: context.params.course_id
-		})
-			.lean()
-			.exec();
-		if (response && response[0] && response[0].xlfile_name) {
-			let file = response[0].xlfile_name;
-			fs.unlinkSync(path.join("uploads", file));
-		}
-		response = await Course.deleteOne({
-			course_id: context.params.course_id
-		}).exec();
-		context.body = {
-			data: response
-		};
+		response = await Course.findOneAndRemove(deleteQuery).exec();
+		if (response.marksheet) await removeUploads(response.marksheet);
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
 const getDetail = async (context, next) => {
 	try {
-		let response = await Course.findOne({
-			course_id: context.params.course_id
-		})
+		let response = await Course.findOne(
+			{
+				course_id: context.params.course_id
+			},
+			["marks"]
+		)
 			.lean()
 			.exec();
 		if (!response) {

@@ -7,7 +7,6 @@ const app = new koa();
 
 app.use(koaBody({ multipart: true }));
 app.use(koaLogger());
-
 app.use(router.routes());
 app.use(router.allowedMethods());
 
@@ -20,6 +19,7 @@ app.on("response", (data, context) => {
 });
 
 app.on("error", (err, context) => {
+	console.log(err);
 	let prettyError = new Array();
 	let { name, message } = err;
 	let errObj = {

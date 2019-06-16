@@ -50,7 +50,13 @@ const UserSchema = new Schema({
 	designation: { type: String, required: true, enum: ["student", "faculty"] },
 
 	// Student Special Field
-	usn: { type: String, required: true },
+	usn: {
+		type: String,
+		required: () => {
+			if (this.designation == "faculty") return false;
+			else return true;
+		}
+	},
 
 	// Optional fields to be filled later
 	age: { type: Number, min: [16, "Age should be greater than 16"] },

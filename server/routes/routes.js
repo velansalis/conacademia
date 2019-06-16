@@ -25,8 +25,8 @@ router.patch(`/api/v1/courses/:course_id`, authKey, filterFaculty, updateCourse)
 
 router.get(`/api/v1/courses/:course_id/:usn`, authKey, filterFaculty, getDetail);
 router.post(`/api/v1/courses/:course_id`, authKey, filterFaculty, addDetail);
-router.delete(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, deleteDetail);
-router.put(`/api/v1/courses/:course_id/:usn`, authKey, verifyFaculty, updateDetail);
+router.delete(`/api/v1/courses/:course_id/:usn`, authKey, filterFaculty, deleteDetail);
+router.put(`/api/v1/courses/:course_id/:usn`, authKey, filterFaculty, updateDetail);
 
 router.get("/api/v1/uploads/:filename", authKey, filterUser, getUploads);
 

@@ -1,15 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const marksObject = {
-	usn: { type: String, required: true, lowercase: true, ref: "Student" },
-	attendance: { type: Number, min: 0 },
-	task: [{ type: Number, min: [0, "Task marks can't be less than 0"] }],
-	mse1: { type: Number, min: [0, "MSE marks can't be less than 0"] },
-	mse2: { type: Number, min: [0, "MSE marks can't be less than 0"] },
-	total: { type: Number, min: 0 },
-	remarks: { type: String }
-};
+const MarksSchema = new Schema(
+	{
+		// Required fields
+		usn: { type: String, required: true, lowercase: true, ref: "User", unique: true },
+		attendance: { type: Number, min: 0, required: true, default: 0 },
+		task: [{ type: Number, min: [0, "Task marks can't be less than 0"], required: false, default: 0 }],
+		mse1: { type: Number, min: [0, "MSE marks can't be less than 0"], required: true, default: 0 },
+		mse2: { type: Number, min: [0, "MSE marks can't be less than 0"], required: true, default: 0 }
+	},
+	{ _id: false }
+);
 
 const CourseSchema = new Schema({
 	_id: { type: mongoose.Schema.Types.ObjectId, required: true, auto: true, index: false },
@@ -25,7 +27,7 @@ const CourseSchema = new Schema({
 
 	// Optionals
 	marksheet: { type: String },
-	marks: [marksObject]
+	marks: [MarksSchema]
 });
 
 module.exports = mongoose.model("Course", CourseSchema);

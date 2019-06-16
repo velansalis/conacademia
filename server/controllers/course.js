@@ -104,13 +104,13 @@ const deleteCourse = async (context, next) => {
 	}
 };
 
-// PENDING : Fetching only usn from one query
 const getDetail = async (context, next) => {
 	let response = null;
 	let { course_id, usn } = context.params;
 	let findQuery = { course_id: course_id, "marks.usn": usn };
+	let avoidQuery = { "marks.$": 1, _id: 0 };
 	try {
-		response = await Course.findOne(findQuery)
+		response = await Course.findOne(findQuery, avoidQuery)
 			.lean()
 			.exec();
 	} catch (err) {
@@ -123,21 +123,22 @@ const getDetail = async (context, next) => {
 };
 
 const addDetail = async (context, next) => {
+	let { course_id } = context.params;
+	let { usn } = context.request.body;
+
+	let findQuery = { course_id: course_id.toLowerCase(), "marks.usn": { $ne: usn } };
+	let addQuery = { $push: { marks: context.request.body } };
+	let options = { upsert: true, new: true };
+	let response = null;
+
 	try {
-		let updateQuery = context.request.body;
-		let response = await Course.updateOne(
-			{
-				course_id: context.params.course_id.toLowerCase(),
-				"marks.usn": { $ne: updateQuery.usn }
-			},
-			{ $push: { marks: updateQuery } }
-		).exec();
-		context.body = {
-			data: response
-		};
+		response = await Course.findOneAndUpdate(findQuery, addQuery, options).exec();
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 
@@ -168,20 +169,17 @@ const updateDetail = async (context, next) => {
 };
 
 const deleteDetail = async (context, next) => {
+	let response = null;
+	let findQuery = { course_id: context.params.course_id };
+	let deleteQuery = { $pull: { marks: { usn: context.params.usn } } };
 	try {
-		let response = await Course.updateOne(
-			{
-				course_id: context.params.course_id
-			},
-			{ $pull: { marks: { usn: context.params.usn } } }
-		).exec();
-
-		context.body = {
-			data: response
-		};
+		response = await Course.findOneAndUpdate(findQuery, deleteQuery).exec();
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.status = 201;
+		context.app.emit("response", response, context);
 	}
 };
 

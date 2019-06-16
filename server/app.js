@@ -20,13 +20,22 @@ app.on("response", (data, context) => {
 
 app.on("error", (err, context) => {
 	console.log(err);
+
+	let name = null,
+		message = null;
+
+	if (err.name == "MongoError") {
+		name = err.name;
+		message = err.errmsg;
+	} else {
+		name = err.name;
+		message = err.message;
+	}
 	let prettyError = new Array();
-	let { name, message } = err;
-	let errObj = {
+	prettyError.push({
 		name,
 		message
-	};
-	prettyError.push(errObj);
+	});
 
 	context.body = {
 		errors: prettyError,

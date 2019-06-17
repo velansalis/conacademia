@@ -12,9 +12,10 @@ app.use(router.allowedMethods());
 
 app.on("response", (data, context) => {
 	context.body = {
-		data: data,
-		method: context.method,
-		url: context.href
+		accessMethod: context.method,
+		accessUrl: context.href,
+		statusCode: context.response.status,
+		data: data
 	};
 });
 

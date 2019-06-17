@@ -23,9 +23,8 @@ const filterUser = async (context, next) => {
 	try {
 		switch (context.method) {
 			case "GET":
-				break;
 			case "POST":
-				throw new Error(errmsg);
+				break;
 			case "PUT":
 			case "PATCH":
 			case "DELETE":

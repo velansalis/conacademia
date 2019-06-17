@@ -3,14 +3,14 @@ const bcrypt = require("bcrypt");
 
 const getUsers = async (context, next) => {
 	try {
-		const { limit, offset, order } = context.request.query;
-		const avoidQuery = { password: 0, activities: 0, __v: 0, owner: 0 };
-
+		let { page, order, designation } = context.request.query;
+		const avoidQuery = { password: 0, activities: 0, __v: 0, owner: 0, token: 0 };
 		const sortQuery = { fname: order == "dsc" ? 0 : 1 };
-		const skipQuery = offset == undefined ? 0 : parseInt(offset);
-		const limitQuery = limit == undefined ? 10 : parseInt(limit);
+		const limitQuery = parseInt(page) * 5;
+		const skipQuery = limitQuery - 5;
+		designation = designation == "faculty" || designation == "student" ? designation : undefined;
 
-		let response = await User.find({}, avoidQuery)
+		let response = await User.find({ designation: designation }, avoidQuery)
 			.sort(sortQuery)
 			.skip(skipQuery)
 			.limit(limitQuery)
@@ -27,7 +27,7 @@ const getUsers = async (context, next) => {
 const getUser = async (context, next) => {
 	try {
 		const { order } = context.request.query;
-		const avoidQuery = { password: 0, activities: 0, __v: 0, owner: 0 };
+		const avoidQuery = { password: 0, activities: 0, __v: 0, owner: 0, token: 0 };
 
 		let response = await User.find({ username: context.params.username }, avoidQuery)
 			.sort({ fname: order == "dsc" ? 0 : 1 })
@@ -43,9 +43,8 @@ const getUser = async (context, next) => {
 
 const addUser = async (context, next) => {
 	try {
-		let { username, password, fname, lname, dob, usn } = context.request.body;
+		let { username, password, fname, lname, dob, designation, usn } = context.request.body;
 		let hash = await bcrypt.hash(password, 12);
-		if (!usn && designation.toLowercase() == "student") throw new Error();
 		let response = await new User({
 			username: username,
 			password: hash,
@@ -53,6 +52,7 @@ const addUser = async (context, next) => {
 			lname: lname,
 			dob: new Date(dob).toDateString(),
 			usn: usn,
+			designation: designation,
 			created_by: username
 		}).save();
 		[response].map(object => {

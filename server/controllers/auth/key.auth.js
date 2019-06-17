@@ -5,19 +5,6 @@ const { User } = require("../../models/index");
 
 require("dotenv").config();
 
-const addActivity = async (username, context) => {
-	let activity = {
-		activities: {
-			method: context.method,
-			url: context.href,
-			timestamp: new Date().toDateString()
-		}
-	};
-	await User.updateOne({ username: username }, { $push: activity })
-		.lean()
-		.exec();
-};
-
 const getToken = data => {
 	return new Promise(async (resolve, reject) => {
 		let username = data.username;
@@ -69,19 +56,34 @@ const login = context => {
 };
 
 const getKey = async context => {
+	let data;
 	try {
 		let tokenData = await login(context);
 		let token = await getToken(tokenData);
-		let data = {
+		data = {
 			AccessToken: token,
 			designation: tokenData.designation,
 			username: tokenData.username
 		};
-		context.app.emit("response", data, context);
 	} catch (err) {
 		context.status = err.status || 500;
 		context.app.emit("error", err, context);
+	} finally {
+		context.app.emit("response", data, context);
 	}
+};
+
+const addActivity = async (username, context) => {
+	let activity = {
+		activities: {
+			method: context.method,
+			url: context.href,
+			timestamp: new Date().toDateString()
+		}
+	};
+	await User.updateOne({ username: username }, { $push: activity })
+		.lean()
+		.exec();
 };
 
 const authKey = async (context, next) => {

@@ -24,14 +24,14 @@ const filterFaculty = async (context, next) => {
 	try {
 		let { designation } = context.decoded;
 		switch (context.method) {
+			case "GET":
+				break;
 			case "PUT":
 			case "PATCH":
 			case "DELETE":
 			case "POST":
 				if (designation == "faculty" || (await checkCourseOwnership(user, context))) break;
 				throw new Error(errmsg);
-			case "GET":
-				break;
 			default:
 				throw new Error(errmsg);
 		}

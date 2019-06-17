@@ -53,8 +53,9 @@ const UserSchema = new Schema({
 	usn: {
 		type: String,
 		required: () => {
-			if (this.designation == "faculty") return false;
-			else return true;
+			// if (this.designation == "faculty") return false;
+			// else return true;
+			return false;
 		}
 	},
 
@@ -71,6 +72,7 @@ const UserSchema = new Schema({
 			timestamp: { type: Date }
 		}
 	],
+	token: { type: String },
 	owner: { type: String }
 });
 

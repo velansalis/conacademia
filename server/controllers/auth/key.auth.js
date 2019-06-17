@@ -18,16 +18,24 @@ const addActivity = async (username, context) => {
 		.exec();
 };
 
-const generateToken = data => {
-	let tokenExpiry = 60 * 60 * 24;
-	return new Promise((resolve, reject) => {
-		jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: tokenExpiry }, (err, token) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(token);
-			}
-		});
+const getToken = data => {
+	return new Promise(async (resolve, reject) => {
+		let username = data.username;
+		let response = await User.findOne({ username: username })
+			.lean()
+			.exec();
+		if (response.token) resolve(response.token);
+		else {
+			let tokenExpiry = 60 * 60 * 24;
+			jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: tokenExpiry }, async (err, token) => {
+				if (err) {
+					reject(err);
+				} else {
+					await User.findOneAndUpdate({ username: username }, { token: token }).exec();
+					resolve(token);
+				}
+			});
+		}
 	});
 };
 
@@ -81,7 +89,7 @@ const loginOrCreate = context => {
 const getKey = async context => {
 	try {
 		let tokenData = await loginOrCreate(context);
-		let token = await generateToken(tokenData);
+		let token = await getToken(tokenData);
 
 		let data = {
 			AccessToken: token,

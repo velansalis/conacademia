@@ -128,7 +128,7 @@ const addDetail = async (context, next) => {
 
 	let findQuery = { course_id: course_id.toLowerCase(), "marks.usn": { $ne: usn } };
 	let addQuery = { $push: { marks: context.request.body } };
-	let options = { upsert: true, new: true };
+	let options = { fields: { marks: 1, _id: 0 }, new: true, upsert: true };
 	let response = null;
 
 	try {

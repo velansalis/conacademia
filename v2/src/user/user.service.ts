@@ -1,8 +1,8 @@
 import { Injectable, HttpCode, HttpException, HttpStatus } from '@nestjs/common';
-import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from './types/user.interface';
-import { UserDTO } from './types/user.dto';
+import { UserDTO } from './user.dto';
+import { Model } from 'mongoose';
+import { User } from './user.interface';
 
 @Injectable()
 export class UserService {
@@ -26,17 +26,16 @@ export class UserService {
     @HttpCode(HttpStatus.OK)
     async editUser(username: string, userdata: Partial<UserDTO>): Promise<User> {
         try {
-            let user: any;
-            user = await this.userModel
+            let user: any = await this.userModel
                 .findOne({ username: username })
                 .lean()
                 .exec();
+            if (!user) throw new HttpException('User does not exists', HttpStatus.BAD_REQUEST);
             if (userdata.designation && user.designation != 'admin') {
                 delete userdata.designation;
                 if (Object.keys(userdata).length == 0)
                     throw new HttpException("Designation can't be changed", HttpStatus.BAD_REQUEST);
             }
-            if (!user) throw new HttpException('User does not exists', HttpStatus.BAD_REQUEST);
             user = await this.userModel
                 .findOneAndUpdate({ username }, userdata, { new: true })
                 .lean()

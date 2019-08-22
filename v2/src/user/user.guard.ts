@@ -1,10 +1,10 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserDTO } from '../user/types/user.dto';
+import { UserDTO } from './user.dto';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class UserGuard implements CanActivate {
     constructor(@InjectModel('User') private readonly userModel) {}
 
     private getTokenData(request): any {

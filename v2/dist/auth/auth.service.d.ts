@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
-import { User } from '../user/types/user.interface';
-import { UserDTO } from '../user/types/user.dto';
+import { User } from '../user/user.interface';
+import { UserDTO } from '../user/user.dto';
 export declare class AuthService {
     private readonly userModel;
     constructor(userModel: Model<User>);

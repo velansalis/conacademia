@@ -1,6 +1,4 @@
-import { IsString, IsInt, IsDate, Max } from 'class-validator';
-
-export class UserDTO {
+export declare class UserDTO {
     _id: string;
     username: string;
     password: string;

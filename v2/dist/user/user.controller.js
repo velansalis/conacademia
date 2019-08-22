@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
 const common_3 = require("@nestjs/common");
-const http_exception_1 = require("../shared/http.exception");
+const http_exception_1 = require("../http.exception");
 const user_service_1 = require("./user.service");
-const auth_guard_1 = require("../shared/auth.guard");
+const user_guard_1 = require("./user.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -48,7 +48,7 @@ __decorate([
 ], UserController.prototype, "editUser", null);
 UserController = __decorate([
     common_1.Controller('users'),
-    common_1.UseGuards(auth_guard_1.AuthGuard),
+    common_1.UseGuards(user_guard_1.UserGuard),
     common_1.UseFilters(http_exception_1.HttpErrorFilter),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);

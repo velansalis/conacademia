@@ -23,8 +23,8 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("mongoose");
-const mongoose_2 = require("@nestjs/mongoose");
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 let UserService = class UserService {
     constructor(userModel) {
         this.userModel = userModel;
@@ -46,18 +46,17 @@ let UserService = class UserService {
     }
     async editUser(username, userdata) {
         try {
-            let user;
-            user = await this.userModel
+            let user = await this.userModel
                 .findOne({ username: username })
                 .lean()
                 .exec();
+            if (!user)
+                throw new common_1.HttpException('User does not exists', common_1.HttpStatus.BAD_REQUEST);
             if (userdata.designation && user.designation != 'admin') {
                 delete userdata.designation;
                 if (Object.keys(userdata).length == 0)
                     throw new common_1.HttpException("Designation can't be changed", common_1.HttpStatus.BAD_REQUEST);
             }
-            if (!user)
-                throw new common_1.HttpException('User does not exists', common_1.HttpStatus.BAD_REQUEST);
             user = await this.userModel
                 .findOneAndUpdate({ username }, userdata, { new: true })
                 .lean()
@@ -84,8 +83,8 @@ __decorate([
 ], UserService.prototype, "editUser", null);
 UserService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_2.InjectModel('User')),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
+    __param(0, mongoose_1.InjectModel('User')),
+    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_2.Model !== "undefined" && mongoose_2.Model) === "function" ? _a : Object])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

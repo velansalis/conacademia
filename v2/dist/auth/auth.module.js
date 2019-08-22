@@ -10,7 +10,7 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
 const mongoose_1 = require("@nestjs/mongoose");
-const user_schema_1 = require("../user/types/user.schema");
+const user_schema_1 = require("../user/user.schema");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([

@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
-import { HttpErrorFilter } from './shared/http.exception';
+import { HttpErrorFilter } from './http.exception';
 import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 @Module({
     imports: [
         MongooseModule.forRoot(
@@ -12,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
         ),
         UserModule,
         AuthModule,
+        AdminModule,
     ],
     providers: [
         {

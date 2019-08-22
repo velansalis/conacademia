@@ -25,7 +25,7 @@ var _a;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const user_dto_1 = require("../user/types/user.dto");
+const user_dto_1 = require("../user/user.dto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 let AuthService = class AuthService {

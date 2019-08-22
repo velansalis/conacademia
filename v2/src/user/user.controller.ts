@@ -3,13 +3,13 @@ import { Get, Patch } from '@nestjs/common';
 import { Req, Param, Body } from '@nestjs/common';
 import { Request } from 'express';
 
-import { HttpErrorFilter } from '../shared/http.exception';
+import { HttpErrorFilter } from '../http.exception';
 import { UserService } from './user.service';
-import { UserDTO } from './types/user.dto';
-import { AuthGuard } from '../shared/auth.guard';
+import { UserDTO } from './user.dto';
+import { UserGuard } from './user.guard';
 
 @Controller('users')
-@UseGuards(AuthGuard)
+@UseGuards(UserGuard)
 @UseFilters(HttpErrorFilter)
 export class UserController {
     constructor(private readonly userService: UserService) {}

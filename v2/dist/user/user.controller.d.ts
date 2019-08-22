@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { UserService } from './user.service';
-import { UserDTO } from './types/user.dto';
+import { UserDTO } from './user.dto';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);

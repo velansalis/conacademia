@@ -1101,91 +1101,19 @@
         "version": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f"
       },
-      "/source/src/user/types/user.interface.ts": {
+      "/source/src/user/user.dto.ts": {
+        "version": "664b46461de6e5197d5655a99a044f947e10404155b79a764aa5a6f5016d732f",
+        "signature": "1854a2dd775eae31daf6858de5f805500b1f29c7e5c3df716304371b99028882"
+      },
+      "/source/src/user/user.interface.ts": {
         "version": "b211db2600395ddcac4f0fbf8142c2d81e38a289c47f7c458620f53f62228c89",
         "signature": "cf40ccabab3a3495d252633329eace1cf4a301aa3399a786df5fc7f3e0db4935"
       },
-      "/source/node_modules/class-validator/validation/ValidationError.d.ts": {
-        "version": "8b5ad058f8dab857050fdbb092b9f1267d22641f0f746cd8a7abee85b48bb83a",
-        "signature": "8b5ad058f8dab857050fdbb092b9f1267d22641f0f746cd8a7abee85b48bb83a"
-      },
-      "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts": {
-        "version": "15172694d8bfa52e97344ad7b85cba450b99ba971d67768dd2fb904856a89c89",
-        "signature": "15172694d8bfa52e97344ad7b85cba450b99ba971d67768dd2fb904856a89c89"
-      },
-      "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts": {
-        "version": "86f89124a90fae1b90421bcce1e0ba58614383ca72403bfc03ff89761b050a4d",
-        "signature": "86f89124a90fae1b90421bcce1e0ba58614383ca72403bfc03ff89761b050a4d"
-      },
-      "/source/node_modules/class-validator/container.d.ts": {
-        "version": "5a6fbec8c8e62c37e9685a91a6ef0f6ecaddb1ee90f7b2c2b71b454b40a0d9a6",
-        "signature": "5a6fbec8c8e62c37e9685a91a6ef0f6ecaddb1ee90f7b2c2b71b454b40a0d9a6"
-      },
-      "/source/node_modules/@types/validator/index.d.ts": {
-        "version": "aec25267628c2fb3b1435d4c370379b06324300c4f716b315559b8b74d610abc",
-        "signature": "aec25267628c2fb3b1435d4c370379b06324300c4f716b315559b8b74d610abc"
-      },
-      "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts": {
-        "version": "414cac79a3eaa7215e77b0b195330fd4b7af715058f4ace4b6936291f6c92e8f",
-        "signature": "414cac79a3eaa7215e77b0b195330fd4b7af715058f4ace4b6936291f6c92e8f"
-      },
-      "/source/node_modules/class-validator/validation/ValidationArguments.d.ts": {
-        "version": "f049af45e62625e0be51a3badd311110abf1ac8b23f56689e1d850923f6d9aac",
-        "signature": "f049af45e62625e0be51a3badd311110abf1ac8b23f56689e1d850923f6d9aac"
-      },
-      "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts": {
-        "version": "e700a3327eb9f018b9af7a56d9214383919103950141d2e44a4a1cd59bbe67c6",
-        "signature": "e700a3327eb9f018b9af7a56d9214383919103950141d2e44a4a1cd59bbe67c6"
-      },
-      "/source/node_modules/class-validator/decorator/decorators.d.ts": {
-        "version": "adb9fd7cb642699d75ffa436557a5ee99e704780d7966c8651440e0b5c2fd070",
-        "signature": "adb9fd7cb642699d75ffa436557a5ee99e704780d7966c8651440e0b5c2fd070"
-      },
-      "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts": {
-        "version": "8e7c8386c3700086085770ac298d37de34bd290db95938f5c77f1ab83fa67c52",
-        "signature": "8e7c8386c3700086085770ac298d37de34bd290db95938f5c77f1ab83fa67c52"
-      },
-      "/source/node_modules/class-validator/validation/ValidationTypes.d.ts": {
-        "version": "6e240857a9a61c96ef764a50f7e339a541288900e2b6d04285e39d2f88817533",
-        "signature": "6e240857a9a61c96ef764a50f7e339a541288900e2b6d04285e39d2f88817533"
-      },
-      "/source/node_modules/class-validator/metadata/ValidationMetadataArgs.d.ts": {
-        "version": "8f29f65ce09040175a948aeb38af31f34367123903c49b556a76097bcb8fe813",
-        "signature": "8f29f65ce09040175a948aeb38af31f34367123903c49b556a76097bcb8fe813"
-      },
-      "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts": {
-        "version": "8be85fd3849c702cd34aee594b4e9773dceca300cc358c63d75a3118720b12fe",
-        "signature": "8be85fd3849c702cd34aee594b4e9773dceca300cc358c63d75a3118720b12fe"
-      },
-      "/source/node_modules/class-validator/validation/Validator.d.ts": {
-        "version": "3f981ab8ad4311f52bc5ed65fc00b1eee1ccc804b924a01d8670d4627ffaa926",
-        "signature": "3f981ab8ad4311f52bc5ed65fc00b1eee1ccc804b924a01d8670d4627ffaa926"
-      },
-      "/source/node_modules/class-validator/register-decorator.d.ts": {
-        "version": "ea96782b5b69f29f37be42c51f944a0a4a478cbe3fed1d2ec25cffd5bd3617a4",
-        "signature": "ea96782b5b69f29f37be42c51f944a0a4a478cbe3fed1d2ec25cffd5bd3617a4"
-      },
-      "/source/node_modules/class-validator/metadata/ConstraintMetadata.d.ts": {
-        "version": "bb71811f328b358d990e298006492de623964862240de7eb6342e5efb8aafae9",
-        "signature": "bb71811f328b358d990e298006492de623964862240de7eb6342e5efb8aafae9"
-      },
-      "/source/node_modules/class-validator/metadata/MetadataStorage.d.ts": {
-        "version": "c569d4d6f3aa771dc1600a73bd8f1b714e10a75218379d93f9cf6bc13bbc0ab0",
-        "signature": "c569d4d6f3aa771dc1600a73bd8f1b714e10a75218379d93f9cf6bc13bbc0ab0"
-      },
-      "/source/node_modules/class-validator/index.d.ts": {
-        "version": "70aecfd981af29d74ba7ab6667b9cc2a53459d8eb099c139fd2aa54c3059c71d",
-        "signature": "70aecfd981af29d74ba7ab6667b9cc2a53459d8eb099c139fd2aa54c3059c71d"
-      },
-      "/source/src/user/types/user.dto.ts": {
-        "version": "1fd928a22f336f13c9091fd728f0d24d0dd7108af1db84dfd3f5dddf7570dac0",
-        "signature": "1854a2dd775eae31daf6858de5f805500b1f29c7e5c3df716304371b99028882"
-      },
       "/source/src/user/user.service.ts": {
-        "version": "e305f8154428ba1ff66a3bfb06c5d70876d5ecd62a03b7b8efe83c43f47f3d91",
-        "signature": "ba5f60d7a1f331c3f9a4d17a748632f8e5c382021b7bccf93bd5ec36aea5afa8"
+        "version": "9ac60676123d5d13e24cfb29f18c0e3e92d28cecef12aaf26a9dffa214ca59cf",
+        "signature": "5c093ea818ba743a08612810def2b5f0f5f70e6d8e060c5e69e2b6dc9f784006"
       },
-      "/source/src/user/types/user.schema.ts": {
+      "/source/src/user/user.schema.ts": {
         "version": "647be1cb01c5e621cb94b94c646d46f64b49fe5ac1f5a06b54f77851ee05f992",
         "signature": "1b8514223032a3be4786a00040cc352e3d5132d3e518054cb2503a20c16ccfd4"
       },
@@ -1217,17 +1145,21 @@
         "version": "434d7d3188d85bd46c64dcc8268422ffdfdd19fdbc98ec01446d650414fcaa0b",
         "signature": "434d7d3188d85bd46c64dcc8268422ffdfdd19fdbc98ec01446d650414fcaa0b"
       },
-      "/source/src/shared/http.exception.ts": {
+      "/source/src/http.exception.ts": {
         "version": "53686527f78849db61a93d116eb656ed1903530858bdcde4008f8fb773d5bae9",
         "signature": "c219c7af45c6925b9eca1c632fa2aa0709da2ae9d375983e90ce9b080f5c4a2f"
       },
-      "/source/src/shared/auth.guard.ts": {
-        "version": "2e8f693408fd36e55a10b60a523a7f58c1cf5aa70b8b80ab0a5232328cca819e",
-        "signature": "72a9696207ef958b9480d8576401d3b7448377178b6d6718a767aea18174ea78"
+      "/source/src/user/user.guard.ts": {
+        "version": "e8145aa645a227f976fd05e4c324aac7d137468ebcce27f870881606d0c7b3bc",
+        "signature": "fc4656abca87dca087e0c0c93ce022e13aa01cadef0632a34feb2cfeb2d03c41"
       },
       "/source/src/user/user.controller.ts": {
-        "version": "2e3ae41975de3b55922e8dfd2a1ae141b9f8377693bc04889fd060e119587440",
-        "signature": "8ef4787dfa7a8d012a6e12f7daf97a69bf05e1684cd82c32c7064da18c8511fc"
+        "version": "3666414bb78a6d63cb16b9fccd678cf8b9bc63220c1860e8817fabbdf06e39a7",
+        "signature": "903b0bb622f8206c145a7cf7b49cd24e5b72aa62da896163527c4d96df12e1e5"
+      },
+      "/source/src/user/user.module.ts": {
+        "version": "5529be23e312384f0c01776f58404956bdd2a21bea86bd851521cfdba309dbf2",
+        "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
         "version": "285fd4018f9de87c5972beb9133971c99212458bcfc317f1b3851adcc86d84b7",
@@ -1337,24 +1269,36 @@
         "version": "2608cfd623840916e664e68c3dc5eb4347ccae822f808d899bf00e73cbab2bfe",
         "signature": "2608cfd623840916e664e68c3dc5eb4347ccae822f808d899bf00e73cbab2bfe"
       },
-      "/source/src/user/user.module.ts": {
-        "version": "94faa03ec56c3671845bf4294c2d4dff032790366d254b6d010afe697a627341",
-        "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
-      },
       "/source/src/auth/auth.service.ts": {
-        "version": "98e0aca099c031d7d33a8b33e1d0deea0138c38fb1f1311dd274d9ad478db02b",
-        "signature": "271aa64a879d65f19c418e98378909b5fa673f58071961aea25b32ad6cbe213f"
+        "version": "490aa2e81630740b9421f1bd29c36b5fb19135ab4f9b91b1e38746d45fdffc9a",
+        "signature": "7255187307c22bf1cb7b1b80d13ee66d58c190f4023b0a5fdaa501d7ddff2a64"
       },
       "/source/src/auth/auth.controller.ts": {
-        "version": "b82ce2bce56ba05739469cd8aa326844b98c0c38c1ac4b3e8a3ed75d2462fb85",
-        "signature": "b599b95f91c7203e7c153c0fe74a99fd0c51ed0b974c198cd2b17293299d1001"
+        "version": "32aeacf3956427f309b1f29407e3153b5c7116025eb5a856c45a5fce5e35f88b",
+        "signature": "b1d12f5ba5aab62fb8e9d5d989a3563a71e9d17ddf89fcdb6b1f995d7c25bb94"
       },
       "/source/src/auth/auth.module.ts": {
-        "version": "6c3ae83864f59993695ecd91c67b77092022b0dc219d64bd8d4606f30f44dbee",
+        "version": "0ff742d629dfac20850afa0ad2c766ed3bea817927f5ed9036d2a2591347629d",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1"
       },
+      "/source/src/admin/admin.service.ts": {
+        "version": "aa0522e1c1ddc841dd6906f082fe4b86f7f3bf8e326a773591d638694e4ebbd4",
+        "signature": "1ab49703e0306d36f7e66d3a016212d58a0cff8867b608945acc14ca46d2b761"
+      },
+      "/source/src/admin/admin.controller.ts": {
+        "version": "9bb4fc3fca958d0c5c011759a7877c3c43f0d602b2a5114c694b12cb8a99d460",
+        "signature": "b5ad191372957afd3f8d3f3697b9634adbddf9726f9b662332bf05ad44e9b506"
+      },
+      "/source/src/admin/admin.schema.ts": {
+        "version": "501feae3eefc7f16bab82883e8bfa2d3ee84589d314c9776f97a95e2f641dec8",
+        "signature": "f9ab86040c71a4a7d73313d587546c8c4b3cda53fb5b61baf1bb479cddab74b5"
+      },
+      "/source/src/admin/admin.module.ts": {
+        "version": "46c37e19a23dca23dd2aa7cd606642925bc75b901dd29b432d648e64eb8a43d2",
+        "signature": "4cb17d629e7bb0df751ae3e10d78a23d59ea51fc7c02044f9a003ba6f36fedf7"
+      },
       "/source/src/app.module.ts": {
-        "version": "3d195d3f05a3ee6adeda36b821b75400ec7a64206fbcc139d921da59386bea1c",
+        "version": "cd934570a1e31543adf1324dc8fe4ca93c10b1f2f6f180c12a30567b1fda6f61",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644"
       },
       "/source/src/main.ts": {
@@ -1844,6 +1788,10 @@
       "/source/node_modules/@types/supertest/index.d.ts": {
         "version": "79e8fe7df47b9eee82aba6de491c17ed11759171ed0ee0d804e83971b2a17fc3",
         "signature": "79e8fe7df47b9eee82aba6de491c17ed11759171ed0ee0d804e83971b2a17fc3"
+      },
+      "/source/node_modules/@types/validator/index.d.ts": {
+        "version": "aec25267628c2fb3b1435d4c370379b06324300c4f716b315559b8b74d610abc",
+        "signature": "aec25267628c2fb3b1435d4c370379b06324300c4f716b315559b8b74d610abc"
       },
       "/source/node_modules/@types/ws/index.d.ts": {
         "version": "2412f764f3a1f9ad6229beba713c4f9b7e78da605d4881a5324f65312a49070f",
@@ -3495,129 +3443,23 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/user/types/user.interface.ts": [
+      "/source/src/user/user.dto.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/node_modules/class-validator/validation/ValidationError.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/container.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/@types/validator/index.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidationArguments.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/decorator/decorators.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-        "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-        "/source/node_modules/@types/validator/index.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidationTypes.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/ValidationMetadataArgs.d.ts": [
-        "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts": [
-        "/source/node_modules/class-validator/metadata/ValidationMetadataArgs.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/Validator.d.ts": [
-        "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationError.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-        "/source/node_modules/@types/validator/index.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/register-decorator.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/ConstraintMetadata.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/MetadataStorage.d.ts": [
-        "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts",
-        "/source/node_modules/class-validator/metadata/ConstraintMetadata.d.ts",
-        "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/index.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationError.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-        "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts",
-        "/source/node_modules/class-validator/container.d.ts",
-        "/source/node_modules/class-validator/decorator/decorators.d.ts",
-        "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationTypes.d.ts",
-        "/source/node_modules/class-validator/validation/Validator.d.ts",
-        "/source/node_modules/class-validator/register-decorator.d.ts",
-        "/source/node_modules/class-validator/metadata/MetadataStorage.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/src/user/types/user.dto.ts": [
-        "/source/node_modules/class-validator/index.d.ts",
+      "/source/src/user/user.interface.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "/source/src/user/user.service.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
-        "/source/src/user/types/user.interface.ts",
-        "/source/src/user/types/user.dto.ts",
+        "/source/src/user/user.dto.ts",
+        "/source/src/user/user.interface.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/user/types/user.schema.ts": [
+      "/source/src/user/user.schema.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3663,25 +3505,34 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/shared/http.exception.ts": [
+      "/source/src/http.exception.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/shared/auth.guard.ts": [
+      "/source/src/user/user.guard.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
-        "/source/src/user/types/user.dto.ts",
+        "/source/src/user/user.dto.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "/source/src/user/user.controller.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@types/express/index.d.ts",
-        "/source/src/shared/http.exception.ts",
+        "/source/src/http.exception.ts",
         "/source/src/user/user.service.ts",
-        "/source/src/user/types/user.dto.ts",
-        "/source/src/shared/auth.guard.ts",
+        "/source/src/user/user.dto.ts",
+        "/source/src/user/user.guard.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/user/user.module.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/src/user/user.service.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/src/user/user.schema.ts",
+        "/source/src/user/user.controller.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3869,30 +3720,19 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/user/user.module.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts",
-        "/source/src/user/user.service.ts",
-        "/source/node_modules/@nestjs/mongoose/index.d.ts",
-        "/source/src/user/types/user.schema.ts",
-        "/source/src/user/user.controller.ts",
-        "/source/node_modules/@nestjs/core/index.d.ts",
-        "/source/src/shared/auth.guard.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "/source/src/auth/auth.service.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
-        "/source/src/user/types/user.interface.ts",
-        "/source/src/user/types/user.dto.ts",
+        "/source/src/user/user.interface.ts",
+        "/source/src/user/user.dto.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "/source/src/auth/auth.controller.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/src/auth/auth.service.ts",
-        "/source/src/user/types/user.dto.ts",
-        "/source/src/shared/http.exception.ts",
+        "/source/src/user/user.dto.ts",
+        "/source/src/http.exception.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3901,7 +3741,31 @@
         "/source/src/auth/auth.service.ts",
         "/source/src/auth/auth.controller.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
-        "/source/src/user/types/user.schema.ts",
+        "/source/src/user/user.schema.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/admin/admin.service.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/admin/admin.controller.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/admin/admin.schema.ts": [
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/admin/admin.module.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/src/admin/admin.service.ts",
+        "/source/src/admin/admin.controller.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/src/admin/admin.schema.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3910,8 +3774,9 @@
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
         "/source/src/user/user.module.ts",
         "/source/node_modules/@nestjs/core/index.d.ts",
-        "/source/src/shared/http.exception.ts",
+        "/source/src/http.exception.ts",
         "/source/src/auth/auth.module.ts",
+        "/source/src/admin/admin.module.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -4761,6 +4626,10 @@
       ],
       "/source/node_modules/@types/supertest/index.d.ts": [
         "/source/node_modules/@types/superagent/index.d.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/node_modules/@types/validator/index.d.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -6404,114 +6273,9 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/node_modules/class-validator/validation/ValidationError.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/container.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/@types/validator/index.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidationArguments.d.ts": [
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/decorator/decorators.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-        "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-        "/source/node_modules/@types/validator/index.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/ValidationTypes.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/ValidationMetadataArgs.d.ts": [
-        "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts": [
-        "/source/node_modules/class-validator/metadata/ValidationMetadataArgs.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/validation/Validator.d.ts": [
-        "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationError.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-        "/source/node_modules/@types/validator/index.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/register-decorator.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/ConstraintMetadata.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/metadata/MetadataStorage.d.ts": [
-        "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts",
-        "/source/node_modules/class-validator/metadata/ConstraintMetadata.d.ts",
-        "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/node_modules/class-validator/index.d.ts": [
-        "/source/node_modules/class-validator/validation/ValidationError.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-        "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts",
-        "/source/node_modules/class-validator/container.d.ts",
-        "/source/node_modules/class-validator/decorator/decorators.d.ts",
-        "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-        "/source/node_modules/class-validator/validation/ValidationTypes.d.ts",
-        "/source/node_modules/class-validator/validation/Validator.d.ts",
-        "/source/node_modules/class-validator/register-decorator.d.ts",
-        "/source/node_modules/class-validator/metadata/MetadataStorage.d.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "/source/src/user/user.service.ts": [
-        "/source/src/user/types/user.interface.ts",
-        "/source/src/user/types/user.dto.ts"
+        "/source/src/user/user.interface.ts",
+        "/source/src/user/user.dto.ts"
       ],
       "/source/node_modules/@types/range-parser/index.d.ts": [
         "/source/node_modules/@types/node/util.d.ts",
@@ -6555,16 +6319,16 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/shared/http.exception.ts": [
+      "/source/src/http.exception.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts"
       ],
-      "/source/src/shared/auth.guard.ts": [
+      "/source/src/user/user.guard.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts"
       ],
       "/source/src/user/user.controller.ts": [
         "/source/src/user/user.service.ts",
         "/source/node_modules/@types/express/index.d.ts",
-        "/source/src/user/types/user.dto.ts"
+        "/source/src/user/user.dto.ts"
       ],
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
@@ -6751,12 +6515,12 @@
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "/source/src/auth/auth.service.ts": [
-        "/source/src/user/types/user.interface.ts",
-        "/source/src/user/types/user.dto.ts"
+        "/source/src/user/user.interface.ts",
+        "/source/src/user/user.dto.ts"
       ],
       "/source/src/auth/auth.controller.ts": [
         "/source/src/auth/auth.service.ts",
-        "/source/src/user/types/user.dto.ts"
+        "/source/src/user/user.dto.ts"
       ],
       "/source/node_modules/@types/accepts/index.d.ts": [
         "/source/node_modules/@types/node/http.d.ts",
@@ -7600,6 +7364,10 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/source/node_modules/@types/validator/index.d.ts": [
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/source/node_modules/@types/ws/index.d.ts": [
         "/source/node_modules/@types/node/events.d.ts",
         "/source/node_modules/@types/node/http.d.ts",
@@ -7890,28 +7658,9 @@
       "/source/node_modules/@nestjs/mongoose/dist/mongoose.module.d.ts",
       "/source/node_modules/@nestjs/mongoose/dist/index.d.ts",
       "/source/node_modules/@nestjs/mongoose/index.d.ts",
-      "/source/src/user/types/user.interface.ts",
-      "/source/node_modules/class-validator/validation/ValidationError.d.ts",
-      "/source/node_modules/class-validator/validation/ValidatorOptions.d.ts",
-      "/source/node_modules/class-validator/validation-schema/ValidationSchema.d.ts",
-      "/source/node_modules/class-validator/container.d.ts",
-      "/source/node_modules/@types/validator/index.d.ts",
-      "/source/node_modules/class-validator/validation/ValidationTypeOptions.d.ts",
-      "/source/node_modules/class-validator/validation/ValidationArguments.d.ts",
-      "/source/node_modules/class-validator/decorator/ValidationOptions.d.ts",
-      "/source/node_modules/class-validator/decorator/decorators.d.ts",
-      "/source/node_modules/class-validator/validation/ValidatorConstraintInterface.d.ts",
-      "/source/node_modules/class-validator/validation/ValidationTypes.d.ts",
-      "/source/node_modules/class-validator/metadata/ValidationMetadataArgs.d.ts",
-      "/source/node_modules/class-validator/metadata/ValidationMetadata.d.ts",
-      "/source/node_modules/class-validator/validation/Validator.d.ts",
-      "/source/node_modules/class-validator/register-decorator.d.ts",
-      "/source/node_modules/class-validator/metadata/ConstraintMetadata.d.ts",
-      "/source/node_modules/class-validator/metadata/MetadataStorage.d.ts",
-      "/source/node_modules/class-validator/index.d.ts",
-      "/source/src/user/types/user.dto.ts",
+      "/source/src/user/user.interface.ts",
       "/source/src/user/user.service.ts",
-      "/source/src/user/types/user.schema.ts",
+      "/source/src/user/user.schema.ts",
       "/source/node_modules/@types/range-parser/index.d.ts",
       "/source/node_modules/@types/express-serve-static-core/index.d.ts",
       "/source/node_modules/@types/mime/index.d.ts",
@@ -7919,9 +7668,10 @@
       "/source/node_modules/@types/connect/index.d.ts",
       "/source/node_modules/@types/body-parser/index.d.ts",
       "/source/node_modules/@types/express/index.d.ts",
-      "/source/src/shared/http.exception.ts",
-      "/source/src/shared/auth.guard.ts",
+      "/source/src/http.exception.ts",
+      "/source/src/user/user.guard.ts",
       "/source/src/user/user.controller.ts",
+      "/source/src/user/user.module.ts",
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "/source/node_modules/@nestjs/core/adapters/index.d.ts",
       "/source/node_modules/@nestjs/core/constants.d.ts",
@@ -7949,10 +7699,13 @@
       "/source/node_modules/@nestjs/core/services/reflector.service.d.ts",
       "/source/node_modules/@nestjs/core/services/index.d.ts",
       "/source/node_modules/@nestjs/core/index.d.ts",
-      "/source/src/user/user.module.ts",
       "/source/src/auth/auth.service.ts",
       "/source/src/auth/auth.controller.ts",
       "/source/src/auth/auth.module.ts",
+      "/source/src/admin/admin.service.ts",
+      "/source/src/admin/admin.controller.ts",
+      "/source/src/admin/admin.schema.ts",
+      "/source/src/admin/admin.module.ts",
       "/source/src/app.module.ts",
       "/source/src/main.ts",
       "/source/node_modules/@types/accepts/index.d.ts",
@@ -8076,8 +7829,10 @@
       "/source/node_modules/@types/stack-utils/index.d.ts",
       "/source/node_modules/@types/superagent/index.d.ts",
       "/source/node_modules/@types/supertest/index.d.ts",
+      "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
-      "/source/node_modules/@types/yargs/index.d.ts"
+      "/source/node_modules/@types/yargs/index.d.ts",
+      "/source/src/user/user.dto.ts"
     ]
   },
   "version": "3.4.3"

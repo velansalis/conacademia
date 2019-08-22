@@ -12,26 +12,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var _a;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("mongoose");
-const mongoose_2 = require("@nestjs/mongoose");
+const mongoose_1 = require("@nestjs/mongoose");
 let AdminService = class AdminService {
     constructor(adminModel) {
         this.adminModel = adminModel;
     }
-    async create(adminInput) {
-        const createdAdmin = new this.adminModel(adminInput);
-        return await createdAdmin.save();
-    }
-    async findAll() {
-        return await this.adminModel.find().exec();
-    }
 };
 AdminService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_2.InjectModel('Admin')),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
+    __param(0, mongoose_1.InjectModel('Admin')),
+    __metadata("design:paramtypes", [Object])
 ], AdminService);
 exports.AdminService = AdminService;
 //# sourceMappingURL=admin.service.js.map

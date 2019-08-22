@@ -14,15 +14,38 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const admin_guard_1 = require("./admin.guard");
 let AdminService = class AdminService {
-    constructor(adminModel) {
+    constructor(adminModel, userModel) {
         this.adminModel = adminModel;
+        this.userModel = userModel;
+    }
+    async addAdmin(admindata) {
+        try {
+            let user = await this.userModel
+                .findOne({ username: admindata.username })
+                .lean()
+                .exec();
+            if (!user) {
+                throw new common_1.HttpException(`User ${admindata.username} Does not exists.`, common_1.HttpStatus.BAD_REQUEST);
+            }
+            admindata.adminId = user._id;
+            let admin = new this.adminModel(admindata);
+            return await admin.save();
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+    async removeAdmin(admindata) {
+        return true;
     }
 };
 AdminService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel('Admin')),
-    __metadata("design:paramtypes", [Object])
+    common_1.UseGuards(admin_guard_1.AdminGuard),
+    __param(0, mongoose_1.InjectModel('Admin')), __param(1, mongoose_1.InjectModel('User')),
+    __metadata("design:paramtypes", [Object, Object])
 ], AdminService);
 exports.AdminService = AdminService;
 //# sourceMappingURL=admin.service.js.map

@@ -21,16 +21,15 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var _a;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
 const user_dto_1 = require("../user/user.dto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 let AuthService = class AuthService {
-    constructor(userModel) {
+    constructor(userModel, adminModel) {
         this.userModel = userModel;
+        this.adminModel = adminModel;
     }
     getToken(data) {
         return jwt.sign(data, 'supersecret', { expiresIn: '7d' });
@@ -42,6 +41,10 @@ let AuthService = class AuthService {
     async loginUser(userdata) {
         try {
             let user = await this.userModel.findOne({ username: userdata.username }).exec();
+            let admin = await this.adminModel
+                .findOne({ username: userdata.username })
+                .lean()
+                .exec();
             if (!user) {
                 throw new common_1.HttpException('Authorization failed : User Does not exists.', common_1.HttpStatus.BAD_REQUEST);
             }
@@ -49,13 +52,21 @@ let AuthService = class AuthService {
                 throw new common_1.HttpException('Authorization failed:Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
             if (!user.token) {
-                user.token = this.getToken({ username: userdata.username, designation: user.designation });
+                user.token = this.getToken({
+                    username: userdata.username,
+                    designation: user.designation,
+                    admin: Boolean(admin),
+                });
                 let n = await this.userModel.updateOne({ username: userdata.username }, { token: user.token }).exec();
                 if (n == 0)
                     throw new common_1.HttpException('Internal server error', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            let data = { username: user.username, designation: user.designation, token: user.token };
-            return { message: 'Successfully logged in', data };
+            let data = {
+                username: user.username,
+                designation: user.designation,
+                token: user.token,
+            };
+            return data;
         }
         catch (err) {
             throw err;
@@ -72,7 +83,7 @@ let AuthService = class AuthService {
                 await user.save();
                 delete userdata.password;
                 delete userdata.owner;
-                return { message: 'User Successfully Registered', data: userdata };
+                return userdata;
             }
             else {
                 throw new common_1.HttpException('Username already exists', common_1.HttpStatus.BAD_REQUEST);
@@ -127,8 +138,8 @@ __decorate([
 ], AuthService.prototype, "deleteUser", null);
 AuthService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel('User')),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_2.Model !== "undefined" && mongoose_2.Model) === "function" ? _a : Object])
+    __param(0, mongoose_1.InjectModel('User')), __param(1, mongoose_1.InjectModel('Admin')),
+    __metadata("design:paramtypes", [Object, Object])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

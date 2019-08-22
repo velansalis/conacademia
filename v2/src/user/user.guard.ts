@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserDTO } from './user.dto';
@@ -28,13 +28,25 @@ export class UserGuard implements CanActivate {
         let user: UserDTO;
         let data = this.getTokenData(request)[1];
         let pivot = this.getPivotData(request);
+
+        // If admin, allow
+        if (data.admin) return true;
+
+        // If anything else,
         if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {
+            // Dont allow designation to change
+            if (request.body.designation)
+                throw new HttpException("Designation can't be changed", HttpStatus.BAD_REQUEST);
+            // Check if user owns the document
             user = await this.userModel
                 .findOne({ username: pivot, owner: data.username })
                 .lean()
                 .exec();
+            // return false if not owned
             if (!user) return false;
         }
+
+        // For any other requests, GET
         return true;
     }
 

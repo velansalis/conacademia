@@ -40,7 +40,11 @@ let UserGuard = class UserGuard {
         let user;
         let data = this.getTokenData(request)[1];
         let pivot = this.getPivotData(request);
+        if (data.admin)
+            return true;
         if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {
+            if (request.body.designation)
+                throw new common_1.HttpException("Designation can't be changed", common_1.HttpStatus.BAD_REQUEST);
             user = await this.userModel
                 .findOne({ username: pivot, owner: data.username })
                 .lean()

@@ -11,6 +11,7 @@ const admin_service_1 = require("./admin.service");
 const admin_controller_1 = require("./admin.controller");
 const mongoose_1 = require("@nestjs/mongoose");
 const admin_schema_1 = require("./admin.schema");
+const user_schema_1 = require("../user/user.schema");
 let AdminModule = class AdminModule {
 };
 AdminModule = __decorate([
@@ -20,6 +21,10 @@ AdminModule = __decorate([
                 {
                     name: 'Admin',
                     schema: admin_schema_1.AdminSchema,
+                },
+                {
+                    name: 'User',
+                    schema: user_schema_1.UserSchema,
                 },
             ]),
         ],

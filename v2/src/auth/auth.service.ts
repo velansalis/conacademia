@@ -8,7 +8,7 @@ import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
-    constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+    constructor(@InjectModel('User') private readonly userModel, @InjectModel('Admin') private readonly adminModel) {}
 
     private getToken(data: object): Object {
         return jwt.sign(data, 'supersecret', { expiresIn: '7d' });
@@ -23,6 +23,10 @@ export class AuthService {
     async loginUser(userdata: Partial<UserDTO>): Promise<object> {
         try {
             let user = await this.userModel.findOne({ username: userdata.username }).exec();
+            let admin = await this.adminModel
+                .findOne({ username: userdata.username })
+                .lean()
+                .exec();
             if (!user) {
                 throw new HttpException('Authorization failed : User Does not exists.', HttpStatus.BAD_REQUEST);
             }
@@ -30,12 +34,20 @@ export class AuthService {
                 throw new HttpException('Authorization failed:Invalid password.', HttpStatus.BAD_REQUEST);
             }
             if (!user.token) {
-                user.token = this.getToken({ username: userdata.username, designation: user.designation });
+                user.token = this.getToken({
+                    username: userdata.username,
+                    designation: user.designation,
+                    admin: Boolean(admin),
+                });
                 let n = await this.userModel.updateOne({ username: userdata.username }, { token: user.token }).exec();
                 if (n == 0) throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            let data = { username: user.username, designation: user.designation, token: user.token };
-            return { message: 'Successfully logged in', data };
+            let data = {
+                username: user.username,
+                designation: user.designation,
+                token: user.token,
+            };
+            return data;
         } catch (err) {
             throw err;
         }
@@ -53,7 +65,7 @@ export class AuthService {
                 await user.save();
                 delete userdata.password;
                 delete userdata.owner;
-                return { message: 'User Successfully Registered', data: userdata };
+                return userdata;
             } else {
                 throw new HttpException('Username already exists', HttpStatus.BAD_REQUEST);
             }

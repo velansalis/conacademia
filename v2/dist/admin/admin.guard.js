@@ -13,28 +13,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const admin_dto_1 = require("./admin.dto");
-const admin_service_1 = require("./admin.service");
-let AdminController = class AdminController {
-    constructor(adminService) {
-        this.adminService = adminService;
+const mongoose_1 = require("@nestjs/mongoose");
+let AdminGuard = class AdminGuard {
+    constructor(adminModel) {
+        this.adminModel = adminModel;
     }
-    async addAdmin(admindata) {
-        let data = await this.adminService.addAdmin(admindata);
-        console.log(data);
-        return data;
+    async validateRequest(request) {
+        return true;
+    }
+    canActivate(context) {
+        const request = context.switchToHttp().getRequest();
+        return this.validateRequest(request);
     }
 };
-__decorate([
-    common_1.Post(),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [admin_dto_1.AdminDTO]),
-    __metadata("design:returntype", Promise)
-], AdminController.prototype, "addAdmin", null);
-AdminController = __decorate([
-    common_1.Controller('admin'),
-    __metadata("design:paramtypes", [admin_service_1.AdminService])
-], AdminController);
-exports.AdminController = AdminController;
-//# sourceMappingURL=admin.controller.js.map
+AdminGuard = __decorate([
+    common_1.Injectable(),
+    __param(0, mongoose_1.InjectModel('Admin')),
+    __metadata("design:paramtypes", [Object])
+], AdminGuard);
+exports.AdminGuard = AdminGuard;
+//# sourceMappingURL=admin.guard.js.map

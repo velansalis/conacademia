@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserModule } from './user/user.module';
+import { UserModule } from './modules/user/user.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
-import { HttpErrorFilter } from './http.exception';
-import { AuthModule } from './auth/auth.module';
-import { AdminModule } from './admin/admin.module';
+import { HttpErrorFilter } from './filters/http.exception';
+import { AuthModule } from './modules/auth/auth.module';
+import { AdminModule } from './modules/admin/admin.module';
+import { MongoExceptionFilter } from './filters/mongo.exception';
 @Module({
     imports: [
         MongooseModule.forRoot(
@@ -16,10 +17,8 @@ import { AdminModule } from './admin/admin.module';
         AdminModule,
     ],
     providers: [
-        {
-            provide: APP_FILTER,
-            useClass: HttpErrorFilter,
-        },
+        { provide: APP_FILTER, useClass: HttpErrorFilter },
+        { provide: APP_FILTER, useClass: MongoExceptionFilter },
     ],
 })
 export class AppModule {}

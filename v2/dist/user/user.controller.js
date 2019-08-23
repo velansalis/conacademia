@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
 const common_3 = require("@nestjs/common");
-const http_exception_1 = require("../http.exception");
+const http_exception_1 = require("../filters/http.exception");
 const user_service_1 = require("./user.service");
 const user_guard_1 = require("./user.guard");
 let UserController = class UserController {

@@ -8,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const user_module_1 = require("./user/user.module");
+const user_module_1 = require("./modules/user/user.module");
 const core_1 = require("@nestjs/core");
-const http_exception_1 = require("./http.exception");
-const auth_module_1 = require("./auth/auth.module");
-const admin_module_1 = require("./admin/admin.module");
+const http_exception_1 = require("./filters/http.exception");
+const auth_module_1 = require("./modules/auth/auth.module");
+const admin_module_1 = require("./modules/admin/admin.module");
+const mongo_exception_1 = require("./filters/mongo.exception");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -24,10 +25,8 @@ AppModule = __decorate([
             admin_module_1.AdminModule,
         ],
         providers: [
-            {
-                provide: core_1.APP_FILTER,
-                useClass: http_exception_1.HttpErrorFilter,
-            },
+            { provide: core_1.APP_FILTER, useClass: http_exception_1.HttpErrorFilter },
+            { provide: core_1.APP_FILTER, useClass: mongo_exception_1.MongoExceptionFilter },
         ],
     })
 ], AppModule);

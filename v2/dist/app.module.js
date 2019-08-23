@@ -7,28 +7,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const user_module_1 = require("./modules/user/user.module");
+const auth_module_1 = require("./modules/auth/auth.module");
+const admin_module_1 = require("./modules/admin/admin.module");
+const http_exception_1 = require("./filters/http.exception");
 const mongoose_1 = require("@nestjs/mongoose");
-const user_module_1 = require("./user/user.module");
 const core_1 = require("@nestjs/core");
-const http_exception_1 = require("./http.exception");
-const auth_module_1 = require("./auth/auth.module");
-const admin_module_1 = require("./admin/admin.module");
+require("dotenv/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://velanmax:nmQwk34BCzmElvIw@mcaproject-5bdfh.mongodb.net/conacademia?retryWrites=true&w=majority', { dbName: 'conacademia', useNewUrlParser: true }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
             admin_module_1.AdminModule,
+            mongoose_1.MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
         ],
-        providers: [
-            {
-                provide: core_1.APP_FILTER,
-                useClass: http_exception_1.HttpErrorFilter,
-            },
-        ],
+        providers: [{ provide: core_1.APP_FILTER, useClass: http_exception_1.HttpErrorFilter }],
     })
 ], AppModule);
 exports.AppModule = AppModule;

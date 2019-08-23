@@ -66,13 +66,10 @@ exports.UserSchema = new mongoose.Schema({
         },
     },
     dob: { type: Date, required: true },
-    designation: {
-        type: String,
-        required: true,
-        enum: ['student', 'faculty'],
-    },
+    designation: { type: String, required: true, enum: ['student', 'faculty'], default: 'student' },
     age: { type: Number, min: [16, 'Age should be greater than 16'] },
     owner: { type: String, required: true },
+    scope: { type: String, enum: ['admin', 'user', 'course'], required: true, default: 'user' },
     token: { type: String },
 });
 //# sourceMappingURL=user.schema.js.map

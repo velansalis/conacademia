@@ -27,12 +27,11 @@ const user_dto_1 = require("../user/user.dto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 let AuthService = class AuthService {
-    constructor(userModel, adminModel) {
+    constructor(userModel) {
         this.userModel = userModel;
-        this.adminModel = adminModel;
     }
     getToken(data) {
-        return jwt.sign(data, 'supersecret', { expiresIn: '7d' });
+        return jwt.sign(data, 'supersecret', { expiresIn: '2h' });
     }
     async isPasswordValid(plaintext, hashedtext) {
         let valid = await bcrypt.compare(plaintext, hashedtext);
@@ -41,21 +40,17 @@ let AuthService = class AuthService {
     async loginUser(userdata) {
         try {
             let user = await this.userModel.findOne({ username: userdata.username }).exec();
-            let admin = await this.adminModel
-                .findOne({ username: userdata.username })
-                .lean()
-                .exec();
             if (!user) {
                 throw new common_1.HttpException('Authorization failed : User Does not exists.', common_1.HttpStatus.BAD_REQUEST);
             }
-            if (await !this.isPasswordValid(userdata.password, user.password)) {
+            if (!(await this.isPasswordValid(userdata.password, user.password))) {
                 throw new common_1.HttpException('Authorization failed:Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
             if (!user.token) {
                 user.token = this.getToken({
                     username: userdata.username,
                     designation: user.designation,
-                    admin: Boolean(admin),
+                    scope: user.scope,
                 });
                 let n = await this.userModel.updateOne({ username: userdata.username }, { token: user.token }).exec();
                 if (n == 0)
@@ -94,9 +89,8 @@ let AuthService = class AuthService {
         }
     }
     async deleteUser(userdata) {
-        let user;
         try {
-            user = await this.userModel
+            let user = await this.userModel
                 .findOne({ username: userdata.username })
                 .lean()
                 .exec();
@@ -110,7 +104,7 @@ let AuthService = class AuthService {
                 .findOneAndDelete({ username: userdata.username })
                 .lean()
                 .exec();
-            let { password, _id, __v, owner, token } = user, data = __rest(user, ["password", "_id", "__v", "owner", "token"]);
+            let { password, _id, __v, owner, token, scope } = user, data = __rest(user, ["password", "_id", "__v", "owner", "token", "scope"]);
             return data;
         }
         catch (err) {
@@ -138,8 +132,8 @@ __decorate([
 ], AuthService.prototype, "deleteUser", null);
 AuthService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel('User')), __param(1, mongoose_1.InjectModel('Admin')),
-    __metadata("design:paramtypes", [Object, Object])
+    __param(0, mongoose_1.InjectModel('User')),
+    __metadata("design:paramtypes", [Object])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

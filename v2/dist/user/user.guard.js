@@ -37,15 +37,14 @@ let UserGuard = class UserGuard {
             return false;
     }
     async isValidOwner(request) {
-        let user;
         let data = this.getTokenData(request)[1];
         let pivot = this.getPivotData(request);
-        if (data.admin)
+        if (data.scope == 'admin')
             return true;
         if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {
-            if (request.body.designation)
-                throw new common_1.HttpException("Designation can't be changed", common_1.HttpStatus.BAD_REQUEST);
-            user = await this.userModel
+            if (request.body.designation || request.body.scope)
+                throw new common_1.HttpException('Designation / scope can not be changed', common_1.HttpStatus.BAD_REQUEST);
+            let user = await this.userModel
                 .findOne({ username: pivot, owner: data.username })
                 .lean()
                 .exec();
@@ -55,7 +54,7 @@ let UserGuard = class UserGuard {
         return true;
     }
     async validateRequest(request) {
-        return this.isValidToken(request) && (await this.isValidOwner(request));
+        return (await this.isValidToken(request)) && (await this.isValidOwner(request));
     }
     canActivate(context) {
         const request = context.switchToHttp().getRequest();

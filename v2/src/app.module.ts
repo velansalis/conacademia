@@ -1,25 +1,19 @@
 import { Module } from '@nestjs/common';
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AdminModule } from './modules/admin/admin.module';
+import { HttpErrorFilter } from './filters/http.exception';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserModule } from './user/user.module';
-import { APP_FILTER, APP_GUARD } from '@nestjs/core';
-import { HttpErrorFilter } from './http.exception';
-import { AuthModule } from './auth/auth.module';
-import { AdminModule } from './admin/admin.module';
+import { APP_FILTER } from '@nestjs/core';
+
+import 'dotenv/config';
 @Module({
     imports: [
-        MongooseModule.forRoot(
-            'mongodb+srv://velanmax:nmQwk34BCzmElvIw@mcaproject-5bdfh.mongodb.net/conacademia?retryWrites=true&w=majority',
-            { dbName: 'conacademia', useNewUrlParser: true },
-        ),
         UserModule,
         AuthModule,
         AdminModule,
+        MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
     ],
-    providers: [
-        {
-            provide: APP_FILTER,
-            useClass: HttpErrorFilter,
-        },
-    ],
+    providers: [{ provide: APP_FILTER, useClass: HttpErrorFilter }],
 })
 export class AppModule {}

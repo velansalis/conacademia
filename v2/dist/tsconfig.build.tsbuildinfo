@@ -6298,10 +6298,6 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "/source/src/user/user.service.ts": [
-        "/source/src/user/user.interface.ts",
-        "/source/src/user/user.dto.ts"
-      ],
       "/source/node_modules/@types/range-parser/index.d.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
@@ -6343,17 +6339,6 @@
         "/source/node_modules/@types/express-serve-static-core/index.d.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/src/http.exception.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts"
-      ],
-      "/source/src/user/user.guard.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts"
-      ],
-      "/source/src/user/user.controller.ts": [
-        "/source/src/user/user.service.ts",
-        "/source/node_modules/@types/express/index.d.ts",
-        "/source/src/user/user.dto.ts"
       ],
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
@@ -6538,23 +6523,6 @@
         "/source/node_modules/@nestjs/core/services/index.d.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/src/auth/auth.service.ts": [
-        "/source/src/user/user.dto.ts"
-      ],
-      "/source/src/auth/auth.controller.ts": [
-        "/source/src/auth/auth.service.ts",
-        "/source/src/user/user.dto.ts"
-      ],
-      "/source/src/admin/admin.guard.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts"
-      ],
-      "/source/src/admin/admin.service.ts": [
-        "/source/src/admin/admin.dto.ts"
-      ],
-      "/source/src/admin/admin.controller.ts": [
-        "/source/src/admin/admin.service.ts",
-        "/source/src/admin/admin.dto.ts"
       ],
       "/source/node_modules/@types/accepts/index.d.ts": [
         "/source/node_modules/@types/node/http.d.ts",
@@ -7414,6 +7382,38 @@
       "/source/node_modules/@types/yargs/index.d.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/admin/admin.service.ts": [
+        "/source/src/admin/admin.dto.ts"
+      ],
+      "/source/src/admin/admin.controller.ts": [
+        "/source/src/admin/admin.service.ts",
+        "/source/src/admin/admin.dto.ts"
+      ],
+      "/source/src/auth/auth.controller.ts": [
+        "/source/src/auth/auth.service.ts",
+        "/source/src/user/user.dto.ts"
+      ],
+      "/source/src/auth/auth.service.ts": [
+        "/source/src/user/user.dto.ts"
+      ],
+      "/source/src/user/user.controller.ts": [
+        "/source/src/user/user.service.ts",
+        "/source/node_modules/@types/express/index.d.ts",
+        "/source/src/user/user.dto.ts"
+      ],
+      "/source/src/user/user.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
+      ],
+      "/source/src/user/user.service.ts": [
+        "/source/src/user/user.interface.ts",
+        "/source/src/user/user.dto.ts"
+      ],
+      "/source/src/http.exception.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
+      ],
+      "/source/src/admin/admin.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -7692,10 +7692,6 @@
       "/source/node_modules/@nestjs/mongoose/dist/mongoose.module.d.ts",
       "/source/node_modules/@nestjs/mongoose/dist/index.d.ts",
       "/source/node_modules/@nestjs/mongoose/index.d.ts",
-      "/source/src/user/user.dto.ts",
-      "/source/src/user/user.interface.ts",
-      "/source/src/user/user.service.ts",
-      "/source/src/user/user.schema.ts",
       "/source/node_modules/@types/range-parser/index.d.ts",
       "/source/node_modules/@types/express-serve-static-core/index.d.ts",
       "/source/node_modules/@types/mime/index.d.ts",
@@ -7703,10 +7699,6 @@
       "/source/node_modules/@types/connect/index.d.ts",
       "/source/node_modules/@types/body-parser/index.d.ts",
       "/source/node_modules/@types/express/index.d.ts",
-      "/source/src/http.exception.ts",
-      "/source/src/user/user.guard.ts",
-      "/source/src/user/user.controller.ts",
-      "/source/src/user/user.module.ts",
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "/source/node_modules/@nestjs/core/adapters/index.d.ts",
       "/source/node_modules/@nestjs/core/constants.d.ts",
@@ -7734,17 +7726,6 @@
       "/source/node_modules/@nestjs/core/services/reflector.service.d.ts",
       "/source/node_modules/@nestjs/core/services/index.d.ts",
       "/source/node_modules/@nestjs/core/index.d.ts",
-      "/source/src/auth/auth.service.ts",
-      "/source/src/auth/auth.controller.ts",
-      "/source/src/admin/admin.schema.ts",
-      "/source/src/auth/auth.module.ts",
-      "/source/src/admin/admin.dto.ts",
-      "/source/src/admin/admin.guard.ts",
-      "/source/src/admin/admin.service.ts",
-      "/source/src/admin/admin.controller.ts",
-      "/source/src/admin/admin.module.ts",
-      "/source/src/app.module.ts",
-      "/source/src/main.ts",
       "/source/node_modules/@types/accepts/index.d.ts",
       "/source/node_modules/@babel/types/lib/index.d.ts",
       "/source/node_modules/@types/babel__generator/index.d.ts",
@@ -7868,7 +7849,26 @@
       "/source/node_modules/@types/supertest/index.d.ts",
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
-      "/source/node_modules/@types/yargs/index.d.ts"
+      "/source/node_modules/@types/yargs/index.d.ts",
+      "/source/src/user/user.dto.ts",
+      "/source/src/user/user.interface.ts",
+      "/source/src/user/user.service.ts",
+      "/source/src/user/user.schema.ts",
+      "/source/src/http.exception.ts",
+      "/source/src/user/user.guard.ts",
+      "/source/src/user/user.controller.ts",
+      "/source/src/user/user.module.ts",
+      "/source/src/auth/auth.service.ts",
+      "/source/src/auth/auth.controller.ts",
+      "/source/src/admin/admin.schema.ts",
+      "/source/src/auth/auth.module.ts",
+      "/source/src/admin/admin.dto.ts",
+      "/source/src/admin/admin.guard.ts",
+      "/source/src/admin/admin.service.ts",
+      "/source/src/admin/admin.controller.ts",
+      "/source/src/admin/admin.module.ts",
+      "/source/src/app.module.ts",
+      "/source/src/main.ts"
     ]
   },
   "version": "3.4.3"

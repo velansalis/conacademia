@@ -29,7 +29,7 @@ exports.UserSchema = new mongoose.Schema({
         validate: {
             validator: value => {
                 if (value)
-                    return /^[A-Za-z_0-9]+$/.test(value);
+                    return /^[A-Za-z]+$/.test(value);
                 else
                     value;
             },
@@ -50,7 +50,7 @@ exports.UserSchema = new mongoose.Schema({
         validate: {
             validator: value => {
                 if (value)
-                    return /^[A-Za-z_0-9]+$/.test(value);
+                    return /^[A-Za-z]+$/.test(value);
                 else
                     value;
             },

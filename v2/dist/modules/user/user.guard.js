@@ -21,7 +21,7 @@ let UserGuard = class UserGuard {
     }
     getTokenData(request) {
         let token = request.headers.authorization.split(' ');
-        token[1] = jwt.verify(token[1], 'supersecret');
+        token[1] = jwt.verify(token[1], process.env.TOKEN_SECRET);
         return token;
     }
     getPivotData(request) {

@@ -1,11 +1,12 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
     private getTokenData(request): any {
         let token: any = request.headers.authorization.split(' ');
-        token[1] = jwt.verify(token[1], 'supersecret');
+        token[1] = jwt.verify(token[1], process.env.TOKEN_SECRET);
         return token;
     }
 

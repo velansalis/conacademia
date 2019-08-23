@@ -32,7 +32,7 @@ export const UserSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: value => {
-                if (value) return /^[A-Za-z_0-9]+$/.test(value);
+                if (value) return /^[A-Za-z]+$/.test(value);
                 else value;
             },
             message: 'Name can contain only letters.',
@@ -53,7 +53,7 @@ export const UserSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: value => {
-                if (value) return /^[A-Za-z_0-9]+$/.test(value);
+                if (value) return /^[A-Za-z]+$/.test(value);
                 else value;
             },
             message: 'Name can contain only letters.',

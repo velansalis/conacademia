@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const jwt = require("jsonwebtoken");
+require("dotenv/config");
 let AdminGuard = class AdminGuard {
     getTokenData(request) {
         let token = request.headers.authorization.split(' ');
-        token[1] = jwt.verify(token[1], 'supersecret');
+        token[1] = jwt.verify(token[1], process.env.TOKEN_SECRET);
         return token;
     }
     isValidToken(request) {

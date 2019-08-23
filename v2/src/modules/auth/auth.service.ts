@@ -25,7 +25,7 @@ export class AuthService {
                 throw new HttpException('Authorization failed : User Does not exists.', HttpStatus.BAD_REQUEST);
             }
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
-                throw new HttpException('Authorization failed:Invalid password.', HttpStatus.BAD_REQUEST);
+                throw new HttpException('Authorization failed : Invalid password.', HttpStatus.BAD_REQUEST);
             }
             if (!user.token) {
                 user.token = this.getToken({
@@ -50,6 +50,7 @@ export class AuthService {
     @HttpCode(HttpStatus.CREATED)
     async registerUser(userdata: UserDTO): Promise<object> {
         try {
+            if (userdata.password.length < 8) throw new HttpException('Invalid password', HttpStatus.BAD_REQUEST);
             let user: any = await this.userModel.findOne({ username: userdata.username }).exec();
             if (!user) {
                 userdata.password = await bcrypt.hash(userdata.password, 10);

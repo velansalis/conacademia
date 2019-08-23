@@ -14,9 +14,7 @@ let HttpErrorFilter = class HttpErrorFilter {
         const request = context.getRequest();
         const status = exception.getStatus ? exception.getStatus() : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
         const errorResponse = {
-            message: status !== common_1.HttpStatus.INTERNAL_SERVER_ERROR
-                ? exception.message.error || exception.message || null
-                : 'Internal server error',
+            message: exception.message,
             method: request.method,
             path: request.url,
             timestamp: new Date(),

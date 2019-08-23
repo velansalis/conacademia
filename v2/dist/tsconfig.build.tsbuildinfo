@@ -1298,7 +1298,7 @@
         "signature": "4cb17d629e7bb0df751ae3e10d78a23d59ea51fc7c02044f9a003ba6f36fedf7"
       },
       "/source/src/filters/mongo.exception.ts": {
-        "version": "9999a144f5cc3a3e631c91436cbcf42c633c2067141b4127b015ce8930fddabf",
+        "version": "83c4eae6dd4e5e5784bcfc285bef869bfdddfed5cfc944ba55f3f88517e89a0c",
         "signature": "2ccd0fe7ae22b6f6e87bd34c6451def0b2d58c5c0b9196dd758f9f4fdce9a130"
       },
       "/source/src/app.module.ts": {
@@ -7689,6 +7689,7 @@
       "/source/node_modules/@types/express/index.d.ts",
       "/source/src/filters/http.exception.ts",
       "/source/src/modules/user/user.guard.ts",
+      "/source/src/modules/user/user.controller.ts",
       "/source/src/modules/user/user.module.ts",
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "/source/node_modules/@nestjs/core/adapters/index.d.ts",
@@ -7850,8 +7851,7 @@
       "/source/node_modules/@types/supertest/index.d.ts",
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
-      "/source/node_modules/@types/yargs/index.d.ts",
-      "/source/src/modules/user/user.controller.ts"
+      "/source/node_modules/@types/yargs/index.d.ts"
     ]
   },
   "version": "3.4.3"

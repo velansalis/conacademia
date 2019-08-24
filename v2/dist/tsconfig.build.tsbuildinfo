@@ -1162,20 +1162,20 @@
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/src/modules/auth/auth.service.ts": {
-        "version": "2bc6275c58c10d5652581e37ca0e47c230aec041f98e3fbba179210da0f609e9",
-        "signature": "a6f29a30c6f19c68fb4756cc25a4fadfa5a6e203dab3172b6bbef7a83bfb4139"
+        "version": "0eee81bd3d1025c6a6a62fdfcb1801e172175f8452ce7e8e81d20b813ae88107",
+        "signature": "44440112855c9147d5d12dbdb26b1cbf1459c212aa50ab01d440f8cdffe1e827"
       },
       "/source/src/modules/auth/auth.controller.ts": {
-        "version": "25650f6846a020c389a9bb7a07340572b93eddb91cfd222b21b101e101f02ee4",
-        "signature": "b1d12f5ba5aab62fb8e9d5d989a3563a71e9d17ddf89fcdb6b1f995d7c25bb94"
+        "version": "63bfeb3673bc0a3f4dbb14ff37059da5019c3d9b82d72b6e21adfadae70a510e",
+        "signature": "8b5fadd2137fb82a0da7bdaacf1ab846abc9096c6d3b53c5189b53620c27b395"
       },
       "/source/src/modules/auth/auth.module.ts": {
         "version": "0ff742d629dfac20850afa0ad2c766ed3bea817927f5ed9036d2a2591347629d",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1"
       },
       "/source/src/modules/admin/admin.service.ts": {
-        "version": "153f0f1fa029437bdf9adfafb483d9b78932bc59191b50ecce6eff0ad2904166",
-        "signature": "d260118a1a2a452a5169e9f3bedd23bd32647e6a9cf90b90150c9c73ac77e34a"
+        "version": "e4a7da132256b487c1a7e7517f9184314fe147aad214dd2266399dd1563457d4",
+        "signature": "79daab1aa0ce80a01c059baa82b680cb7e0d4c2590de3695042d410acaf1981e"
       },
       "/source/src/modules/admin/admin.guard.ts": {
         "version": "46c92afac034df610c2c5086014104e9c197ae0f14bcf8bb83757306bf9f03a1",
@@ -1186,8 +1186,8 @@
         "signature": "b719162b8522bd0316c838cb4dd9e7c4ca25e8473e35b34213492d892da27422"
       },
       "/source/src/modules/admin/admin.controller.ts": {
-        "version": "6f7017d3fa4c0466bb44349b55bf6b9c6d8ab0e8b8747d86883082ec6c179781",
-        "signature": "bae9893901cba97e9681c63be9f5d9951b200896d0e41efdc86a3812707b9c6b"
+        "version": "f6ce18412f1bfadddca73e6d25548d2d843542de830ae5f161eb602e2902f7fc",
+        "signature": "7b07a06ac500680fd6a877b2b6bef04315f3cd278e6568a0d82765f673db5588"
       },
       "/source/src/modules/admin/admin.module.ts": {
         "version": "9fa101b6a725850d2a1210ae62e2062e24b56e7ed4707285b91366fb33216c6a",
@@ -6412,16 +6412,12 @@
         "/source/src/modules/auth/auth.service.ts",
         "/source/src/modules/user/user.dto.ts"
       ],
-      "/source/src/modules/admin/admin.service.ts": [
-        "/source/src/modules/user/user.dto.ts"
-      ],
       "/source/src/modules/admin/admin.guard.ts": [
         "/source/src/modules/user/user.interface.ts",
         "/source/node_modules/@nestjs/common/index.d.ts"
       ],
       "/source/src/modules/admin/admin.controller.ts": [
         "/source/src/modules/admin/admin.service.ts",
-        "/source/src/modules/user/user.dto.ts",
         "/source/src/modules/course/course.dto.ts"
       ],
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts": [

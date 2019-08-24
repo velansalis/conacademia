@@ -36,4 +36,13 @@ export class AuthController {
             data: response,
         };
     }
+
+    @Post('grant')
+    async addAdmin(@Body() userdata: Partial<UserDTO>): Promise<object> {
+        let data = await this.authService.grant(userdata);
+        return {
+            message: 'Permissions successfully changed',
+            data,
+        };
+    }
 }

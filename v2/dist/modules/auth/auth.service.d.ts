@@ -9,4 +9,5 @@ export declare class AuthService {
     loginUser(userdata: Partial<UserDTO>): Promise<object>;
     registerUser(userdata: UserDTO): Promise<object>;
     deleteUser(userdata: Partial<UserDTO>): Promise<object>;
+    grant(admindata: Partial<UserDTO>): Promise<object>;
 }

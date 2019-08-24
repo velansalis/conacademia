@@ -41,6 +41,13 @@ let AuthController = class AuthController {
             data: response,
         };
     }
+    async addAdmin(userdata) {
+        let data = await this.authService.grant(userdata);
+        return {
+            message: 'Permissions successfully changed',
+            data,
+        };
+    }
 };
 __decorate([
     common_1.Post('login'),
@@ -66,6 +73,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "delete", null);
+__decorate([
+    common_1.Post('grant'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "addAdmin", null);
 AuthController = __decorate([
     common_1.Controller('auth'),
     common_1.UseFilters(http_exception_1.HttpErrorFilter),

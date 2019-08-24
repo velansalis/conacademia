@@ -122,6 +122,26 @@ let AuthService = class AuthService {
             throw err;
         }
     }
+    async grant(admindata) {
+        try {
+            let user = await this.userModel
+                .findOne({ username: admindata.username })
+                .lean()
+                .exec();
+            if (!user) {
+                throw new common_1.HttpException(`User ${admindata.username} Does not exists.`, common_1.HttpStatus.BAD_REQUEST);
+            }
+            user = await this.userModel
+                .findOneAndUpdate({ username: admindata.username }, { scope: admindata.scope }, { new: true, runValidators: true })
+                .lean()
+                .exec();
+            let { _id, password, owner, __v, token } = user, data = __rest(user, ["_id", "password", "owner", "__v", "token"]);
+            return data;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 };
 __decorate([
     common_1.HttpCode(common_1.HttpStatus.CREATED),
@@ -141,6 +161,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthService.prototype, "deleteUser", null);
+__decorate([
+    common_1.HttpCode(common_1.HttpStatus.OK),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthService.prototype, "grant", null);
 AuthService = __decorate([
     common_1.Injectable(),
     __param(0, mongoose_1.InjectModel('User')),

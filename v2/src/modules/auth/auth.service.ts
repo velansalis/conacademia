@@ -104,4 +104,29 @@ export class AuthService {
             throw err;
         }
     }
+
+    @HttpCode(HttpStatus.OK)
+    async grant(admindata: Partial<UserDTO>): Promise<object> {
+        try {
+            let user: UserDTO = await this.userModel
+                .findOne({ username: admindata.username })
+                .lean()
+                .exec();
+            if (!user) {
+                throw new HttpException(`User ${admindata.username} Does not exists.`, HttpStatus.BAD_REQUEST);
+            }
+            user = await this.userModel
+                .findOneAndUpdate(
+                    { username: admindata.username },
+                    { scope: admindata.scope },
+                    { new: true, runValidators: true },
+                )
+                .lean()
+                .exec();
+            let { _id, password, owner, __v, token, ...data } = user;
+            return data;
+        } catch (err) {
+            throw err;
+        }
+    }
 }

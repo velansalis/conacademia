@@ -2,13 +2,13 @@ export class UserDTO {
     _id: string;
     username: string;
     password: string;
-    age: number;
-    owner: string;
     fname: string;
     lname: string;
-    designation: string;
     dob: string;
+    age: number;
+    designation: string;
     scope: string;
+    owner: string;
     token: string;
     __v: number;
 }

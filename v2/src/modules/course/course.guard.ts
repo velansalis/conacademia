@@ -1,11 +1,11 @@
 import { Injectable, CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserDTO } from './user.dto';
 import * as jwt from 'jsonwebtoken';
+import { CourseDTO } from './course.dto';
 
 @Injectable()
-export class UserGuard implements CanActivate {
-    constructor(@InjectModel('User') private readonly userModel) {}
+export class CourseGuard implements CanActivate {
+    constructor(@InjectModel('Course') private readonly courseModel) {}
 
     private getTokenData(request): any {
         let token: any = request.headers.authorization.split(' ');
@@ -14,7 +14,7 @@ export class UserGuard implements CanActivate {
     }
 
     private getPivotData(request): string {
-        return request.params.username || request.body.username;
+        return request.params.courseId || request.body.courseId;
     }
 
     private async isValidToken(request): Promise<boolean> {
@@ -27,15 +27,15 @@ export class UserGuard implements CanActivate {
     private async isValidOwner(request): Promise<boolean> {
         let data = this.getTokenData(request)[1];
         let pivot = this.getPivotData(request);
-        if (data.scope == 'admin') return true;
-        if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {
+
+        if (['PATCH'].includes(request.method)) {
             if (request.body.designation || request.body.scope)
                 throw new HttpException('Designation / scope can not be changed', HttpStatus.BAD_REQUEST);
-            let user: UserDTO = await this.userModel
-                .findOne({ username: pivot, owner: data.username })
+            let course: CourseDTO = await this.courseModel
+                .findOne({ courseId: pivot, owner: data.username })
                 .lean()
                 .exec();
-            if (!user) return false;
+            if (!course) return false;
         }
         return true;
     }

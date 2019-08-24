@@ -5,6 +5,7 @@ import { AdminModule } from './modules/admin/admin.module';
 import { HttpErrorFilter } from './filters/http.exception';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_FILTER } from '@nestjs/core';
+import { CourseModule } from './modules/course/course.module';
 
 import 'dotenv/config';
 @Module({
@@ -13,6 +14,7 @@ import 'dotenv/config';
         AuthModule,
         AdminModule,
         MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
+        CourseModule,
     ],
     providers: [{ provide: APP_FILTER, useClass: HttpErrorFilter }],
 })

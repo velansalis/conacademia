@@ -1102,8 +1102,8 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f"
       },
       "/source/src/modules/user/user.dto.ts": {
-        "version": "bade55e42bf16e72df497cf2552d8f5fc3779c2163b9cd801212d034cbc9a308",
-        "signature": "5388f77cbfba1c2079b498ca9f2c000b1d17040796009d04fd0b4a176daf3511"
+        "version": "7944545ed26eaf375095f80894e787a6a36945f3e92551a6f5c5444c11dac67f",
+        "signature": "4c3ec2b415deee85b632a470b60b0f6823ec5f2d83a4941e1a958359d9c02b38"
       },
       "/source/src/modules/user/user.interface.ts": {
         "version": "b211db2600395ddcac4f0fbf8142c2d81e38a289c47f7c458620f53f62228c89",
@@ -1150,7 +1150,7 @@
         "signature": "c219c7af45c6925b9eca1c632fa2aa0709da2ae9d375983e90ce9b080f5c4a2f"
       },
       "/source/src/modules/user/user.guard.ts": {
-        "version": "a82921026ad822defa87c365851c3be02c397205d135700e7f77ddb698959543",
+        "version": "8327d7e7e0c5f7cf7f6350b98a45a70873ec435a86da2986ebbf36fb40bb4f39",
         "signature": "fc4656abca87dca087e0c0c93ce022e13aa01cadef0632a34feb2cfeb2d03c41"
       },
       "/source/src/modules/user/user.controller.ts": {
@@ -1162,8 +1162,8 @@
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/src/modules/auth/auth.service.ts": {
-        "version": "d9e3c032c0bbd6b68d13374230ca2f3591acf3e87e90151e92621d4ec675662f",
-        "signature": "ddbc16362d63ab82593d2d5b1e04d9ce738e4dc6bdf24998c4a8ca2d6e8a6511"
+        "version": "2bc6275c58c10d5652581e37ca0e47c230aec041f98e3fbba179210da0f609e9",
+        "signature": "a6f29a30c6f19c68fb4756cc25a4fadfa5a6e203dab3172b6bbef7a83bfb4139"
       },
       "/source/src/modules/auth/auth.controller.ts": {
         "version": "25650f6846a020c389a9bb7a07340572b93eddb91cfd222b21b101e101f02ee4",
@@ -1174,16 +1174,20 @@
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1"
       },
       "/source/src/modules/admin/admin.service.ts": {
-        "version": "f9bd4348b270ec555a21536cc7f0520d3bbaa3175e0c74ea5295e714e7d1c51f",
+        "version": "153f0f1fa029437bdf9adfafb483d9b78932bc59191b50ecce6eff0ad2904166",
         "signature": "d260118a1a2a452a5169e9f3bedd23bd32647e6a9cf90b90150c9c73ac77e34a"
       },
       "/source/src/modules/admin/admin.guard.ts": {
-        "version": "e11ce1b951aa83d787400242c06fd0e9b473eccee3120c5fc87c98bc8de39689",
-        "signature": "48f6adb1f20ab7734f6150e6d7867cd839701d0b8e6c32c29d10e490768e2744"
+        "version": "46c92afac034df610c2c5086014104e9c197ae0f14bcf8bb83757306bf9f03a1",
+        "signature": "423bf03c309ea677f4bf75c9a834ef72894ce9c1c898cb4d6a7e284842915021"
+      },
+      "/source/src/modules/course/course.dto.ts": {
+        "version": "bef6d9b212f188fbf5f4789e26e532ba31462f846bca9e5680acfb877c92fcb4",
+        "signature": "b719162b8522bd0316c838cb4dd9e7c4ca25e8473e35b34213492d892da27422"
       },
       "/source/src/modules/admin/admin.controller.ts": {
-        "version": "052e69a7764820455e3cc5e16b49efae97a91bc8a9f8943fc86039f8f4613422",
-        "signature": "32f9e7c49dc4b91300b14c9d2661187468691d2ef031e87f21ecd0398222fdfb"
+        "version": "6f7017d3fa4c0466bb44349b55bf6b9c6d8ab0e8b8747d86883082ec6c179781",
+        "signature": "bae9893901cba97e9681c63be9f5d9951b200896d0e41efdc86a3812707b9c6b"
       },
       "/source/src/modules/admin/admin.module.ts": {
         "version": "9fa101b6a725850d2a1210ae62e2062e24b56e7ed4707285b91366fb33216c6a",
@@ -1297,13 +1301,37 @@
         "version": "2608cfd623840916e664e68c3dc5eb4347ccae822f808d899bf00e73cbab2bfe",
         "signature": "2608cfd623840916e664e68c3dc5eb4347ccae822f808d899bf00e73cbab2bfe"
       },
+      "/source/src/modules/course/course.service.ts": {
+        "version": "b6d7de833f20efb8106d887bfcf530d675ccb19e1de11c8cf0475f87eaa26f77",
+        "signature": "a4f8855c246b778cdac7ab45ce39f0c0825c736fcf1dd86789aa2443100547f6"
+      },
+      "/source/src/modules/course/course.guard.ts": {
+        "version": "4a07761f96893463dcb8b27abbe00376f5b985cea03a122d8bcf84c1fb31fb87",
+        "signature": "787b8eb161ef7f6f0682fd9143c782679acfc316efb5ddcb12ef70821269c3bd"
+      },
+      "/source/src/modules/course/course.controller.ts": {
+        "version": "e4573a9963c7349b5cde41f60ffccbc5dad483fee98165cd55a750f1d039a65a",
+        "signature": "2926c591225b72adc8ace1b2058613c1606ff3fa44a6fbe58869aa798c45da60"
+      },
+      "/source/src/modules/course/course.schema.ts": {
+        "version": "e33f2f1cca64154bd5f746936c7e965766fa77e37f0402b02b1b951b3de3483b",
+        "signature": "aa54dc42bc74029ee6bc4ab4aefeeb52542ef3f680955a607710e3def0a29c0b"
+      },
+      "/source/src/modules/course/course.module.ts": {
+        "version": "733620b0340e7eb72e162409961c2bda3354c85d31fe333f0833cb14ab35854f",
+        "signature": "89ca1fd1c04411c4031a09748b91cd80315f78b180dc089f29d7d4ae7ec7773a"
+      },
       "/source/src/app.module.ts": {
-        "version": "98d84d446eadd51f47fcf7744696005abc25753228050b9d42193ba2ae316252",
+        "version": "be092bd6ee67f782951bd998cb184522f749e4ec84eed55cd870a45d84f614c0",
         "signature": "f65025cb25b42ac868f57858fc40320824cce5046a380d70e5a1b536d47aece2"
       },
       "/source/src/main.ts": {
         "version": "1b54c6e8ab3b4ff62aed4f072c8683448dc8ef6fce40e4efdcf8a09575a032db",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      "/source/src/modules/course/course.interface.ts": {
+        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "/source/node_modules/@types/accepts/index.d.ts": {
         "version": "6738101ae8e56cd3879ab3f99630ada7d78097fc9fd334df7e766216778ca219",
@@ -3569,6 +3597,12 @@
       ],
       "/source/src/modules/admin/admin.guard.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/src/modules/user/user.interface.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.dto.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3577,6 +3611,7 @@
         "/source/src/modules/admin/admin.service.ts",
         "/source/src/modules/user/user.dto.ts",
         "/source/src/modules/admin/admin.guard.ts",
+        "/source/src/modules/course/course.dto.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3773,6 +3808,37 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/source/src/modules/course/course.service.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/src/modules/course/course.dto.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.controller.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/src/modules/course/course.guard.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.schema.ts": [
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.module.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/src/modules/course/course.service.ts",
+        "/source/src/modules/course/course.controller.ts",
+        "/source/src/modules/course/course.schema.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/source/src/app.module.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/src/modules/user/user.module.ts",
@@ -3781,6 +3847,7 @@
         "/source/src/filters/http.exception.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
         "/source/node_modules/@nestjs/core/index.d.ts",
+        "/source/src/modules/course/course.module.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3788,6 +3855,10 @@
         "/source/node_modules/@nestjs/core/index.d.ts",
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/src/app.module.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.interface.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -6277,6 +6348,10 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/source/src/modules/user/user.service.ts": [
+        "/source/src/modules/user/user.interface.ts",
+        "/source/src/modules/user/user.dto.ts"
+      ],
       "/source/node_modules/@types/range-parser/index.d.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
@@ -6318,6 +6393,36 @@
         "/source/node_modules/@types/express-serve-static-core/index.d.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/filters/http.exception.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
+      ],
+      "/source/src/modules/user/user.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
+      ],
+      "/source/src/modules/user/user.controller.ts": [
+        "/source/src/modules/user/user.service.ts",
+        "/source/node_modules/@types/express/index.d.ts",
+        "/source/src/modules/user/user.dto.ts"
+      ],
+      "/source/src/modules/auth/auth.service.ts": [
+        "/source/src/modules/user/user.dto.ts"
+      ],
+      "/source/src/modules/auth/auth.controller.ts": [
+        "/source/src/modules/auth/auth.service.ts",
+        "/source/src/modules/user/user.dto.ts"
+      ],
+      "/source/src/modules/admin/admin.service.ts": [
+        "/source/src/modules/user/user.dto.ts"
+      ],
+      "/source/src/modules/admin/admin.guard.ts": [
+        "/source/src/modules/user/user.interface.ts",
+        "/source/node_modules/@nestjs/common/index.d.ts"
+      ],
+      "/source/src/modules/admin/admin.controller.ts": [
+        "/source/src/modules/admin/admin.service.ts",
+        "/source/src/modules/user/user.dto.ts",
+        "/source/src/modules/course/course.dto.ts"
       ],
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
@@ -6502,6 +6607,9 @@
         "/source/node_modules/@nestjs/core/services/index.d.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/source/src/modules/course/course.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
       ],
       "/source/node_modules/@types/accepts/index.d.ts": [
         "/source/node_modules/@types/node/http.d.ts",
@@ -7361,38 +7469,6 @@
       "/source/node_modules/@types/yargs/index.d.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/src/modules/admin/admin.controller.ts": [
-        "/source/src/modules/admin/admin.service.ts",
-        "/source/src/modules/user/user.dto.ts"
-      ],
-      "/source/src/modules/admin/admin.service.ts": [
-        "/source/src/modules/user/user.dto.ts"
-      ],
-      "/source/src/modules/auth/auth.controller.ts": [
-        "/source/src/modules/auth/auth.service.ts",
-        "/source/src/modules/user/user.dto.ts"
-      ],
-      "/source/src/modules/auth/auth.service.ts": [
-        "/source/src/modules/user/user.dto.ts"
-      ],
-      "/source/src/modules/user/user.controller.ts": [
-        "/source/src/modules/user/user.service.ts",
-        "/source/node_modules/@types/express/index.d.ts",
-        "/source/src/modules/user/user.dto.ts"
-      ],
-      "/source/src/modules/user/user.guard.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts"
-      ],
-      "/source/src/modules/user/user.service.ts": [
-        "/source/src/modules/user/user.interface.ts",
-        "/source/src/modules/user/user.dto.ts"
-      ],
-      "/source/src/filters/http.exception.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts"
-      ],
-      "/source/src/modules/admin/admin.guard.ts": [
-        "/source/node_modules/@nestjs/common/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -7671,6 +7747,10 @@
       "/source/node_modules/@nestjs/mongoose/dist/mongoose.module.d.ts",
       "/source/node_modules/@nestjs/mongoose/dist/index.d.ts",
       "/source/node_modules/@nestjs/mongoose/index.d.ts",
+      "/source/src/modules/user/user.dto.ts",
+      "/source/src/modules/user/user.interface.ts",
+      "/source/src/modules/user/user.service.ts",
+      "/source/src/modules/user/user.schema.ts",
       "/source/node_modules/@types/range-parser/index.d.ts",
       "/source/node_modules/@types/express-serve-static-core/index.d.ts",
       "/source/node_modules/@types/mime/index.d.ts",
@@ -7678,6 +7758,18 @@
       "/source/node_modules/@types/connect/index.d.ts",
       "/source/node_modules/@types/body-parser/index.d.ts",
       "/source/node_modules/@types/express/index.d.ts",
+      "/source/src/filters/http.exception.ts",
+      "/source/src/modules/user/user.guard.ts",
+      "/source/src/modules/user/user.controller.ts",
+      "/source/src/modules/user/user.module.ts",
+      "/source/src/modules/auth/auth.service.ts",
+      "/source/src/modules/auth/auth.controller.ts",
+      "/source/src/modules/auth/auth.module.ts",
+      "/source/src/modules/admin/admin.service.ts",
+      "/source/src/modules/admin/admin.guard.ts",
+      "/source/src/modules/course/course.dto.ts",
+      "/source/src/modules/admin/admin.controller.ts",
+      "/source/src/modules/admin/admin.module.ts",
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "/source/node_modules/@nestjs/core/adapters/index.d.ts",
       "/source/node_modules/@nestjs/core/constants.d.ts",
@@ -7705,6 +7797,14 @@
       "/source/node_modules/@nestjs/core/services/reflector.service.d.ts",
       "/source/node_modules/@nestjs/core/services/index.d.ts",
       "/source/node_modules/@nestjs/core/index.d.ts",
+      "/source/src/modules/course/course.service.ts",
+      "/source/src/modules/course/course.guard.ts",
+      "/source/src/modules/course/course.controller.ts",
+      "/source/src/modules/course/course.schema.ts",
+      "/source/src/modules/course/course.module.ts",
+      "/source/src/app.module.ts",
+      "/source/src/main.ts",
+      "/source/src/modules/course/course.interface.ts",
       "/source/node_modules/@types/accepts/index.d.ts",
       "/source/node_modules/@babel/types/lib/index.d.ts",
       "/source/node_modules/@types/babel__generator/index.d.ts",
@@ -7828,24 +7928,7 @@
       "/source/node_modules/@types/supertest/index.d.ts",
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
-      "/source/node_modules/@types/yargs/index.d.ts",
-      "/source/src/modules/user/user.dto.ts",
-      "/source/src/modules/user/user.interface.ts",
-      "/source/src/modules/user/user.service.ts",
-      "/source/src/modules/user/user.schema.ts",
-      "/source/src/filters/http.exception.ts",
-      "/source/src/modules/user/user.guard.ts",
-      "/source/src/modules/user/user.controller.ts",
-      "/source/src/modules/user/user.module.ts",
-      "/source/src/modules/auth/auth.service.ts",
-      "/source/src/modules/auth/auth.controller.ts",
-      "/source/src/modules/auth/auth.module.ts",
-      "/source/src/modules/admin/admin.service.ts",
-      "/source/src/modules/admin/admin.guard.ts",
-      "/source/src/modules/admin/admin.controller.ts",
-      "/source/src/modules/admin/admin.module.ts",
-      "/source/src/app.module.ts",
-      "/source/src/main.ts"
+      "/source/node_modules/@types/yargs/index.d.ts"
     ]
   },
   "version": "3.4.3"

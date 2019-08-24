@@ -26,12 +26,17 @@ const mongoose_1 = require("@nestjs/mongoose");
 const user_dto_1 = require("../user/user.dto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv/config");
 let AuthService = class AuthService {
     constructor(userModel) {
         this.userModel = userModel;
     }
     getToken(data) {
-        return jwt.sign(data, 'supersecret', { expiresIn: '2h' });
+        return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '2h' });
+    }
+    isTokenValid(data) {
+        let isValid = jwt.verify(data, process.env.TOKEN_SECRET);
+        return Boolean(isValid);
     }
     async isPasswordValid(plaintext, hashedtext) {
         let valid = await bcrypt.compare(plaintext, hashedtext);
@@ -41,27 +46,25 @@ let AuthService = class AuthService {
         try {
             let user = await this.userModel.findOne({ username: userdata.username }).exec();
             if (!user) {
-                throw new common_1.HttpException('Authorization failed : User Does not exists.', common_1.HttpStatus.BAD_REQUEST);
+                throw new common_1.HttpException('User Does not exists.', common_1.HttpStatus.BAD_REQUEST);
             }
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
-                throw new common_1.HttpException('Authorization failed : Invalid password.', common_1.HttpStatus.BAD_REQUEST);
+                throw new common_1.HttpException('Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
-            if (!user.token) {
+            if (!this.isTokenValid(user.token)) {
                 user.token = this.getToken({
                     username: userdata.username,
                     designation: user.designation,
                     scope: user.scope,
                 });
-                let n = await this.userModel.updateOne({ username: userdata.username }, { token: user.token }).exec();
-                if (n == 0)
-                    throw new common_1.HttpException('Internal server error', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+                await this.userModel.updateOne({ username: userdata.username }, { token: user.token }).exec();
+                throw new common_1.HttpException('Access token has expired. Log in to obtain a new one', common_1.HttpStatus.FORBIDDEN);
             }
-            let data = {
+            return {
                 username: user.username,
                 designation: user.designation,
                 token: user.token,
             };
-            return data;
         }
         catch (err) {
             throw err;
@@ -72,15 +75,21 @@ let AuthService = class AuthService {
             if (userdata.password.length < 8)
                 throw new common_1.HttpException('Invalid password', common_1.HttpStatus.BAD_REQUEST);
             let user = await this.userModel.findOne({ username: userdata.username }).exec();
+            let count = await this.userModel.count();
             if (!user) {
                 userdata.password = await bcrypt.hash(userdata.password, 10);
                 userdata.age = Math.floor((new Date() - new Date(userdata.dob).getTime()) / 3.15576e10);
                 userdata.owner = userdata.username;
+                userdata.scope = count == 0 ? 'admin' : userdata.designation == 'student' ? 'user' : 'course';
+                userdata.token = await this.getToken({
+                    username: userdata.username,
+                    designation: userdata.designation,
+                    scope: userdata.scope,
+                });
                 user = new this.userModel(userdata);
                 await user.save();
-                delete userdata.password;
-                delete userdata.owner;
-                return userdata;
+                let { password, owner, token } = userdata, response = __rest(userdata, ["password", "owner", "token"]);
+                return response;
             }
             else {
                 throw new common_1.HttpException('Username already exists', common_1.HttpStatus.BAD_REQUEST);
@@ -97,10 +106,10 @@ let AuthService = class AuthService {
                 .lean()
                 .exec();
             if (!user) {
-                throw new common_1.HttpException('Authorization failed : User Does not exists.', common_1.HttpStatus.BAD_REQUEST);
+                throw new common_1.HttpException('User Does not exists.', common_1.HttpStatus.BAD_REQUEST);
             }
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
-                throw new common_1.HttpException('Authorization failed : Invalid password.', common_1.HttpStatus.BAD_REQUEST);
+                throw new common_1.HttpException('Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
             user = await this.userModel
                 .findOneAndDelete({ username: userdata.username })

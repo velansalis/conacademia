@@ -13,6 +13,7 @@ const admin_module_1 = require("./modules/admin/admin.module");
 const http_exception_1 = require("./filters/http.exception");
 const mongoose_1 = require("@nestjs/mongoose");
 const core_1 = require("@nestjs/core");
+const course_module_1 = require("./modules/course/course.module");
 require("dotenv/config");
 let AppModule = class AppModule {
 };
@@ -23,6 +24,7 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             admin_module_1.AdminModule,
             mongoose_1.MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
+            course_module_1.CourseModule,
         ],
         providers: [{ provide: core_1.APP_FILTER, useClass: http_exception_1.HttpErrorFilter }],
     })

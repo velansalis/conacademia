@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const jwt = require("jsonwebtoken");
-let UserGuard = class UserGuard {
-    constructor(userModel) {
-        this.userModel = userModel;
+let CourseGuard = class CourseGuard {
+    constructor(courseModel) {
+        this.courseModel = courseModel;
     }
     getTokenData(request) {
         let token = request.headers.authorization.split(' ');
@@ -25,7 +25,7 @@ let UserGuard = class UserGuard {
         return token;
     }
     getPivotData(request) {
-        return request.params.username || request.body.username;
+        return request.params.courseId || request.body.courseId;
     }
     async isValidToken(request) {
         if (!request.headers.authorization)
@@ -39,16 +39,14 @@ let UserGuard = class UserGuard {
     async isValidOwner(request) {
         let data = this.getTokenData(request)[1];
         let pivot = this.getPivotData(request);
-        if (data.scope == 'admin')
-            return true;
-        if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {
+        if (['PATCH'].includes(request.method)) {
             if (request.body.designation || request.body.scope)
                 throw new common_1.HttpException('Designation / scope can not be changed', common_1.HttpStatus.BAD_REQUEST);
-            let user = await this.userModel
-                .findOne({ username: pivot, owner: data.username })
+            let course = await this.courseModel
+                .findOne({ courseId: pivot, owner: data.username })
                 .lean()
                 .exec();
-            if (!user)
+            if (!course)
                 return false;
         }
         return true;
@@ -61,10 +59,10 @@ let UserGuard = class UserGuard {
         return this.validateRequest(request);
     }
 };
-UserGuard = __decorate([
+CourseGuard = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel('User')),
+    __param(0, mongoose_1.InjectModel('Course')),
     __metadata("design:paramtypes", [Object])
-], UserGuard);
-exports.UserGuard = UserGuard;
-//# sourceMappingURL=user.guard.js.map
+], CourseGuard);
+exports.CourseGuard = CourseGuard;
+//# sourceMappingURL=course.guard.js.map

@@ -37,15 +37,15 @@ let UserGuard = class UserGuard {
             return false;
     }
     async isValidOwner(request) {
-        let data = this.getTokenData(request)[1];
-        let pivot = this.getPivotData(request);
-        if (data.scope == 'admin')
+        let token = this.getTokenData(request)[1];
+        if (token.scope == 'admin')
             return true;
+        let pivot = this.getPivotData(request);
         if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method)) {
             if (request.body.designation || request.body.scope)
                 throw new common_1.HttpException('Designation / scope can not be changed', common_1.HttpStatus.BAD_REQUEST);
             let user = await this.userModel
-                .findOne({ username: pivot, owner: data.username })
+                .findOne({ username: pivot, owner: token.username })
                 .lean()
                 .exec();
             if (!user)

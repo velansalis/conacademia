@@ -1,7 +1,10 @@
 import { ExceptionFilter, Catch, ArgumentsHost, Logger, HttpException, HttpStatus } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Catch()
 export class HttpErrorFilter implements ExceptionFilter {
+    // constructor(@InjectModel('User') private readonly userModel) {}
+
     catch(exception: HttpException, host: ArgumentsHost) {
         const context = host.switchToHttp();
         const response = context.getResponse();
@@ -14,6 +17,11 @@ export class HttpErrorFilter implements ExceptionFilter {
             path: request.url,
             timestamp: new Date(),
         };
+
+        if (exception.name === 'TokenExpiredError') {
+            console.log('error');
+            let obj = request.body.username || request.query.username;
+        }
 
         Logger.error(`${request.method} ${request.url}`);
         response.status(status).json(errorResponse);

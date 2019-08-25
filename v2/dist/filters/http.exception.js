@@ -19,6 +19,10 @@ let HttpErrorFilter = class HttpErrorFilter {
             path: request.url,
             timestamp: new Date(),
         };
+        if (exception.name === 'TokenExpiredError') {
+            console.log('error');
+            let obj = request.body.username || request.query.username;
+        }
         common_1.Logger.error(`${request.method} ${request.url}`);
         response.status(status).json(errorResponse);
     }

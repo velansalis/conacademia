@@ -14,12 +14,16 @@ export class AuthService {
         return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '2h' });
     }
 
-    private isTokenValid(data: object): boolean {
-        let isValid = jwt.verify(data, process.env.TOKEN_SECRET);
-        return Boolean(isValid);
+    private async isTokenValid(data: object): Promise<boolean> {
+        try {
+            await jwt.verify(data, process.env.TOKEN_SECRET);
+            return true;
+        } catch (err) {
+            return false;
+        }
     }
 
-    private async isPasswordValid(plaintext, hashedtext): Promise<Boolean> {
+    private async isPasswordValid(plaintext, hashedtext): Promise<boolean> {
         let valid = await bcrypt.compare(plaintext, hashedtext);
         return Boolean(valid);
     }
@@ -28,13 +32,14 @@ export class AuthService {
     async loginUser(userdata: Partial<UserDTO>): Promise<object> {
         try {
             let user = await this.userModel.findOne({ username: userdata.username }).exec();
+
             if (!user) {
                 throw new HttpException('User Does not exists.', HttpStatus.BAD_REQUEST);
             }
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
                 throw new HttpException('Invalid password.', HttpStatus.BAD_REQUEST);
             }
-            if (!this.isTokenValid(user.token)) {
+            if (!(await this.isTokenValid(user.token))) {
                 user.token = this.getToken({
                     username: userdata.username,
                     designation: user.designation,

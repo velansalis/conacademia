@@ -1146,11 +1146,11 @@
         "signature": "434d7d3188d85bd46c64dcc8268422ffdfdd19fdbc98ec01446d650414fcaa0b"
       },
       "/source/src/filters/http.exception.ts": {
-        "version": "2e72b2be83cb0aeb873b4475b43906d46897f6bc81824aa19e55504a18da00a6",
+        "version": "69b52649bc1c1a2232a9d43b6088a6087191589746b63ced09aa0cdd0245f040",
         "signature": "c219c7af45c6925b9eca1c632fa2aa0709da2ae9d375983e90ce9b080f5c4a2f"
       },
       "/source/src/modules/user/user.guard.ts": {
-        "version": "8327d7e7e0c5f7cf7f6350b98a45a70873ec435a86da2986ebbf36fb40bb4f39",
+        "version": "954ef80e32ac13224e7c5533c6a9cebae0606afb8c0e175b319fb02ed6fce31c",
         "signature": "fc4656abca87dca087e0c0c93ce022e13aa01cadef0632a34feb2cfeb2d03c41"
       },
       "/source/src/modules/user/user.controller.ts": {
@@ -1162,11 +1162,11 @@
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/src/modules/auth/auth.service.ts": {
-        "version": "0eee81bd3d1025c6a6a62fdfcb1801e172175f8452ce7e8e81d20b813ae88107",
+        "version": "5dce58d623adda79b4f28a93a60f4ad9b186f893be5604984eec598794f35c8a",
         "signature": "44440112855c9147d5d12dbdb26b1cbf1459c212aa50ab01d440f8cdffe1e827"
       },
       "/source/src/modules/auth/auth.controller.ts": {
-        "version": "63bfeb3673bc0a3f4dbb14ff37059da5019c3d9b82d72b6e21adfadae70a510e",
+        "version": "e480d2a6f2b61498d1546ee7ff76101934facf63ed32819b43f3d38afddf7d60",
         "signature": "8b5fadd2137fb82a0da7bdaacf1ab846abc9096c6d3b53c5189b53620c27b395"
       },
       "/source/src/modules/auth/auth.module.ts": {
@@ -3535,6 +3535,7 @@
       ],
       "/source/src/filters/http.exception.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@nestjs/mongoose/index.d.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -7758,7 +7759,6 @@
       "/source/src/modules/user/user.guard.ts",
       "/source/src/modules/user/user.controller.ts",
       "/source/src/modules/user/user.module.ts",
-      "/source/src/modules/auth/auth.service.ts",
       "/source/src/modules/auth/auth.controller.ts",
       "/source/src/modules/auth/auth.module.ts",
       "/source/src/modules/admin/admin.service.ts",
@@ -7924,7 +7924,8 @@
       "/source/node_modules/@types/supertest/index.d.ts",
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
-      "/source/node_modules/@types/yargs/index.d.ts"
+      "/source/node_modules/@types/yargs/index.d.ts",
+      "/source/src/modules/auth/auth.service.ts"
     ]
   },
   "version": "3.4.3"

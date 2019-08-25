@@ -34,9 +34,14 @@ let AuthService = class AuthService {
     getToken(data) {
         return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '2h' });
     }
-    isTokenValid(data) {
-        let isValid = jwt.verify(data, process.env.TOKEN_SECRET);
-        return Boolean(isValid);
+    async isTokenValid(data) {
+        try {
+            await jwt.verify(data, process.env.TOKEN_SECRET);
+            return true;
+        }
+        catch (err) {
+            return false;
+        }
     }
     async isPasswordValid(plaintext, hashedtext) {
         let valid = await bcrypt.compare(plaintext, hashedtext);
@@ -51,7 +56,7 @@ let AuthService = class AuthService {
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
                 throw new common_1.HttpException('Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
-            if (!this.isTokenValid(user.token)) {
+            if (!(await this.isTokenValid(user.token))) {
                 user.token = this.getToken({
                     username: userdata.username,
                     designation: user.designation,

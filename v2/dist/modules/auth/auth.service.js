@@ -36,8 +36,8 @@ let AuthService = class AuthService {
     }
     async isTokenValid(data) {
         try {
-            await jwt.verify(data, process.env.TOKEN_SECRET);
-            return true;
+            let token = jwt.verify(data, process.env.TOKEN_SECRET);
+            return token;
         }
         catch (err) {
             return false;
@@ -56,7 +56,9 @@ let AuthService = class AuthService {
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
                 throw new common_1.HttpException('Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
-            if (!(await this.isTokenValid(user.token))) {
+            let token = await this.isTokenValid(user.token);
+            console.log(token, user.scope);
+            if (!token || token.scope != user.scope) {
                 user.token = this.getToken({
                     username: userdata.username,
                     designation: user.designation,

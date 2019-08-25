@@ -1162,7 +1162,7 @@
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/src/modules/auth/auth.service.ts": {
-        "version": "5dce58d623adda79b4f28a93a60f4ad9b186f893be5604984eec598794f35c8a",
+        "version": "107cdeb2acdf71205f1a4ab77e2472d84c4beaaeaee46ad71cf982babc1ebd50",
         "signature": "44440112855c9147d5d12dbdb26b1cbf1459c212aa50ab01d440f8cdffe1e827"
       },
       "/source/src/modules/auth/auth.controller.ts": {

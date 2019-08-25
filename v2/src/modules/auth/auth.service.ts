@@ -14,10 +14,10 @@ export class AuthService {
         return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '2h' });
     }
 
-    private async isTokenValid(data: object): Promise<boolean> {
+    private async isTokenValid(data: object): Promise<any> {
         try {
-            await jwt.verify(data, process.env.TOKEN_SECRET);
-            return true;
+            let token = jwt.verify(data, process.env.TOKEN_SECRET);
+            return token;
         } catch (err) {
             return false;
         }
@@ -39,7 +39,9 @@ export class AuthService {
             if (!(await this.isPasswordValid(userdata.password, user.password))) {
                 throw new HttpException('Invalid password.', HttpStatus.BAD_REQUEST);
             }
-            if (!(await this.isTokenValid(user.token))) {
+            let token = await this.isTokenValid(user.token);
+            console.log(token, user.scope);
+            if (!token || token.scope != user.scope) {
                 user.token = this.getToken({
                     username: userdata.username,
                     designation: user.designation,

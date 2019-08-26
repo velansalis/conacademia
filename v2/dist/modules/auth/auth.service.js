@@ -57,7 +57,6 @@ let AuthService = class AuthService {
                 throw new common_1.HttpException('Invalid password.', common_1.HttpStatus.BAD_REQUEST);
             }
             let token = await this.isTokenValid(user.token);
-            console.log(token, user.scope);
             if (!token || token.scope != user.scope) {
                 user.token = this.getToken({
                     username: userdata.username,

@@ -11,11 +11,11 @@ export class AdminController {
 
     @Post('course')
     async addCourse(@Body() coursedata: CourseDTO) {
-        return { message: 'Adding course' + coursedata };
+        return await this.adminService.addCourse(coursedata);
     }
 
     @Delete('course/:courseid')
-    async deleteCourse(@Param() courseid) {
-        return { message: 'Deleting course ' + courseid };
+    async deleteCourse(@Body() coursedata, @Param() courseid) {
+        return await this.adminService.deleteCourse(coursedata, courseid);
     }
 }

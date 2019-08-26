@@ -21,10 +21,10 @@ let AdminController = class AdminController {
         this.adminService = adminService;
     }
     async addCourse(coursedata) {
-        return { message: 'Adding course' + coursedata };
+        return await this.adminService.addCourse(coursedata);
     }
-    async deleteCourse(courseid) {
-        return { message: 'Deleting course ' + courseid };
+    async deleteCourse(coursedata, courseid) {
+        return await this.adminService.deleteCourse(coursedata, courseid);
     }
 };
 __decorate([
@@ -36,9 +36,9 @@ __decorate([
 ], AdminController.prototype, "addCourse", null);
 __decorate([
     common_1.Delete('course/:courseid'),
-    __param(0, common_1.Param()),
+    __param(0, common_1.Body()), __param(1, common_1.Param()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "deleteCourse", null);
 AdminController = __decorate([

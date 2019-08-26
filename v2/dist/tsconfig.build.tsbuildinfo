@@ -1146,7 +1146,7 @@
         "signature": "434d7d3188d85bd46c64dcc8268422ffdfdd19fdbc98ec01446d650414fcaa0b"
       },
       "/source/src/filters/http.exception.ts": {
-        "version": "69b52649bc1c1a2232a9d43b6088a6087191589746b63ced09aa0cdd0245f040",
+        "version": "edcba857b6603a4f566c46b56fb5a28a0fd01822895774bc919699c95a718e28",
         "signature": "c219c7af45c6925b9eca1c632fa2aa0709da2ae9d375983e90ce9b080f5c4a2f"
       },
       "/source/src/modules/user/user.guard.ts": {
@@ -1162,7 +1162,7 @@
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/src/modules/auth/auth.service.ts": {
-        "version": "107cdeb2acdf71205f1a4ab77e2472d84c4beaaeaee46ad71cf982babc1ebd50",
+        "version": "84e749ea9c84931cde51977401a1887e4af0cabbd60ee3305ca74ab1eb55c2a7",
         "signature": "44440112855c9147d5d12dbdb26b1cbf1459c212aa50ab01d440f8cdffe1e827"
       },
       "/source/src/modules/auth/auth.controller.ts": {
@@ -1173,24 +1173,28 @@
         "version": "0ff742d629dfac20850afa0ad2c766ed3bea817927f5ed9036d2a2591347629d",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1"
       },
+      "/source/src/modules/course/course.dto.ts": {
+        "version": "bef6d9b212f188fbf5f4789e26e532ba31462f846bca9e5680acfb877c92fcb4",
+        "signature": "b719162b8522bd0316c838cb4dd9e7c4ca25e8473e35b34213492d892da27422"
+      },
       "/source/src/modules/admin/admin.service.ts": {
-        "version": "e4a7da132256b487c1a7e7517f9184314fe147aad214dd2266399dd1563457d4",
-        "signature": "79daab1aa0ce80a01c059baa82b680cb7e0d4c2590de3695042d410acaf1981e"
+        "version": "87259fbad0762f899ec4476f865be3c4f71ac4cfc90c430f971eefb354f00d17",
+        "signature": "dd64df4dfc89b54fc9aa0e68bec3cd48d67acb4e0b1cfc1b0d35a5d08aad3fe0"
       },
       "/source/src/modules/admin/admin.guard.ts": {
         "version": "46c92afac034df610c2c5086014104e9c197ae0f14bcf8bb83757306bf9f03a1",
         "signature": "423bf03c309ea677f4bf75c9a834ef72894ce9c1c898cb4d6a7e284842915021"
       },
-      "/source/src/modules/course/course.dto.ts": {
-        "version": "bef6d9b212f188fbf5f4789e26e532ba31462f846bca9e5680acfb877c92fcb4",
-        "signature": "b719162b8522bd0316c838cb4dd9e7c4ca25e8473e35b34213492d892da27422"
-      },
       "/source/src/modules/admin/admin.controller.ts": {
-        "version": "f6ce18412f1bfadddca73e6d25548d2d843542de830ae5f161eb602e2902f7fc",
-        "signature": "7b07a06ac500680fd6a877b2b6bef04315f3cd278e6568a0d82765f673db5588"
+        "version": "688800064c8592465db05ee57b1598116c859d4037d1070ea7b75a7677639e33",
+        "signature": "09785605f50d0711ead445c141e671bbf16dfb26bf3c9b9ce789a42276bc5311"
+      },
+      "/source/src/modules/course/course.schema.ts": {
+        "version": "b3f8e586cfdc7f8ecc4665b6fd41b85a7c9c2f88f2ce1ad6e583354c75227e48",
+        "signature": "aa54dc42bc74029ee6bc4ab4aefeeb52542ef3f680955a607710e3def0a29c0b"
       },
       "/source/src/modules/admin/admin.module.ts": {
-        "version": "9fa101b6a725850d2a1210ae62e2062e24b56e7ed4707285b91366fb33216c6a",
+        "version": "86c8f566491d18d1660e9075a25c365050678f5104b479fd9a9e194fb6f7e80c",
         "signature": "4cb17d629e7bb0df751ae3e10d78a23d59ea51fc7c02044f9a003ba6f36fedf7"
       },
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
@@ -1312,10 +1316,6 @@
       "/source/src/modules/course/course.controller.ts": {
         "version": "e4573a9963c7349b5cde41f60ffccbc5dad483fee98165cd55a750f1d039a65a",
         "signature": "2926c591225b72adc8ace1b2058613c1606ff3fa44a6fbe58869aa798c45da60"
-      },
-      "/source/src/modules/course/course.schema.ts": {
-        "version": "e33f2f1cca64154bd5f746936c7e965766fa77e37f0402b02b1b951b3de3483b",
-        "signature": "aa54dc42bc74029ee6bc4ab4aefeeb52542ef3f680955a607710e3def0a29c0b"
       },
       "/source/src/modules/course/course.module.ts": {
         "version": "733620b0340e7eb72e162409961c2bda3354c85d31fe333f0833cb14ab35854f",
@@ -3589,9 +3589,14 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/source/src/modules/course/course.dto.ts": [
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/source/src/modules/admin/admin.service.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
+        "/source/src/modules/course/course.dto.ts",
         "/source/src/modules/user/user.dto.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
@@ -3600,10 +3605,6 @@
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
         "/source/src/modules/user/user.interface.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/src/modules/course/course.dto.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3616,12 +3617,17 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/source/src/modules/course/course.schema.ts": [
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/source/src/modules/admin/admin.module.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/src/modules/admin/admin.service.ts",
         "/source/src/modules/admin/admin.controller.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
         "/source/src/modules/user/user.schema.ts",
+        "/source/src/modules/course/course.schema.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3824,10 +3830,6 @@
       "/source/src/modules/course/course.controller.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/src/modules/course/course.guard.ts",
-        "/source/node_modules/@types/node/util.d.ts",
-        "/source/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "/source/src/modules/course/course.schema.ts": [
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -6413,6 +6415,9 @@
         "/source/src/modules/auth/auth.service.ts",
         "/source/src/modules/user/user.dto.ts"
       ],
+      "/source/src/modules/admin/admin.service.ts": [
+        "/source/src/modules/course/course.dto.ts"
+      ],
       "/source/src/modules/admin/admin.guard.ts": [
         "/source/src/modules/user/user.interface.ts",
         "/source/node_modules/@nestjs/common/index.d.ts"
@@ -7759,12 +7764,13 @@
       "/source/src/modules/user/user.guard.ts",
       "/source/src/modules/user/user.controller.ts",
       "/source/src/modules/user/user.module.ts",
+      "/source/src/modules/auth/auth.service.ts",
       "/source/src/modules/auth/auth.controller.ts",
       "/source/src/modules/auth/auth.module.ts",
-      "/source/src/modules/admin/admin.service.ts",
-      "/source/src/modules/admin/admin.guard.ts",
       "/source/src/modules/course/course.dto.ts",
+      "/source/src/modules/admin/admin.guard.ts",
       "/source/src/modules/admin/admin.controller.ts",
+      "/source/src/modules/course/course.schema.ts",
       "/source/src/modules/admin/admin.module.ts",
       "/source/node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "/source/node_modules/@nestjs/core/adapters/index.d.ts",
@@ -7796,7 +7802,6 @@
       "/source/src/modules/course/course.service.ts",
       "/source/src/modules/course/course.guard.ts",
       "/source/src/modules/course/course.controller.ts",
-      "/source/src/modules/course/course.schema.ts",
       "/source/src/modules/course/course.module.ts",
       "/source/src/app.module.ts",
       "/source/src/main.ts",
@@ -7925,7 +7930,7 @@
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
       "/source/node_modules/@types/yargs/index.d.ts",
-      "/source/src/modules/auth/auth.service.ts"
+      "/source/src/modules/admin/admin.service.ts"
     ]
   },
   "version": "3.4.3"

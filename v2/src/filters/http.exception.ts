@@ -19,7 +19,6 @@ export class HttpErrorFilter implements ExceptionFilter {
         };
 
         if (exception.name === 'TokenExpiredError') {
-            console.log('error');
             let obj = request.body.username || request.query.username;
         }
 

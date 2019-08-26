@@ -3,10 +3,6 @@ import { CourseDTO } from '../course/course.dto';
 export declare class AdminController {
     private readonly adminService;
     constructor(adminService: AdminService);
-    addCourse(coursedata: CourseDTO): Promise<{
-        message: string;
-    }>;
-    deleteCourse(courseid: any): Promise<{
-        message: string;
-    }>;
+    addCourse(coursedata: CourseDTO): Promise<any>;
+    deleteCourse(coursedata: any, courseid: any): Promise<any>;
 }

@@ -18,7 +18,7 @@ export const CourseSchema = new mongoose.Schema({
     course_title: { type: String, required: true },
     credits: { type: Number, required: true },
     year: { type: Number, required: true },
-    semester: { type: Number, required: true },
-    faculty_incharge: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    semester: { type: String, required: true, enum: ['odd', 'even'] },
+    faculty_incharge: { type: String, required: true },
     marks: [MarksSchema],
 });

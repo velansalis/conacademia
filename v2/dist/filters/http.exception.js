@@ -14,14 +14,11 @@ let HttpErrorFilter = class HttpErrorFilter {
         const request = context.getRequest();
         const status = exception.getStatus ? exception.getStatus() : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
         const errorResponse = {
-            message: exception.message,
+            message: exception.name == 'TokenExpiredError' ? 'Access token has expired' : exception.message,
             method: request.method,
             path: request.url,
             timestamp: new Date(),
         };
-        if (exception.name === 'TokenExpiredError') {
-            let obj = request.body.username || request.query.username;
-        }
         common_1.Logger.error(`${request.method} ${request.url}`);
         response.status(status).json(errorResponse);
     }

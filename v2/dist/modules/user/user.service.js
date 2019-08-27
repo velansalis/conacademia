@@ -63,19 +63,27 @@ let UserService = class UserService {
             throw err;
         }
     }
+    async grantPermission(admindata) {
+        try {
+            let user = await this.userModel
+                .findOne({ username: admindata.username })
+                .lean()
+                .exec();
+            if (!user) {
+                throw new common_1.HttpException(`User ${admindata.username} Does not exists.`, common_1.HttpStatus.BAD_REQUEST);
+            }
+            user = await this.userModel
+                .findOneAndUpdate({ username: admindata.username }, { scope: admindata.scope }, { new: true, runValidators: true })
+                .lean()
+                .exec();
+            let { _id, password, owner, __v, token } = user, data = __rest(user, ["_id", "password", "owner", "__v", "token"]);
+            return data;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 };
-__decorate([
-    common_1.HttpCode(common_1.HttpStatus.OK),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], UserService.prototype, "getUser", null);
-__decorate([
-    common_1.HttpCode(common_1.HttpStatus.OK),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], UserService.prototype, "editUser", null);
 UserService = __decorate([
     common_1.Injectable(),
     __param(0, mongoose_1.InjectModel('User')),

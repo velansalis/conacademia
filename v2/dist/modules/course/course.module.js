@@ -11,6 +11,7 @@ const course_service_1 = require("./course.service");
 const course_controller_1 = require("./course.controller");
 const course_schema_1 = require("./course.schema");
 const mongoose_1 = require("@nestjs/mongoose");
+const user_schema_1 = require("../user/user.schema");
 let CourseModule = class CourseModule {
 };
 CourseModule = __decorate([
@@ -20,6 +21,10 @@ CourseModule = __decorate([
                 {
                     name: 'Course',
                     schema: course_schema_1.CourseSchema,
+                },
+                {
+                    name: 'User',
+                    schema: user_schema_1.UserSchema,
                 },
             ]),
         ],

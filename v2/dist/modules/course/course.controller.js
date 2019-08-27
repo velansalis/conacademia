@@ -8,32 +8,73 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const course_guard_1 = require("./course.guard");
+const course_guard_1 = require("../../guards/course.guard");
+const admin_guard_1 = require("../../guards/admin.guard");
+const course_service_1 = require("./course.service");
+const course_dto_1 = require("./course.dto");
 let CourseController = class CourseController {
+    constructor(courseService) {
+        this.courseService = courseService;
+    }
     async getCourse() {
         return { message: 'Getting course' };
     }
     async editCourse() {
         return { message: 'Editing course' };
     }
+    async addCourse(coursedata) {
+        let response = await this.courseService.addCourse(coursedata);
+        return {
+            message: 'Course successfully added',
+            data: response,
+        };
+    }
+    async deleteCourse(coursedata, courseid) {
+        let response = await this.courseService.deleteCourse(coursedata, courseid);
+        return {
+            message: 'Course successfully deleted',
+            data: response,
+        };
+    }
 };
 __decorate([
+    common_1.UseGuards(course_guard_1.CourseGuard),
     common_1.Get(':courseid'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "getCourse", null);
 __decorate([
+    common_1.UseGuards(course_guard_1.CourseGuard),
     common_1.Patch(':courseid'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "editCourse", null);
+__decorate([
+    common_1.UseGuards(admin_guard_1.AdminGuard),
+    common_1.Post('course'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [course_dto_1.CourseDTO]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "addCourse", null);
+__decorate([
+    common_1.UseGuards(admin_guard_1.AdminGuard),
+    common_1.Delete('course/:courseid'),
+    __param(0, common_1.Body()), __param(1, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "deleteCourse", null);
 CourseController = __decorate([
     common_1.Controller('course'),
-    common_1.UseGuards(course_guard_1.CourseGuard)
+    __metadata("design:paramtypes", [course_service_1.CourseService])
 ], CourseController);
 exports.CourseController = CourseController;
 //# sourceMappingURL=course.controller.js.map

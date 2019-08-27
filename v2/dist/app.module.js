@@ -9,21 +9,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const user_module_1 = require("./modules/user/user.module");
 const auth_module_1 = require("./modules/auth/auth.module");
-const admin_module_1 = require("./modules/admin/admin.module");
-const http_exception_1 = require("./filters/http.exception");
-const mongoose_1 = require("@nestjs/mongoose");
-const core_1 = require("@nestjs/core");
 const course_module_1 = require("./modules/course/course.module");
+const mongoose_1 = require("@nestjs/mongoose");
+const http_exception_1 = require("./filters/http.exception");
+const core_1 = require("@nestjs/core");
 require("dotenv/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
+            mongoose_1.MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
-            admin_module_1.AdminModule,
-            mongoose_1.MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
             course_module_1.CourseModule,
         ],
         providers: [{ provide: core_1.APP_FILTER, useClass: http_exception_1.HttpErrorFilter }],

@@ -6,4 +6,5 @@ export declare class UserController {
     constructor(userService: UserService);
     getUser(username: string): Promise<Object>;
     editUser(request: Request, userdata: Partial<UserDTO>): Promise<Object>;
+    addAdmin(userdata: Partial<UserDTO>): Promise<object>;
 }

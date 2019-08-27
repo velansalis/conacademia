@@ -6,4 +6,5 @@ export declare class UserService {
     constructor(userModel: Model<User>);
     getUser(username: string): Promise<User>;
     editUser(username: string, userdata: Partial<UserDTO>): Promise<User>;
+    grantPermission(admindata: Partial<UserDTO>): Promise<object>;
 }

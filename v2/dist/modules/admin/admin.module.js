@@ -9,25 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const admin_service_1 = require("./admin.service");
 const admin_controller_1 = require("./admin.controller");
-const mongoose_1 = require("@nestjs/mongoose");
-const user_schema_1 = require("../user/user.schema");
-const course_schema_1 = require("../course/course.schema");
 let AdminModule = class AdminModule {
 };
 AdminModule = __decorate([
     common_1.Module({
-        imports: [
-            mongoose_1.MongooseModule.forFeature([
-                {
-                    name: 'User',
-                    schema: user_schema_1.UserSchema,
-                },
-                {
-                    name: 'Course',
-                    schema: course_schema_1.CourseSchema,
-                },
-            ]),
-        ],
         providers: [admin_service_1.AdminService],
         controllers: [admin_controller_1.AdminController],
     })

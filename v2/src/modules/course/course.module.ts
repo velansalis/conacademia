@@ -3,6 +3,7 @@ import { CourseService } from './course.service';
 import { CourseController } from './course.controller';
 import { CourseSchema } from './course.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserSchema } from '../user/user.schema';
 
 @Module({
     imports: [
@@ -10,6 +11,10 @@ import { MongooseModule } from '@nestjs/mongoose';
             {
                 name: 'Course',
                 schema: CourseSchema,
+            },
+            {
+                name: 'User',
+                schema: UserSchema,
             },
         ]),
     ],

@@ -7768,6 +7768,7 @@
       "/source/src/modules/auth/auth.controller.ts",
       "/source/src/modules/auth/auth.module.ts",
       "/source/src/modules/course/course.dto.ts",
+      "/source/src/modules/admin/admin.service.ts",
       "/source/src/modules/admin/admin.guard.ts",
       "/source/src/modules/admin/admin.controller.ts",
       "/source/src/modules/course/course.schema.ts",
@@ -7929,8 +7930,7 @@
       "/source/node_modules/@types/supertest/index.d.ts",
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
-      "/source/node_modules/@types/yargs/index.d.ts",
-      "/source/src/modules/admin/admin.service.ts"
+      "/source/node_modules/@types/yargs/index.d.ts"
     ]
   },
   "version": "3.4.3"

@@ -32,8 +32,9 @@ export class CourseController {
 
     @UseGuards(JWTStrategy, CourseGuard)
     @Patch(':course_id')
-    async editCourse() {
-        return { message: 'Editing course' };
+    async editCourse(@Param('course_id') course_id, @Body() coursedata: Partial<CourseDTO>) {
+        let response = await this.courseService.editCourse(course_id, coursedata);
+        return { message: 'Course successfully edited', data: response };
     }
 
     @UseGuards(JWTStrategy, AdminGuard)

@@ -19,6 +19,10 @@ export class CourseService {
         return response;
     }
 
+    async editCourse(course_id, coursedata) {
+        return { msg: `Method not implemented ${course_id} | ${coursedata}` };
+    }
+
     async addCourse(coursedata: CourseDTO): Promise<any> {
         try {
             let user = await this.userModel

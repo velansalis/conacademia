@@ -1,7 +1,7 @@
 import { Controller, Post, Body, HttpCode, UseFilters, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { UserDTO } from '../user/user.dto';
-import { HttpErrorFilter } from '../../filters/http.exception';
+import { UserDTO } from '../modules/user/user.dto';
+import { HttpErrorFilter } from '../filters/http.exception';
 @Controller('auth')
 @UseFilters(HttpErrorFilter)
 export class AuthController {

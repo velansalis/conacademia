@@ -4,6 +4,7 @@ import { CourseDTO } from './course.dto';
 import { CourseGuard } from '../../guards/course.guard';
 import { AdminGuard } from '../../guards/admin.guard';
 import { JWTStrategy } from '../../guards/jwt.guard';
+import { Token } from '../../globals/token.decorator';
 
 @Controller('course')
 export class CourseController {
@@ -11,8 +12,12 @@ export class CourseController {
 
     @UseGuards(JWTStrategy, CourseGuard)
     @Get(':course_id')
-    async getCourse() {
-        return { message: 'Getting course' };
+    async getCourse(@Param('course_id') course_id) {
+        let response = await this.courseService.getCourse(course_id);
+        return {
+            message: 'Course successfully fetched',
+            data: response,
+        };
     }
 
     @UseGuards(JWTStrategy, AdminGuard)
@@ -33,8 +38,12 @@ export class CourseController {
 
     @UseGuards(JWTStrategy, AdminGuard)
     @Delete(':course_id')
-    async deleteCourse(@Body() coursedata: Partial<CourseDTO>, @Param() courseid: string): Promise<object> {
-        let response = await this.courseService.deleteCourse(coursedata, courseid);
+    async deleteCourse(
+        @Token('username') username: string,
+        @Body('password') password: string,
+        @Param('course_id') courseid: string,
+    ): Promise<object> {
+        let response = await this.courseService.deleteCourse(username, password, courseid);
         return {
             message: 'Course successfully deleted',
             data: response,

@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 
-const MarksSchema = new mongoose.Schema(
+const StudentSchema = new mongoose.Schema(
     {
         // Required fields
-        usn: { type: String, required: true, lowercase: true, ref: 'User', unique: true },
+        usn: { type: String, required: true, lowercase: true, ref: 'User', sparse: true, unique: true },
         attendance: { type: Number, min: 0, required: true, default: 0 },
         task: [{ type: Number, min: [0, "Task marks can't be less than 0"], required: false, default: 0 }],
         mse1: { type: Number, min: [0, "MSE marks can't be less than 0"], required: true, default: 0 },
@@ -20,5 +20,5 @@ export const CourseSchema = new mongoose.Schema({
     year: { type: Number, required: true },
     semester: { type: String, required: true, enum: ['odd', 'even'] },
     faculty_incharge: { type: String, required: true },
-    marks: [MarksSchema],
+    student_details: [StudentSchema],
 });

@@ -9,6 +9,16 @@ import { UserDTO } from '../user/user.dto';
 export class CourseService {
     constructor(@InjectModel('User') private readonly userModel, @InjectModel('Course') private readonly courseModel) {}
 
+    async getCourse(course_id: string): Promise<any> {
+        let course = await this.courseModel
+            .findOne({ course_id })
+            .lean()
+            .exec();
+        if (!course) throw new HttpException(`Course ${course_id} does not exists.`, HttpStatus.BAD_REQUEST);
+        let { marks, _id, __v, ...response } = course;
+        return response;
+    }
+
     async addCourse(coursedata: CourseDTO): Promise<any> {
         try {
             let user = await this.userModel
@@ -22,29 +32,32 @@ export class CourseService {
                 throw new HttpException(`${user.username} is not a faculty`, HttpStatus.BAD_REQUEST);
             }
             let course = await this.courseModel(coursedata).save();
-            return course;
+            let { _id, __v, marks, student_details, ...response } = course['_doc'];
+            return response;
         } catch (err) {
             throw err;
         }
     }
 
-    async deleteCourse(coursedata, course_id): Promise<any> {
+    async deleteCourse(username, password, course_id): Promise<any> {
         try {
             let user: UserDTO = await this.userModel
-                .findOne({ username: coursedata.username })
+                .findOne({ username })
                 .lean()
                 .exec();
             if (!user) {
                 throw new HttpException('Invalid username', HttpStatus.BAD_REQUEST);
             }
-            if (!(await bcrypt.compare(coursedata.password, user.password))) {
+            if (!(await bcrypt.compare(password, user.password))) {
                 throw new HttpException('Invalid password', HttpStatus.BAD_REQUEST);
             }
             let course = await this.courseModel
                 .findOneAndDelete({ course_id: course_id })
                 .lean()
                 .exec();
-            return course;
+            if (!course) throw new HttpException(`Course ${course_id} doesn't exists`, HttpStatus.BAD_REQUEST);
+            let { __v, _id, student_details, ...response } = course;
+            return response;
         } catch (err) {
             throw err;
         }

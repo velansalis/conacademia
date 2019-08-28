@@ -12,7 +12,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 @Module({
     imports: [
-        MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
+        MongooseModule.forRoot(process.env.MONGO_URI, {
+            dbName: process.env.DATABASE,
+            useNewUrlParser: true,
+            useCreateIndex: true,
+        }),
         AuthModule,
         UserModule,
         CourseModule,

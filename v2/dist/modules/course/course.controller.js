@@ -25,15 +25,15 @@ let CourseController = class CourseController {
     async getCourse() {
         return { message: 'Getting course' };
     }
-    async editCourse() {
-        return { message: 'Editing course' };
-    }
     async addCourse(coursedata) {
         let response = await this.courseService.addCourse(coursedata);
         return {
             message: 'Course successfully added',
             data: response,
         };
+    }
+    async editCourse() {
+        return { message: 'Editing course' };
     }
     async deleteCourse(coursedata, courseid) {
         let response = await this.courseService.deleteCourse(coursedata, courseid);
@@ -51,6 +51,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "getCourse", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_1.JWTStrategy, admin_guard_1.AdminGuard),
+    common_1.Post(),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [course_dto_1.CourseDTO]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "addCourse", null);
+__decorate([
     common_1.UseGuards(jwt_guard_1.JWTStrategy, course_guard_1.CourseGuard),
     common_1.Patch(':course_id'),
     __metadata("design:type", Function),
@@ -59,15 +67,7 @@ __decorate([
 ], CourseController.prototype, "editCourse", null);
 __decorate([
     common_1.UseGuards(jwt_guard_1.JWTStrategy, admin_guard_1.AdminGuard),
-    common_1.Post('course'),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [course_dto_1.CourseDTO]),
-    __metadata("design:returntype", Promise)
-], CourseController.prototype, "addCourse", null);
-__decorate([
-    common_1.UseGuards(jwt_guard_1.JWTStrategy, admin_guard_1.AdminGuard),
-    common_1.Delete('course/:course_id'),
+    common_1.Delete(':course_id'),
     __param(0, common_1.Body()), __param(1, common_1.Param()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),

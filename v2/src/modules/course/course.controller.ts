@@ -15,14 +15,8 @@ export class CourseController {
         return { message: 'Getting course' };
     }
 
-    @UseGuards(JWTStrategy, CourseGuard)
-    @Patch(':course_id')
-    async editCourse() {
-        return { message: 'Editing course' };
-    }
-
     @UseGuards(JWTStrategy, AdminGuard)
-    @Post('course')
+    @Post()
     async addCourse(@Body() coursedata: CourseDTO) {
         let response = await this.courseService.addCourse(coursedata);
         return {
@@ -31,8 +25,14 @@ export class CourseController {
         };
     }
 
+    @UseGuards(JWTStrategy, CourseGuard)
+    @Patch(':course_id')
+    async editCourse() {
+        return { message: 'Editing course' };
+    }
+
     @UseGuards(JWTStrategy, AdminGuard)
-    @Delete('course/:course_id')
+    @Delete(':course_id')
     async deleteCourse(@Body() coursedata: Partial<CourseDTO>, @Param() courseid: string): Promise<object> {
         let response = await this.courseService.deleteCourse(coursedata, courseid);
         return {

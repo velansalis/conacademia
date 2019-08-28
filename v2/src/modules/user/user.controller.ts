@@ -5,7 +5,7 @@ import { Request } from 'express';
 
 import { UserDTO } from './user.dto';
 import { UserService } from './user.service';
-import { HttpErrorFilter } from '../../filters/http.exception';
+import { HttpErrorFilter } from '../../globals/http.exception';
 
 import { JWTStrategy } from '../../guards/jwt.guard';
 import { UserGuard } from '../../guards/user.guard';

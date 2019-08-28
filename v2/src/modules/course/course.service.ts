@@ -21,8 +21,7 @@ export class CourseService {
             if (user.designation != 'faculty') {
                 throw new HttpException(`${user.username} is not a faculty`, HttpStatus.BAD_REQUEST);
             }
-            let course = await this.courseModel(coursedata);
-            await course.save();
+            let course = await this.courseModel(coursedata).save();
             return course;
         } catch (err) {
             throw err;

@@ -6,25 +6,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 const common_1 = require("@nestjs/common");
 const user_module_1 = require("./modules/user/user.module");
-const auth_module_1 = require("./modules/auth/auth.module");
+const auth_module_1 = require("./auth/auth.module");
 const course_module_1 = require("./modules/course/course.module");
+const http_exception_1 = require("./globals/http.exception");
+const log_interceptor_1 = require("./globals/log.interceptor");
 const mongoose_1 = require("@nestjs/mongoose");
-const http_exception_1 = require("./filters/http.exception");
 const core_1 = require("@nestjs/core");
-require("dotenv/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
             mongoose_1.MongooseModule.forRoot(process.env.MONGO_URI, { dbName: process.env.DATABASE, useNewUrlParser: true }),
-            user_module_1.UserModule,
             auth_module_1.AuthModule,
+            user_module_1.UserModule,
             course_module_1.CourseModule,
         ],
-        providers: [{ provide: core_1.APP_FILTER, useClass: http_exception_1.HttpErrorFilter }],
+        providers: [
+            {
+                provide: core_1.APP_FILTER,
+                useClass: http_exception_1.HttpErrorFilter,
+            },
+            {
+                provide: core_1.APP_INTERCEPTOR,
+                useClass: log_interceptor_1.LogInterceptor,
+            },
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;

@@ -6,12 +6,12 @@ export declare class CourseController {
     getCourse(): Promise<{
         message: string;
     }>;
-    editCourse(): Promise<{
-        message: string;
-    }>;
     addCourse(coursedata: CourseDTO): Promise<{
         message: string;
         data: any;
+    }>;
+    editCourse(): Promise<{
+        message: string;
     }>;
     deleteCourse(coursedata: Partial<CourseDTO>, courseid: string): Promise<object>;
 }

@@ -14,26 +14,29 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const jwt = require("jsonwebtoken");
 let CourseGuard = class CourseGuard {
     constructor(courseModel) {
         this.courseModel = courseModel;
     }
-    async validateRequest(request) {
-        let token = request.headers.authorization ? request.headers.authorization.split(' ')[1] : null;
-        let tokendata = jwt.verify(token, process.env.TOKEN_SECRET);
-        if (tokendata.scope == 'admin')
-            return true;
-        let pivot = request.params.courseId || request.body.courseId;
-        if (request.method == 'PATCH') {
-            let course = await this.courseModel
-                .findOne({ course_id: pivot, owner: tokendata.username })
-                .lean()
-                .exec();
-            if (!course)
-                return false;
+    async filterRequests(request, username) {
+        let method = request.method;
+        let pivot = request.params.course_id || request.body.course_id;
+        switch (method) {
+            case 'PATCH':
+                let course = await this.courseModel
+                    .findOne({ course_id: pivot, owner: username })
+                    .lean()
+                    .exec();
+                if (!course)
+                    return false;
         }
         return true;
+    }
+    async validateRequest(request) {
+        let { user } = request;
+        if (user.scope == 'admin')
+            return true;
+        return await this.filterRequests(request.method, user.username);
     }
     canActivate(context) {
         const request = context.switchToHttp().getRequest();

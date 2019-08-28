@@ -8,7 +8,6 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @Post('login')
-    @HttpCode(HttpStatus.OK)
     async loginUser(@Body() userdata: Partial<UserDTO>): Promise<object> {
         let response = await this.authService.loginUser(userdata);
         return {
@@ -18,7 +17,6 @@ export class AuthController {
     }
 
     @Post('register')
-    @HttpCode(HttpStatus.OK)
     async register(@Body() userdata: UserDTO): Promise<object> {
         let response = await this.authService.registerUser(userdata);
         return {
@@ -28,7 +26,6 @@ export class AuthController {
     }
 
     @Post('terminate')
-    @HttpCode(HttpStatus.OK)
     async delete(@Body() userdata: Partial<UserDTO>): Promise<object> {
         let response = await this.authService.deleteUser(userdata);
         return {

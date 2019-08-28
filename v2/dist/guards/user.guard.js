@@ -14,29 +14,32 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const jwt = require("jsonwebtoken");
 let UserGuard = class UserGuard {
     constructor(userModel) {
         this.userModel = userModel;
     }
-    async validateRequest(request) {
-        try {
-            let token = request.headers.authorization ? request.headers.authorization.split(' ')[1] : null;
-            let tokendata = jwt.verify(token, process.env.TOKEN_SECRET);
-            if (tokendata.scope == 'admin')
-                return true;
-            let pivot = request.params.username || request.body.username;
-            if (request.method == 'PATCH') {
+    async filterRequests(request, username) {
+        let method = request.method;
+        let pivot = request.params.username || request.body.username;
+        switch (method) {
+            case 'PATCH':
                 if (request.body.designation || request.body.scope)
                     throw new common_1.HttpException('Designation / scope can not be changed', common_1.HttpStatus.BAD_REQUEST);
                 let user = await this.userModel
-                    .findOne({ username: pivot, owner: tokendata.username })
+                    .findOne({ username: pivot, owner: username })
                     .lean()
                     .exec();
                 if (!user)
                     return false;
-            }
-            return true;
+        }
+        return true;
+    }
+    async validateRequest(request) {
+        try {
+            let tokendata = request.user;
+            if (tokendata.scope == 'admin')
+                return true;
+            return await this.filterRequests(request, tokendata.username);
         }
         catch (err) {
             throw err;

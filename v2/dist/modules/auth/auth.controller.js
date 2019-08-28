@@ -44,7 +44,6 @@ let AuthController = class AuthController {
 };
 __decorate([
     common_1.Post('login'),
-    common_1.HttpCode(common_1.HttpStatus.OK),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -52,7 +51,6 @@ __decorate([
 ], AuthController.prototype, "loginUser", null);
 __decorate([
     common_1.Post('register'),
-    common_1.HttpCode(common_1.HttpStatus.OK),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_dto_1.UserDTO]),
@@ -60,7 +58,6 @@ __decorate([
 ], AuthController.prototype, "register", null);
 __decorate([
     common_1.Post('terminate'),
-    common_1.HttpCode(common_1.HttpStatus.OK),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

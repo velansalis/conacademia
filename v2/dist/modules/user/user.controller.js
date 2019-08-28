@@ -15,8 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
 const common_3 = require("@nestjs/common");
-const http_exception_1 = require("../../filters/http.exception");
 const user_service_1 = require("./user.service");
+const http_exception_1 = require("../../filters/http.exception");
+const jwt_guard_1 = require("../../guards/jwt.guard");
 const user_guard_1 = require("../../guards/user.guard");
 const admin_guard_1 = require("../../guards/admin.guard");
 let UserController = class UserController {
@@ -24,7 +25,6 @@ let UserController = class UserController {
         this.userService = userService;
     }
     async getUser(username) {
-        console.log(username);
         let response = await this.userService.getUser(username);
         return { data: response };
     }
@@ -42,32 +42,32 @@ let UserController = class UserController {
     }
 };
 __decorate([
-    common_2.Get(':username'),
-    common_1.UseGuards(user_guard_1.UserGuard),
-    __param(0, common_3.Param('username')),
+    common_1.Get(':username'),
+    common_3.UseGuards(jwt_guard_1.JWTStrategy, user_guard_1.UserGuard),
+    __param(0, common_2.Param('username')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
 __decorate([
-    common_2.Patch(':username'),
-    common_1.UseGuards(user_guard_1.UserGuard),
-    __param(0, common_3.Req()), __param(1, common_3.Body()),
+    common_1.Patch(':username'),
+    common_3.UseGuards(jwt_guard_1.JWTStrategy, user_guard_1.UserGuard),
+    __param(0, common_2.Req()), __param(1, common_2.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "editUser", null);
 __decorate([
     common_1.Post('grant'),
-    common_1.UseGuards(admin_guard_1.AdminGuard),
-    __param(0, common_3.Body()),
+    common_3.UseGuards(jwt_guard_1.JWTStrategy, admin_guard_1.AdminGuard),
+    __param(0, common_2.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "addAdmin", null);
 UserController = __decorate([
-    common_1.Controller('user'),
-    common_1.UseFilters(http_exception_1.HttpErrorFilter),
+    common_3.Controller('user'),
+    common_3.UseFilters(http_exception_1.HttpErrorFilter),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;

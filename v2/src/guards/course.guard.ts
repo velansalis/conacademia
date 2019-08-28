@@ -2,26 +2,28 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CourseDTO } from '../modules/course/course.dto';
 
-import * as jwt from 'jsonwebtoken';
-
 @Injectable()
 export class CourseGuard implements CanActivate {
     constructor(@InjectModel('Course') private readonly courseModel) {}
 
-    private async validateRequest(request): Promise<boolean> {
-        let token: any = request.headers.authorization ? request.headers.authorization.split(' ')[1] : null;
-        let tokendata = jwt.verify(token, process.env.TOKEN_SECRET);
-        if (tokendata.scope == 'admin') return true;
-        let pivot = request.params.courseId || request.body.courseId;
-
-        if (request.method == 'PATCH') {
-            let course: CourseDTO = await this.courseModel
-                .findOne({ course_id: pivot, owner: tokendata.username })
-                .lean()
-                .exec();
-            if (!course) return false;
+    private async filterRequests(request, username) {
+        let method = request.method;
+        let pivot = request.params.course_id || request.body.course_id;
+        switch (method) {
+            case 'PATCH':
+                let course: CourseDTO = await this.courseModel
+                    .findOne({ course_id: pivot, owner: username })
+                    .lean()
+                    .exec();
+                if (!course) return false;
         }
         return true;
+    }
+
+    private async validateRequest(request): Promise<boolean> {
+        let { user } = request;
+        if (user.scope == 'admin') return true;
+        return await this.filterRequests(request.method, user.username);
     }
 
     canActivate(context: ExecutionContext): Promise<boolean> {

@@ -1149,28 +1149,32 @@
         "version": "9bc40e6f8f479eb913d6e8df996e09f6659395f5fa1fa0c75a9628b73a0f0b0f",
         "signature": "c219c7af45c6925b9eca1c632fa2aa0709da2ae9d375983e90ce9b080f5c4a2f"
       },
+      "/source/src/guards/jwt.guard.ts": {
+        "version": "6d4e422476734824c4662ff9c603b3ddf96cbe2d3a4759d1653a779be1c9dbae",
+        "signature": "0f642a027e82780671ea88c36434704b4a64efc01967b26ba85d581b10563007"
+      },
       "/source/src/guards/user.guard.ts": {
-        "version": "213f5eedf2cccbe44f26aefc313e086dc2e95465101e618335dbe3f91e96b68e",
-        "signature": "0bbcf335a1a70c31bc256b1cce60311d5c6318e4c354890d152285b9652167c8"
+        "version": "ca64af8d03506bbf0f1c50d18625e385bf2a929441758bcf876e913f8887191f",
+        "signature": "f15489907209c5a768a8da7e13d251aa866feee0841ee6326974feded934d770"
       },
       "/source/src/guards/admin.guard.ts": {
-        "version": "7ecae6d4eecfc34fe020c3b763e0fd90390964a56add259d9a23e31bf32383d7",
-        "signature": "21804b505ba3a682f567ee162c241d583097a6ff063561e8c5b42d429bc698a6"
+        "version": "c5a7e5866ae7e02644c78de25a1b5fde78ea765d1c715122ad12da8920fc56e3",
+        "signature": "4265aa16a96bf30c54ea3210fc71636e734557b53b4fc9df1e0f5b96f5b7801f"
       },
       "/source/src/modules/user/user.controller.ts": {
-        "version": "2495e421f50c5b31ce471e84eae9b985295fab2415992a2620e38c64cd12ef2f",
-        "signature": "baa919c7d0fe1bd1e941c79c56d34de3b590d4bd6706d625d639ede5cd7a2bde"
+        "version": "634fe990107841b564a5be09f779c6ce589a064be01552aadd9d87e9c7ba1a6e",
+        "signature": "0b6774ce0fa75557c79d3bfcd055e2def776906778e69d5c8f9af2570a38f9f8"
       },
       "/source/src/modules/user/user.module.ts": {
         "version": "5529be23e312384f0c01776f58404956bdd2a21bea86bd851521cfdba309dbf2",
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329"
       },
       "/source/src/modules/auth/auth.service.ts": {
-        "version": "0435817f0e314f338945cd0dbf82f3b5a73cec9066760d27c327a4397de08c02",
+        "version": "b5714182388db03bf39d38f16aa9ab5cec22ff0f7bef7ce1c519ccc0db880583",
         "signature": "3f596f1844cdd040591d0df88b2aee41df906d7ff6395e9eabd9f518878387da"
       },
       "/source/src/modules/auth/auth.controller.ts": {
-        "version": "d8b28a56ba1ffb71cfd2d9db590acad2053c2cafd10c87a3bf9574b689818451",
+        "version": "7721f948e47fd322046899aef37733ec3d96e1caddfa89f407a5588ef7aab421",
         "signature": "b1d12f5ba5aab62fb8e9d5d989a3563a71e9d17ddf89fcdb6b1f995d7c25bb94"
       },
       "/source/src/modules/auth/auth.module.ts": {
@@ -1186,11 +1190,11 @@
         "signature": "20d6f3deb0cd74d5600afd6c5277c39fac0b843cd639730a8e38ccd5ecc86c6f"
       },
       "/source/src/guards/course.guard.ts": {
-        "version": "036072fc887a2aecded430860e4b815a715abf09b47ca06a4e8f4fed99d29fd6",
-        "signature": "cdc230c3cf164c0cd7f7750163a233908e00f9f92b0756d32286a5bf653a6e43"
+        "version": "39b8499b909c09fa269af777fce0bca8d2f7365f4c6086a215dcb856bcdae75d",
+        "signature": "1febf68d912bf753618c7a45b66f97be46a4c8f03ba3503307b92f58c5b92828"
       },
       "/source/src/modules/course/course.controller.ts": {
-        "version": "1df55b4a603423867e892491d2ed918711b6c2cb6f8e397867a28cec8ab3116e",
+        "version": "aefd638cb0202d8eb76efdb5b422ed169337f3ba62bb242e7ada8e2cf9ad1c99",
         "signature": "51c5f8bd953ac2de727610691c28781f7b5f287e7c03d1548924dae1f45b073e"
       },
       "/source/src/modules/course/course.schema.ts": {
@@ -3526,6 +3530,11 @@
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "/source/src/guards/jwt.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts",
+        "/source/node_modules/@types/node/util.d.ts",
+        "/source/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "/source/src/guards/user.guard.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@nestjs/mongoose/index.d.ts",
@@ -3541,9 +3550,10 @@
       "/source/src/modules/user/user.controller.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
         "/source/node_modules/@types/express/index.d.ts",
-        "/source/src/filters/http.exception.ts",
-        "/source/src/modules/user/user.service.ts",
         "/source/src/modules/user/user.dto.ts",
+        "/source/src/modules/user/user.service.ts",
+        "/source/src/filters/http.exception.ts",
+        "/source/src/guards/jwt.guard.ts",
         "/source/src/guards/user.guard.ts",
         "/source/src/guards/admin.guard.ts",
         "/source/node_modules/@types/node/util.d.ts",
@@ -3603,10 +3613,11 @@
       ],
       "/source/src/modules/course/course.controller.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts",
-        "/source/src/guards/course.guard.ts",
-        "/source/src/guards/admin.guard.ts",
         "/source/src/modules/course/course.service.ts",
         "/source/src/modules/course/course.dto.ts",
+        "/source/src/guards/course.guard.ts",
+        "/source/src/guards/admin.guard.ts",
+        "/source/src/guards/jwt.guard.ts",
         "/source/node_modules/@types/node/util.d.ts",
         "/source/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -6365,6 +6376,9 @@
       "/source/src/filters/http.exception.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts"
       ],
+      "/source/src/guards/jwt.guard.ts": [
+        "/source/node_modules/@nestjs/common/index.d.ts"
+      ],
       "/source/src/guards/user.guard.ts": [
         "/source/node_modules/@nestjs/common/index.d.ts"
       ],
@@ -7725,7 +7739,7 @@
       "/source/node_modules/@types/body-parser/index.d.ts",
       "/source/node_modules/@types/express/index.d.ts",
       "/source/src/filters/http.exception.ts",
-      "/source/src/guards/user.guard.ts",
+      "/source/src/guards/jwt.guard.ts",
       "/source/src/guards/admin.guard.ts",
       "/source/src/modules/user/user.controller.ts",
       "/source/src/modules/user/user.module.ts",
@@ -7765,6 +7779,7 @@
       "/source/node_modules/@nestjs/core/services/reflector.service.d.ts",
       "/source/node_modules/@nestjs/core/services/index.d.ts",
       "/source/node_modules/@nestjs/core/index.d.ts",
+      "/source/src/app.module.ts",
       "/source/src/main.ts",
       "/source/src/modules/course/course.interface.ts",
       "/source/node_modules/@types/accepts/index.d.ts",
@@ -7891,7 +7906,7 @@
       "/source/node_modules/@types/validator/index.d.ts",
       "/source/node_modules/@types/ws/index.d.ts",
       "/source/node_modules/@types/yargs/index.d.ts",
-      "/source/src/app.module.ts"
+      "/source/src/guards/user.guard.ts"
     ]
   },
   "version": "3.4.3"

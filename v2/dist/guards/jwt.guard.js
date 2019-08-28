@@ -7,18 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-let AdminGuard = class AdminGuard {
-    validateRequest(request) {
-        let tokendata = request.user;
-        return tokendata.scope == 'admin';
-    }
+const jwt = require("jsonwebtoken");
+require("dotenv/config");
+let JWTStrategy = class JWTStrategy {
     canActivate(context) {
         const request = context.switchToHttp().getRequest();
         return this.validateRequest(request);
     }
+    validateRequest(request) {
+        let token = request.headers.authorization ? request.headers.authorization.split(' ')[1] : null;
+        let decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+        request.user = decoded;
+        return true;
+    }
 };
-AdminGuard = __decorate([
+JWTStrategy = __decorate([
     common_1.Injectable()
-], AdminGuard);
-exports.AdminGuard = AdminGuard;
-//# sourceMappingURL=admin.guard.js.map
+], JWTStrategy);
+exports.JWTStrategy = JWTStrategy;
+//# sourceMappingURL=jwt.guard.js.map

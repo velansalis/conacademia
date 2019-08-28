@@ -27,8 +27,9 @@ export class AuthService {
             if (!(await bcrypt.compare(userdata.password, user.password))) {
                 throw new HttpException('Invalid password.', HttpStatus.BAD_REQUEST);
             }
-            let token = await jwt.verify(user.token, process.env.TOKEN_SECRET);
-            if (token.scope != user.scope) {
+            try {
+                await jwt.verify(user.token, process.env.TOKEN_SECRET);
+            } catch (err) {
                 user.token = this.signToken({
                     username: userdata.username,
                     designation: user.designation,

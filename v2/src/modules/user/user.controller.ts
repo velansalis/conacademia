@@ -1,11 +1,13 @@
-import { Controller, UseFilters, UseGuards, Post } from '@nestjs/common';
-import { Get, Patch } from '@nestjs/common';
+import { Get, Patch, Post } from '@nestjs/common';
 import { Req, Param, Body } from '@nestjs/common';
+import { Controller, UseFilters, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 
-import { HttpErrorFilter } from '../../filters/http.exception';
-import { UserService } from './user.service';
 import { UserDTO } from './user.dto';
+import { UserService } from './user.service';
+import { HttpErrorFilter } from '../../filters/http.exception';
+
+import { JWTStrategy } from '../../guards/jwt.guard';
 import { UserGuard } from '../../guards/user.guard';
 import { AdminGuard } from '../../guards/admin.guard';
 
@@ -15,15 +17,14 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get(':username')
-    @UseGuards(UserGuard)
+    @UseGuards(JWTStrategy, UserGuard)
     async getUser(@Param('username') username: string): Promise<Object> {
-        console.log(username);
         let response = await this.userService.getUser(username);
         return { data: response };
     }
 
     @Patch(':username')
-    @UseGuards(UserGuard)
+    @UseGuards(JWTStrategy, UserGuard)
     async editUser(@Req() request: Request, @Body() userdata: Partial<UserDTO>): Promise<Object> {
         const username: string = request.params.username;
         let response = await this.userService.editUser(username, userdata);
@@ -31,7 +32,7 @@ export class UserController {
     }
 
     @Post('grant')
-    @UseGuards(AdminGuard)
+    @UseGuards(JWTStrategy, AdminGuard)
     async addAdmin(@Body() userdata: Partial<UserDTO>): Promise<object> {
         let data = await this.userService.grantPermission(userdata);
         return {

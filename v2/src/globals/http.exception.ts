@@ -8,14 +8,22 @@ export class HttpErrorFilter implements ExceptionFilter {
         const request = context.getRequest();
         const status = exception.getStatus ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
-        const errorResponse = {
-            message: exception.name == 'TokenExpiredError' ? 'Access token has expired' : exception.message,
-            method: request.method,
-            path: request.url,
-            timestamp: new Date(),
-        };
+        let message = exception.message;
+        let method = request.method;
+        let path = request.url;
+        let timestamp = new Date();
 
-        Logger.error(`${request.method} ${request.url}`);
+        switch (exception.name) {
+            case 'CastError':
+                message = exception.message.replace(/"/g, "'");
+                break;
+            case 'TokenExpiredError':
+                message = 'Access token has expired';
+                break;
+        }
+
+        const errorResponse = { message, method, path, timestamp };
+        Logger.debug(`${request.method} ${request.url}`);
         response.status(status).json(errorResponse);
     }
 }

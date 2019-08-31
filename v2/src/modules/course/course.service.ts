@@ -15,12 +15,8 @@ export class CourseService {
             .lean()
             .exec();
         if (!course) throw new HttpException(`Course ${course_id} does not exists.`, HttpStatus.BAD_REQUEST);
-        let { marks, _id, __v, ...response } = course;
+        let { marks, _id, __v, student_details, ...response } = course;
         return response;
-    }
-
-    async editCourse(course_id, coursedata) {
-        return { msg: `Method not implemented ${course_id} | ${coursedata}` };
     }
 
     async addCourse(coursedata: CourseDTO): Promise<any> {
@@ -41,6 +37,19 @@ export class CourseService {
         } catch (err) {
             throw err;
         }
+    }
+
+    async editCourse(courseid, coursedata) {
+        let { _id, course_id, student_details, __v, ...data } = coursedata;
+
+        let course = await this.courseModel
+            .findOneAndUpdate({ course_id: courseid }, data, { new: true, useFindAndModify: true })
+            .lean()
+            .exec();
+
+        if (!course) throw new HttpException(`Course ${courseid} does not exists.`, HttpStatus.BAD_REQUEST);
+
+        return course;
     }
 
     async deleteCourse(username, password, course_id): Promise<any> {
@@ -65,5 +74,48 @@ export class CourseService {
         } catch (err) {
             throw err;
         }
+    }
+
+    async editStudentDetail(courseid, coursedata) {
+        let course = await this.courseModel
+            .findOne({ course_id: courseid })
+            .lean()
+            .exec();
+        if (!course) throw new HttpException(`Course ${courseid} does not exists.`, HttpStatus.BAD_REQUEST);
+        course = await this.courseModel
+            .findOneAndUpdate({ course_id: courseid }, { $push: { student_details: coursedata } })
+            .lean()
+            .exec();
+        return course;
+    }
+
+    async addStudentDetail(courseid, coursedata) {
+        let course = await this.courseModel
+            .findOne({ course_id: courseid })
+            .lean()
+            .exec();
+        if (!course) throw new HttpException(`Course ${courseid} does not exists.`, HttpStatus.BAD_REQUEST);
+
+        let student = await this.userModel
+            .findOne({ username: coursedata.usn })
+            .lean()
+            .exec();
+        if (!student) throw new HttpException(`User ${coursedata.usn} doesn't exists`, HttpStatus.BAD_REQUEST);
+        if (student.designation != 'student') throw new HttpException(`User ${coursedata.usn} is not a student`, HttpStatus.BAD_REQUEST);
+
+        console.log(course.student_details);
+
+        student = course.student_details.filter(student => student.usn == coursedata.usn);
+        if (student.length) throw new HttpException(`User ${coursedata.usn} already exists.`, HttpStatus.BAD_REQUEST);
+
+        course = await this.courseModel
+            .findOneAndUpdate({ course_id: courseid }, { $push: { student_details: { usn: coursedata.usn } } }, { new: true })
+            .lean()
+            .exec();
+        return { student: coursedata.usn, marks: null };
+    }
+
+    async deleteStudentDetail() {
+        return { message: 'Delete Details' };
     }
 }

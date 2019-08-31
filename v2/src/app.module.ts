@@ -16,6 +16,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
             dbName: process.env.DATABASE,
             useNewUrlParser: true,
             useCreateIndex: true,
+            useFindAndModify: false,
         }),
         AuthModule,
         UserModule,

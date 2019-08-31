@@ -80,7 +80,7 @@ export const UserSchema = new mongoose.Schema({
     // Owner of the particular document
     owner: { type: String, required: true },
 
-    scope: { type: String, enum: ['admin', 'user', 'course'], required: true, default: 'user' },
+    scope: { type: String, enum: ['admin', 'user', 'course', 'none'], required: true, default: 'user' },
 
     // Access token
     token: { type: String },

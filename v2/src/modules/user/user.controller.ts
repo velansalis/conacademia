@@ -17,7 +17,7 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get(':username')
-    @UseGuards(JWTStrategy, UserGuard)
+    @UseGuards(JWTStrategy)
     async getUser(@Param('username') username: string): Promise<Object> {
         let response = await this.userService.getUser(username);
         return { data: response };

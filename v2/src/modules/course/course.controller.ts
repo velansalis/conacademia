@@ -10,7 +10,7 @@ import { Token } from '../../globals/token.decorator';
 export class CourseController {
     constructor(private readonly courseService: CourseService) {}
 
-    @UseGuards(JWTStrategy, CourseGuard)
+    @UseGuards(JWTStrategy)
     @Get(':course_id')
     async getCourse(@Param('course_id') course_id) {
         let response = await this.courseService.getCourse(course_id);
@@ -30,11 +30,14 @@ export class CourseController {
         };
     }
 
-    @UseGuards(JWTStrategy, CourseGuard)
+    @UseGuards(JWTStrategy, AdminGuard)
     @Patch(':course_id')
     async editCourse(@Param('course_id') course_id, @Body() coursedata: Partial<CourseDTO>) {
         let response = await this.courseService.editCourse(course_id, coursedata);
-        return { message: 'Course successfully edited', data: response };
+        return {
+            message: 'Course successfully edited',
+            data: response,
+        };
     }
 
     @UseGuards(JWTStrategy, AdminGuard)
@@ -47,6 +50,40 @@ export class CourseController {
         let response = await this.courseService.deleteCourse(username, password, courseid);
         return {
             message: 'Course successfully deleted',
+            data: response,
+        };
+    }
+
+    @UseGuards(JWTStrategy, CourseGuard)
+    @Post(':course_id')
+    async addStudentDetail(@Param('course_id') courseid, @Body() coursedata) {
+        let response = await this.courseService.addStudentDetail(courseid, coursedata);
+        return {
+            message: 'Student details successfully added',
+            data: response,
+        };
+    }
+
+    @UseGuards(JWTStrategy, CourseGuard)
+    @Patch(':course_id/:username')
+    async editStudentDetail(
+        @Param('course_id') course_id: string,
+        @Param('username') username: string,
+        @Body() coursedata: Partial<CourseDTO>,
+    ): Promise<any> {
+        let response = await this.courseService.editStudentDetail(course_id, username);
+        return {
+            message: 'Student details successfully edited',
+            data: response,
+        };
+    }
+
+    @UseGuards(JWTStrategy, CourseGuard)
+    @Delete(':course_id/:username')
+    async deleteStudentDetail(@Param('course_id') courseid, @Param('username') username) {
+        let response = await this.courseService.deleteStudentDetail();
+        return {
+            message: 'Student details successfully added',
             data: response,
         };
     }

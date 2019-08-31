@@ -3,11 +3,14 @@ import * as mongoose from 'mongoose';
 const StudentSchema = new mongoose.Schema(
     {
         // Required fields
-        usn: { type: String, required: true, lowercase: true, ref: 'User', sparse: true, unique: true },
-        attendance: { type: Number, min: 0, required: true, default: 0 },
-        task: [{ type: Number, min: [0, "Task marks can't be less than 0"], required: false, default: 0 }],
-        mse1: { type: Number, min: [0, "MSE marks can't be less than 0"], required: true, default: 0 },
-        mse2: { type: Number, min: [0, "MSE marks can't be less than 0"], required: true, default: 0 },
+        usn: { type: String, required: true, lowercase: true, unique: true },
+        marks: [
+            {
+                exam_name: { type: String, required: true, unique: true },
+                acquired_marks: { type: Number, required: true },
+                total_marks: { type: Number, required: true },
+            },
+        ],
     },
     { _id: false },
 );

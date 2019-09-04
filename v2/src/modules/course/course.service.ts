@@ -1,9 +1,9 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CourseDTO } from './course.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { UserDTO } from '../user/user.dto';
 
 import * as bcrypt from 'bcrypt';
-import { UserDTO } from '../user/user.dto';
 
 @Injectable()
 export class CourseService {
@@ -76,19 +76,6 @@ export class CourseService {
         }
     }
 
-    async editStudentDetail(courseid, coursedata) {
-        let course = await this.courseModel
-            .findOne({ course_id: courseid })
-            .lean()
-            .exec();
-        if (!course) throw new HttpException(`Course ${courseid} does not exists.`, HttpStatus.BAD_REQUEST);
-        course = await this.courseModel
-            .findOneAndUpdate({ course_id: courseid }, { $push: { student_details: coursedata } })
-            .lean()
-            .exec();
-        return course;
-    }
-
     async addStudentDetail(courseid, coursedata) {
         let course = await this.courseModel
             .findOne({ course_id: courseid })
@@ -103,16 +90,24 @@ export class CourseService {
         if (!student) throw new HttpException(`User ${coursedata.usn} doesn't exists`, HttpStatus.BAD_REQUEST);
         if (student.designation != 'student') throw new HttpException(`User ${coursedata.usn} is not a student`, HttpStatus.BAD_REQUEST);
 
-        console.log(course.student_details);
-
-        student = course.student_details.filter(student => student.usn == coursedata.usn);
-        if (student.length) throw new HttpException(`User ${coursedata.usn} already exists.`, HttpStatus.BAD_REQUEST);
-
-        course = await this.courseModel
-            .findOneAndUpdate({ course_id: courseid }, { $push: { student_details: { usn: coursedata.usn } } }, { new: true })
+        let student_details = course.student_details.filter((student) => student.usn == coursedata.usn );
+        if(!student_details.length) {
+            course = await this.courseModel
+            .findOneAndUpdate(
+                { course_id: courseid }, 
+                { $push: { student_details: { usn: coursedata.usn } } }, 
+                { new: true }
+            )
             .lean()
             .exec();
-        return { student: coursedata.usn, marks: null };
+        }
+
+        let studentdata = {
+            exam_name: coursedata.exam_name,
+            acquired_marks: coursedata.acquired_marks,
+            total_marks: coursedata.total_marks,
+        }
+        return course;
     }
 
     async deleteStudentDetail() {

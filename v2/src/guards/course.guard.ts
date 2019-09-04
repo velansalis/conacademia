@@ -10,11 +10,13 @@ export class CourseGuard implements CanActivate {
         let method = request.method;
         let pivot = request.params.course_id || request.body.course_id;
         switch (method) {
-            case 'PATCH':
+            case 'POST' :
+            case 'DELETE':
                 let course: CourseDTO = await this.courseModel
-                    .findOne({ course_id: pivot, owner: username })
+                    .findOne({ course_id: pivot, faculty_incharge: username })
                     .lean()
                     .exec();
+                console.log(course);
                 if (!course) return false;
         }
         return true;
@@ -23,7 +25,7 @@ export class CourseGuard implements CanActivate {
     private async validateRequest(request): Promise<boolean> {
         let { user } = request;
         if (user.scope == 'admin') return true;
-        return await this.filterRequests(request.method, user.username);
+        return await this.filterRequests(request, user.username);
     }
 
     canActivate(context: ExecutionContext): Promise<boolean> {

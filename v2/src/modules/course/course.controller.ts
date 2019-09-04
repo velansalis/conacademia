@@ -54,27 +54,13 @@ export class CourseController {
         };
     }
 
-    @UseGuards(JWTStrategy, CourseGuard)
     @Post(':course_id')
+    @UseGuards(JWTStrategy, CourseGuard)
     async addStudentDetail(@Param('course_id') courseid, @Body() coursedata) {
         let response = await this.courseService.addStudentDetail(courseid, coursedata);
         return {
             message: 'Student details successfully added',
-            data: response,
-        };
-    }
-
-    @UseGuards(JWTStrategy, CourseGuard)
-    @Patch(':course_id/:username')
-    async editStudentDetail(
-        @Param('course_id') course_id: string,
-        @Param('username') username: string,
-        @Body() coursedata: Partial<CourseDTO>,
-    ): Promise<any> {
-        let response = await this.courseService.editStudentDetail(course_id, username);
-        return {
-            message: 'Student details successfully edited',
-            data: response,
+            data: coursedata,
         };
     }
 

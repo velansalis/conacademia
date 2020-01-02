@@ -1,7 +1,7 @@
 {
-    "name": "mcabud",
-    "version": "0.0.1",
-    "description": "",
+    "name": "conacademia",
+    "version": "2.0.0",
+    "description": "A javascript/typescript based REST API to manage the communication between lecturers and students in a college.",
     "author": "",
     "license": "MIT",
     "scripts": {
@@ -16,7 +16,8 @@
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-        "test:e2e": "jest --config ./test/jest-e2e.json"
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "doc": "typedoc --out docs src --categorizeByGroup --name 'Conacademia v2' --theme default "
     },
     "dependencies": {
         "@nestjs/common": "^6.0.0",
@@ -52,6 +53,7 @@
         "tsc-watch": "2.2.1",
         "tsconfig-paths": "3.8.0",
         "tslint": "5.16.0",
+        "typedoc": "^0.15.6",
         "typescript": "3.4.3"
     },
     "jest": {

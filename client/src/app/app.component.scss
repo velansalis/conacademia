@@ -1,0 +1,12 @@
+header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  nav {
+    a {
+      margin: 0.5em 1em;
+    }
+  }
+}

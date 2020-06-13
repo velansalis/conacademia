@@ -26,7 +26,7 @@
         "@nestjs/mongoose": "^6.1.2",
         "@nestjs/platform-express": "^6.0.0",
         "@types/dotenv": "^6.1.1",
-        "apollo-server-express": "^2.8.1",
+        "apollo-server-express": "^2.14.2",
         "bcrypt": "^3.0.6",
         "class-validator": "^0.10.0",
         "dotenv": "^8.0.0",
